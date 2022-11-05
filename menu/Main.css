@@ -1,0 +1,229 @@
+/*body 초기화*/
+/*font-family:"Roboto", serif;*/
+body {
+    margin: 0;
+    padding: 0;
+    font-family: verdana, sans-serif; 
+    display: flex;
+    flex-flow: column nowrap;
+    overflow-x: hidden;  
+  }
+  /*
+  body에...
+  justify-content: center;
+    align-items: center;
+  */
+  a {
+    text-decoration-line: none;
+    color: #ffffffb8;
+  }
+  
+  img{display: block; margin: auto; }
+  #Menu_logo{
+  display:inline-block;
+  vertical-align:top;
+  font: verdana, sans-serif;
+  color: #096622fb;
+  text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+  background-color: #ffffff;
+  margin: 0px;
+  padding: 0px; 
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 100px;
+  
+  }
+  
+  h1 {
+  margin: 2em 0 1.5em 0;
+  }
+  
+  nav {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  background: #ffffff;
+  border: #084e22;
+  }
+  
+  ul, li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  }
+  
+  #main-menu > li {
+  float: left;
+  position: relative;
+  
+  }
+  
+  #main-menu > li > a {
+  font-size: 0.85rem;
+  color: #000000;
+  text-align: center;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  display: block;
+  padding: 14px 36px;
+  border-right: 1px solid rgba(0,0,0,0.15);
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+  }
+  
+  #main-menu > li:nth-child(1) > a {
+  border-left: 1px solid rgba(0,0,0,0.15);
+  }
+  /*background:#182952;*/
+  #sub-menu {
+  position: absolute;
+  background: #084e22;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.15s ease-in;
+  }
+  
+  #sub-menu > li {
+  padding: 16px 28px;
+  border-bottom: 1px solid rgba(0,0,0,0.15);
+  }
+  
+  #sub-menu > li >  a {
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  }
+  
+  #main-menu > li:hover #sub-menu {
+  opacity: 1;
+  visibility: visible;
+  }
+  
+  #sub-menu > li >  a:hover {
+  text-decoration: underline;
+  }
+    
+  
+  #updeco{
+    display:inline-block;
+    vertical-align:top;
+    font: verdana, sans-serif;
+    color: #ffffffb8;
+    background-color: #096622fb;
+    margin: 0px;
+    padding: 10px; 
+    text-align: right;
+  
+  }
+  #downdeco{
+    display:inline-block;
+    vertical-align:top;
+    font: verdana, sans-serif;
+    color: #ffffffb8;
+    background-color: #096622fb;
+    margin: 0px;
+    padding: 10px; 
+    text-align: left;
+    font-size: 70%; 
+  
+  }
+  #menuBar{
+    vertical-align:top;
+    font: verdana, sans-serif;
+    color: #ffffffb8;
+    background-color: #8fb499fb;
+    margin: 0px;
+    padding: 10px; 
+    margin-top: 15px; 
+    margin-left: 3em;
+    column-width: 10em;
+    float: left;
+    border-radius: 7px;
+  }
+  #sidemenu{
+    font-size: 1rem;
+    color: #084e22;
+    height : 9rem;
+    column-width: 10em;
+  }
+  #contents{
+    background: #ffffff;
+    vertical-align:top;
+    font: verdana, sans-serif;
+    margin: 0px;
+    padding: 4rem 3rem; 
+    margin-top: 3rem;
+    margin-bottom: 1rem; 
+    margin-left: 10rem;
+    margin-right: 4rem;
+    width: 50rem;
+    float: center;
+    column-width: 20rem;
+    border-radius: 30px;
+    background-image: linear-gradient(180deg, #ffffff95,#ffffffa7,#ffffffea,#ffffffc7),url('../../asset/logo.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 50%; 
+    background-position-x: center;
+    text-align: left;
+  }
+  section {
+    background: linear-gradient(180deg, #dadadf,#ffffffda,#ffffff);
+    margin: 0px;
+    padding: 10px; 
+    text-align: center;
+    width: 100%;
+  }
+  #title{
+  text-align: center;
+  }
+  
+  #sidemenu > li >  a {
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+  }
+  
+  #sidemenu> li:hover #sidemenu {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  #sidemenu > li >  a:hover {
+   text-decoration: underline;
+  }
+  
+  #sidemenu > li  {
+    border-radius: 7px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    margin-bottom: 7px;
+   }
+   #logogreen{
+    margin-top: 10rem;
+    margin-right: -2rem;
+    margin-left: 5rem;
+    padding: 3rem;
+    text-align: center;
+    align-items: center;
+   }
+   #logoblack{
+    margin-right: -2rem;
+    margin-left: 5rem;
+    padding: 3rem;
+    text-align: center;
+    align-items: center;
+   }
+   #brandlogo{
+    margin:10px;
+    margin-left: 1rem;
+    padding: 10px;
+    text-align: right;
+    align-items: right;
+   }
+   #update{
+    display: inline-block;
+    margin-left: 2rem;
+    
+  }
+  
+  
+  

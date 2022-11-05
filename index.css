@@ -1,0 +1,46 @@
+#showlogo{
+    text-align: center;
+    font-size: 400%;
+    font: verdana, sans-serif;
+    color: #096622fb;
+    text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+    background-color: #ffffff;
+}
+img{border-radius: 200px; display: block; margin: auto; }
+
+#index_wrapper{
+    width: 90%;
+    height :96%; 
+    margin: 15px auto; 
+    text-align: center; 
+    background: #ffffff; 
+    float: center; border: 1px solid #096622fb; 
+    padding: 20px; 
+    margin-bottom: 15px; 
+    
+}
+
+
+a {
+    text-decoration-line: none;
+    color: #000000;
+  }
+
+div { 
+width: auto; 
+margin: 20px;
+padding: 10px; 
+border: 0px ;
+display:flex;	
+flex-direction: column;
+
+}
+
+.copyright-wrap{
+    font-size: 70%;
+    font: verdana, sans-serif;
+    margin-bottom: 15px; 
+    color: #096622fb;
+    text-align: center;
+}
+

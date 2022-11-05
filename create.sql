@@ -22,8 +22,8 @@ CREATE TABLE Festival(
     festival_id INT AUTO_INCREMENT PRIMARY KEY,
     category_id INT,
     festival_name VARCHAR(30) NOT NULL,
-    continent VARCHAR(20) NOT NULL,
-    country VARCHAR(20) NOT NULL,
+    continent VARCHAR(20),
+    country VARCHAR(20),
     city VARCHAR(30),
     FOREIGN KEY (category_id) REFERENCES Category(category_id)
 )

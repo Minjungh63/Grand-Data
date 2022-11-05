@@ -8,12 +8,12 @@ CREATE TABLE Category(
     category_name VARCHAR(20) NOT NULL
 )
 
-CREATE Director(
+CREATE TABLE Director(
     director_id INT AUTO_INCREMENT PRIMARY KEY,
     director_name VARCHAR(50) NOT NULL
 )
 
-CREATE Distributor(
+CREATE  TABLE Distributor(
     distributor_id INT AUTO_INCREMENT PRIMARY KEY,
     distributor_name VARCHAR(40) NOT NULL
 )
@@ -36,14 +36,14 @@ CREATE TABLE Theater(
     seat_num INT
 )
 
-CREATE TheaterAddress(
+CREATE TABLE TheaterAddress(
     theater_id INT PRIMARY KEY,
     city VARCHAR(30) NOT NULL,
     district VARCHAR(30) NOT NULL,
     FOREIGN KEY (theater_id) REFERENCES Theater(theater_id)
 )
 
-CREATE Movie(
+CREATE TABLE Movie(
     movie_id INT AUTO_INCREMENT PRIMARY KEY,
     genre_id INT,
     category_id INT,
@@ -59,27 +59,27 @@ CREATE Movie(
     FOREIGN KEY (distributor_id) REFERENCES Distributor(distributor_id)
 )
 
-CREATE ScreeningInfo(
+CREATE TABLE ScreeningInfo(
     movie_id INT PRIMARY KEY,
     screen_num INT,
     FOREIGN KEY (movie_id) REFERENCES Movie(movie_id)
 )
 
-CREATE Sales(
+CREATE TABLE Sales(
     movie_id INT PRIMARY KEY,
     sales_total INT NOT NULL,
     sales_seoul INT NOT NULL,
     FOREIGN KEY (movie_id) REFERENCES Movie(movie_id)
 )
 
-CREATE Spectator(
+CREATE TABLE Spectator(
     movie_id INT PRIMARY KEY,
     spectator_total INT NOT NULL,
     spectator_seoul INT NOT NULL,
     FOREIGN KEY (movie_id) REFERENCES Movie(movie_id)
 )
 
-CREATE Award(
+CREATE TABLE Award(
     award_id INT AUTO_INCREMENT PRIMARY KEY,
     movie_id INT NOT NULL,
     festival_id INT NOT NULL,

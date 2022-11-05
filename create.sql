@@ -36,7 +36,7 @@ CREATE TABLE Theater(
     seat_num INT
 )
 
-CREATE TABLE TheaterAddress(
+CREATE TABLE Theater_Address(
     theater_id INT PRIMARY KEY,
     city VARCHAR(30) NOT NULL,
     district VARCHAR(30) NOT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE Movie(
     FOREIGN KEY (distributor_id) REFERENCES Distributor(distributor_id)
 )
 
-CREATE TABLE ScreeningInfo(
+CREATE TABLE Screening_Info(
     movie_id INT PRIMARY KEY,
     screen_num INT,
     FOREIGN KEY (movie_id) REFERENCES Movie(movie_id)

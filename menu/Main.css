@@ -112,6 +112,7 @@ body {
     margin: 0px;
     padding: 10px; 
     text-align: right;
+    padding-right: 30px;
   
   }
   #downdeco{
@@ -122,9 +123,10 @@ body {
     background-color: #096622fb;
     margin: 0px;
     padding: 10px; 
+    padding-left: 20px;
     text-align: left;
     font-size: 70%; 
-  
+    
   }
   #menuBar{
     vertical-align:top;
@@ -157,7 +159,6 @@ body {
     margin-right: 4rem;
     width: 50rem;
     float: center;
-    column-width: 20rem;
     border-radius: 30px;
     background-image: linear-gradient(180deg, #ffffff95,#ffffffa7,#ffffffea,#ffffffc7),url('../../asset/logo.png');
     background-repeat: no-repeat;
@@ -174,9 +175,27 @@ body {
     width: 100%;
   }
   #title{
-  text-align: center;
+    text-align: left;
+    font-size: xx-large;
   }
-  
+  #dropbox{
+    width: 300px;
+    height: 50px;
+    font-size: medium;
+    padding: 3px;
+    border-radius: 5px;
+    font-weight: 700;
+  }
+  #search{
+    width: 90px;
+    height: 50px;
+    font-size: medium;
+    padding: 3px;
+    border-radius: 5px;
+    font-weight: 700;
+    background-color: #000;
+    color:#ffffff;
+  }
   #sidemenu > li >  a {
     color: rgba(255,255,255,0.6);
     text-decoration: none;

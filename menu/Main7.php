@@ -67,7 +67,7 @@ if(mysqli_connect_errno()){
 }
 else{
     $sql1 = "SELECT count(theater_id) AS theater_num, sum(hall_num) AS hall_sum, sum(seat_num) AS seat_sum FROM Theater JOIN Theater_Address USING(theater_id) WHERE city=\"".$_GET["region"]."\" OR district=\"".$_GET["region"]."\"";
-    $sql2 = "SELECT * FROM Theater JOIN Theater_Address USING(theater_id)";
+    $sql2 = "SELECT * FROM Theater JOIN Theater_Address USING(theater_id) WHERE city=\"".$_GET["region"]."\" OR district=\"".$_GET["region"]."\"";
     $res1 = mysqli_query($mysqli, $sql1);
     $res2 = mysqli_query($mysqli, $sql2);
     if($res1){

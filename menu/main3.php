@@ -59,7 +59,7 @@
 
 <p>
     <table border cols=3>
-        <tr><td>movie name</td><td>country</td><td>released date</td></tr>
+        <tr><td>movie name</td><td>month</td><td>sales total</td></tr>
         <?php
             $mysqli=mysqli_connect("localhost","team11","team11","team11");
             if(mysqli_connect_errno()){
@@ -70,7 +70,8 @@
                 $res_conn="Success!";
             }
             if(isset($_POST['month'])){
-                $sql="select * FROM movie WHERE movie_id<".$_POST['month'].";";
+                //$sql="select M.movie_name AS mn, SUBSTRING(M.released_date,6,7) AS mm, S.sales_total AS st FROM movie M, sales S WHERE SUBSTRING(M.released_date,6,7)=".$_POST['month']." AND M.movie_id=S.movie_id ORDER BY mm;";
+                $sql="select M.movie_name AS mn, SUBSTRING(M.released_date,6,7) AS mm, S.sales_total AS st, SCR.screen_num AS sn FROM movie M, sales S, screening_info SCR WHERE SUBSTRING(M.released_date,6,7)=".$_POST['month']." AND M.movie_id=S.movie_id AND M.movie_id=SCR.movie_id ORDER BY st DESC;";
             }
             else{
                 $sql="select * FROM movie WHERE movie_id=0;";
@@ -78,10 +79,10 @@
             $res=mysqli_query($mysqli,$sql);
             if($res){
                 while($newArr=mysqli_fetch_array($res,MYSQLI_ASSOC)){
-                    $mn=$newArr['movie_name'];
-                    $country=$newArr['country'];
-                    $rd=$newArr['released_date'];
-                    echo "<tr><td>".$mn."</td><td>".$country."</td><td>".$rd."</td></tr>";
+                    $mn=$newArr['mn'];
+                    $mm=substr($newArr['mm'],1,1)."월";
+                    $st=$newArr['st'];
+                    echo "<tr><td>".$mn."</td><td>".$mm."</td><td>".$st."</td></tr>";
                 }
             }
             else{

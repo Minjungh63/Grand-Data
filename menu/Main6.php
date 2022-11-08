@@ -74,8 +74,9 @@
         exit();
     }
     else{
-        if($_POST["sorting"] == "category_id"){
-            $sql = "SELECT RANK() OVER (ORDER BY COUNT(category_id) desc) AS Rank, category_name, COUNT(festival_name) AS festival_num FROM Category, Festival GROUP BY category_id ORDER BY RANK ASC";
+        if($_POST["sorting"] == "category"){
+            printf("<p>Which category has the most film festivals?</p>");
+            $sql = "SELECT RANK() OVER (ORDER BY COUNT(category_id) desc) AS Rank, category_name, COUNT(festival_name) AS festival_num FROM Category JOIN Festival USING(category_id) GROUP BY category_id ORDER BY Rank ASC";
             $res = mysqli_query($mysqli, $sql);
             if($res){
                 printf("<table id=\"ranking_table\">");
@@ -94,38 +95,40 @@
             mysqli_free_result($res);
         }
         else if ($_POST["sorting"] == "continent"){
-            $sql = "SELECT RANK() OVER (ORDER BY COUNT(continent) desc) AS Rank, continent, COUNT(festival_name) AS festival_num FROM Festival GROUP BY continent ORDER BY RANK ASC";
+            printf("<p>Which continent has the most film festivals?</p>");
+            $sql = "SELECT RANK() OVER (ORDER BY COUNT(continent) desc) AS Rank, continent, COUNT(festival_name) AS festival_num FROM Festival GROUP BY continent ORDER BY Rank ASC";
             $res = mysqli_query($mysqli, $sql);
             if($res){
                 printf("<table id=\"ranking_table\">");
                 while($newArray = mysqli_fetch_array($res, MYSQLI_ASSOC)){
                     $rank = $newArray['Rank'];
-                    $category_name = $newArray['continent'];
+                    $continent = $newArray['continent'];
                     $festival_num = $newArray['festival_num'];
                     if($rank==1) printf("<tr class=\"ranking_tr\"><td width:100px> 🥇 </td>");
                     else if($rank==2) printf("<tr class=\"ranking_tr\" style=\"color:darkslategray;\"><td> 🥈 </td>");
                     else if($rank==3) printf("<tr class=\"ranking_tr\" style=\"color:brown;\"><td> 🥉 </td>");
                     else printf("<tr class=\"normal_tr\"><td><B> %d </B></td>",$rank);
-                    printf("<td style=\"width:400px\">%s</td><td style=\"width:100px\">🎉 %d</td></tr>",$category_name,$festival_num);
+                    printf("<td style=\"width:400px\">%s</td><td style=\"width:100px\">🎉 %d</td></tr>",$continent,$festival_num);
                 }
             }
             printf("</table>");
             mysqli_free_result($res);
         }
         else if ($_POST["sorting"] == "country"){
-            $sql = "SELECT RANK() OVER (ORDER BY COUNT(continent) DESC) AS Rank, country, COUNT(festival_name) AS festival_num FROM Festival GROUP BY country ORDER BY RANK ASC";
+            printf("<p>Which country has the most film festivals?</p>");
+            $sql = "SELECT RANK() OVER (ORDER BY COUNT(continent) DESC) AS Rank, country, COUNT(festival_name) AS festival_num FROM Festival GROUP BY country ORDER BY Rank ASC";
             $res = mysqli_query($mysqli, $sql);
             if($res){
                 printf("<table id=\"ranking_table\">");
                 while($newArray = mysqli_fetch_array($res, MYSQLI_ASSOC)){
                     $rank = $newArray['Rank'];
-                    $category_name = $newArray['country'];
+                    $country = $newArray['country'];
                     $festival_num = $newArray['festival_num'];
                     if($rank==1) printf("<tr class=\"ranking_tr\"><td width:100px> 🥇 </td>");
                     else if($rank==2) printf("<tr class=\"ranking_tr\" style=\"color:darkslategray;\"><td> 🥈 </td>");
                     else if($rank==3) printf("<tr class=\"ranking_tr\" style=\"color:brown;\"><td> 🥉 </td>");
                     else printf("<tr class=\"normal_tr\"><td><B> %d </B></td>",$rank);
-                    printf("<td style=\"width:400px\">%s</td><td style=\"width:100px\">🎉 %d</td></tr>",$category_name,$festival_num);
+                    printf("<td style=\"width:400px\">%s</td><td style=\"width:100px\">🎉 %d</td></tr>",$country,$festival_num);
                 }
             }
             printf("</table>");

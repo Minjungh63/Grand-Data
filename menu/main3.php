@@ -69,8 +69,12 @@
             else {
                 $res_conn="Success!";
             }
-
-            $sql="select * FROM movie WHERE movie_id<".$_POST['month'].";";
+            if(isset($_POST['month'])){
+                $sql="select * FROM movie WHERE movie_id<".$_POST['month'].";";
+            }
+            else{
+                $sql="select * FROM movie WHERE movie_id=0;";
+            }
             $res=mysqli_query($mysqli,$sql);
             if($res){
                 while($newArr=mysqli_fetch_array($res,MYSQLI_ASSOC)){

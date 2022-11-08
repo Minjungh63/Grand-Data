@@ -135,7 +135,8 @@
             mysqli_free_result($res);
         }
         else if ($_POST["sorting"] == "reality"){
-            // $sql = "SELECT RANK() OVER (ORDER BY COUNT(movie_id) desc)"
+            printf("<p>Correlation between award winning films and films actually loved</p>");
+            $sql = "SELECT RANK() OVER (ORDER BY COUNT(movie_id) desc)"
         }
         else{
             printf("Could not retrieve records: %s\n", mysqli_error($mysqli));

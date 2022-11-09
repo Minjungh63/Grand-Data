@@ -72,7 +72,7 @@
             exit();
         }else{
           if($_POST['menu']=="sales") {
-            $sql = "SELECT genre_name, sum(sales_total),0 as total_cnt, sum(sales_seoul),0 as seoul_cnt FROM movie JOIN sales USING(movie_id) JOIN genre USING(genre_id) group by(genre_id) ORDER BY total_cnt DESC";
+            $sql = "SELECT genre_name, sum(sales_total) as total_cnt, sum(sales_seoul) as seoul_cnt FROM movie JOIN sales USING(movie_id) JOIN genre USING(genre_id) group by(genre_id) ORDER BY total_cnt DESC";
             $table_title = "<th><td> Genre </td><td> Total Sales </td><td> Seoul Sales </td></th>";
         }
           else if($_POST['menu']=="spectator"){

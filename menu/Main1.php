@@ -29,7 +29,7 @@
 
     <section>
     <div id = "contents">
-      <h2 id = "title">Ranking of<br>Genre</h2>
+      <h2 id = "title">Prefered Genre <br>by Distributor</h2>
  
       <form action="Main1.php" method="post" style="margin-bottom:5%">
        <select id="dropbox" name="scope">

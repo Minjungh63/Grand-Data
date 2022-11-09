@@ -84,7 +84,7 @@
         <input id="insert" type="submit" value="Insert Record"></p>
       </form>
 
-<?php
+      <?php
 $mysqli = mysqli_connect("localhost", "team11", "team11", "team11");
 
 if(mysqli_connect_errno()){
@@ -92,38 +92,24 @@ if(mysqli_connect_errno()){
     exit();
 }
 else{
-    $sql1 = "SELECT count(theater_id) AS theater_num, sum(hall_num) AS hall_sum, sum(seat_num) AS seat_sum FROM Theater JOIN Theater_Address USING(theater_id) WHERE city=\"".$_GET["region"]."\" OR district=\"".$_GET["region"]."\"";
-    $sql2 = "SELECT * FROM Theater JOIN Theater_Address USING(theater_id) WHERE city=\"".$_GET["region"]."\" OR district=\"".$_GET["region"]."\"";
+    $sql1 = "INSERT INTO Theater(theater_name, branch, hall_num, seat_num) values(\"".$_POST["theater_name"]."\", \"".$_POST["branch"]."\", ".$_POST["hall_num"].", ".$_POST["seat_num"].")";
     $res1 = mysqli_query($mysqli, $sql1);
-    $res2 = mysqli_query($mysqli, $sql2);
-    if($res1){
-        $newArray = mysqli_fetch_array($res1, MYSQLI_ASSOC);
-        $theater_num = $newArray['theater_num'];
-        $hall_sum = $newArray['hall_sum'];
-        $seat_sum = $newArray['seat_sum'];
-        printf("<p><B>%s</B>의<br>", $_GET["region"]);
-        printf("총 영화관 수: %d  /  ", $theater_num);
-        printf("총 스크린 수: %d  /  ", $hall_sum);
-        printf("총 좌석 수: %d</p>", $seat_sum);
-    }
-    if($res2){
-        printf("<table id=\"list_table\">");
-        printf("<tr class=\"list_tr\"><td><B> name </B></td><td><B> branch </B></td><td> hall </td><td> seat </td><td> city </td><td> district </td>");
-        while($newArray = mysqli_fetch_array($res2, MYSQLI_ASSOC)){
-            $theater_name = $newArray['theater_name'];
-            $branch = $newArray['branch'];
-            $hall_num = $newArray['hall_num'];
-            $seat_num = $newArray['seat_num'];
-            $city = $newArray['city'];
-            $district = $newArray['district'];
-            printf("<tr class=\"normal_tr\"><td><B> %s </B></td><td><B> %s </B></td><td> %d </td><td> %d </td><td> %s </td><td> %s </td>",$theater_name, $branch, $hall_num, $seat_num, $city, $district);
+    if ($res1 === TRUE) {
+        $sql2 = "SELECT MAX(theater_id) AS theater_id FROM Theater";
+        $res2 = mysqli_query($mysqli, $sql2);
+        $newArray = mysqli_fetch_array($res2, MYSQLI_ASSOC);
+
+        $sql3 = "INSERT INTO Theater_Address(theater_id, city, district) values(\"".$newArray["theater_id"]."\", \"".$_POST["city"]."\", \"".$_POST["district"]."\")";
+        $res3 = mysqli_query($mysqli, $sql3);
+
+        if ($res3==TRUE) {
+            echo "Insertion Successful.";
+        } else {
+            printf("Could not insert record: %s\n",mysqli_error($mysqli));
         }
-        printf("</table>");
+    } else {
+        printf("Could not insert record: %s\n",mysqli_error($mysqli));
     }
-    else{
-        printf("Could not retrieve records: %s\n", mysqli_error($mysqli));
-    }
-    mysqli_free_result($res1);
     mysqli_free_result($res2);
     mysqli_close($mysqli);
 }

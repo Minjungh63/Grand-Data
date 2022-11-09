@@ -59,8 +59,8 @@
                   $genre_name = $ranking_list["genre_name"];
                   //$distributor_id = $ranking_list["distributor_id"];->배급사 누르면 배급사별 각 장르를 몇개 배급했는지 나오는 상세페이지..?
                   //printf("<tr onclick= location.href='../menu/Main1_detail.php?distributor_id='+$distributor_id ");
-                  printf("class=\"normal_tr\"><td><B> %d </B></td>",$i);
-                  printf("<td style=\"width:400px\">%s</td><td style=\"width:100px\">🏆 %s</td></tr>",$distributor_name,$genre_name);
+                  printf("<tr class=\"normal_tr\"><td><B> %d </B></td>",$i);
+                  printf("<td style=\"width:460px\">%s</td><td style=\"width:200px\">🏆 %s</td></tr>",$distributor_name,$genre_name);
                 }
             
             printf("</table>");

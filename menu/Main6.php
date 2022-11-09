@@ -80,10 +80,15 @@
             $res = mysqli_query($mysqli, $sql);
             if($res){
                 printf("<table id=\"ranking_table\">");
+                $i=0;
                 while($newArray = mysqli_fetch_array($res, MYSQLI_ASSOC)){
-                    $rank = $newArray['Rank'];
+                    $rank = $newArray['Rank'] + $i;
                     $category_name = $newArray['category_name'];
                     $festival_num = $newArray['festival_num'];
+                    if($category_name == "기타"){
+                      $i=-1;
+                      continue;
+                    }
                     if($rank==1) printf("<tr class=\"ranking_tr\"><td width:100px> 🥇 </td>");
                     else if($rank==2) printf("<tr class=\"ranking_tr\" style=\"color:darkslategray;\"><td> 🥈 </td>");
                     else if($rank==3) printf("<tr class=\"ranking_tr\" style=\"color:brown;\"><td> 🥉 </td>");
@@ -100,10 +105,15 @@
             $res = mysqli_query($mysqli, $sql);
             if($res){
                 printf("<table id=\"ranking_table\">");
+                $i=0;
                 while($newArray = mysqli_fetch_array($res, MYSQLI_ASSOC)){
                     $rank = $newArray['Rank'];
                     $continent = $newArray['continent'];
                     $festival_num = $newArray['festival_num'];
+                    if($continent == "NULL"){
+                      $i=-1;
+                      continue;
+                    }
                     if($rank==1) printf("<tr class=\"ranking_tr\"><td width:100px> 🥇 </td>");
                     else if($rank==2) printf("<tr class=\"ranking_tr\" style=\"color:darkslategray;\"><td> 🥈 </td>");
                     else if($rank==3) printf("<tr class=\"ranking_tr\" style=\"color:brown;\"><td> 🥉 </td>");
@@ -120,10 +130,15 @@
             $res = mysqli_query($mysqli, $sql);
             if($res){
                 printf("<table id=\"ranking_table\">");
+                $i=0;
                 while($newArray = mysqli_fetch_array($res, MYSQLI_ASSOC)){
                     $rank = $newArray['Rank'];
                     $country = $newArray['country'];
                     $festival_num = $newArray['festival_num'];
+                    if($country == "NULL"){
+                      $i=-1;
+                      continue;
+                    }
                     if($rank==1) printf("<tr class=\"ranking_tr\"><td width:100px> 🥇 </td>");
                     else if($rank==2) printf("<tr class=\"ranking_tr\" style=\"color:darkslategray;\"><td> 🥈 </td>");
                     else if($rank==3) printf("<tr class=\"ranking_tr\" style=\"color:brown;\"><td> 🥉 </td>");

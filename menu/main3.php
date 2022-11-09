@@ -200,13 +200,7 @@
           echo '<tr class="normal_tr"><td><B>' . $rk . '</B></td>';
         }
 
-        echo '<td>' .
-          $mn .
-          '</td><td>' .
-          $sn .
-          '</td><td>' .
-          $st .
-          '</td></tr>';
+        echo '<td>' . $mn . '</td><td>' . $sn . '</td><td>' . $st . '</td></tr>';
       }
       echo '</table>';
     } elseif ($ver == 3) {

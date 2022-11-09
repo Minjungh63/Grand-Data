@@ -134,7 +134,7 @@
             printf("</table>");
             mysqli_free_result($res);
         }
-        else if ($_POST["sorting"] == "reality"){
+        else if ($_POST["sorting"] == "special"){
             printf("<p>Correlation between award winning films and films actually loved</p>");
             //$sql = "SELECT RANK() OVER (ORDER BY COUNT(movie_id) desc)"
         }

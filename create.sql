@@ -69,8 +69,8 @@ CREATE TABLE Screening_Info(
 
 CREATE TABLE Sales(
     movie_id INT PRIMARY KEY,
-    sales_total INT NOT NULL,
-    sales_seoul INT NOT NULL,
+    sales_total BIGINT(15) NOT NULL,
+    sales_seoul BIGINT(15) NOT NULL,
     FOREIGN KEY (movie_id) REFERENCES Movie(movie_id)
 );
 

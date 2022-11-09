@@ -48,7 +48,7 @@
         <li><a href="../menu/Main4.html">main4</a></li>
         <li><a href="../menu/Main5.html">main5</a></li>
         <li><a href="../menu/Main6.html">main6</a></li>
-        <li><a href="../menu/Main7.html">main7</a></li>
+        <li><a href="../menu/Main7.php">main7</a></li>
       </ul>
     </nav>
 
@@ -86,7 +86,7 @@
                   $director_name = $ranking_list["director_name"];
                   $award_cnt = $ranking_list["award_cnt"];
                   $director_id = $ranking_list["director_id"];
-                  printf("<tr onclick= location.href='../menu/Main5_detail.php?director_id='+$director_id ");
+                  printf("<tr onclick= location.href='../menu/Main5_detail.php?director_id=%d&&director_name=%s&&state=search' ",$director_id,$director_name);
                   if($i==1) printf("class=\"ranking_tr\"><td width:100px> 🥇 </td>");
                   else if($i==2) printf("class=\"ranking_tr\" style=\"color:darkslategray;\"><td> 🥈 </td>");
                   else if($i==3) printf("class=\"ranking_tr\" style=\"color:brown;\"><td> 🥉 </td>");

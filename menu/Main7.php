@@ -5,6 +5,27 @@
     margin-left:auto;
     margin-right:auto;
   }
+  #insert{
+    width: 180px;
+    height: 40px;
+    font-size: medium;
+    padding: 5px;
+    border-radius: 10px;
+    font-weight: 700;
+    background-color: #000;
+    color:#ffffff;
+    margin-top:5px;
+		margin-bottom:5px
+  }
+  .input_box{
+    width:180px;
+    height:20px;
+    font-size:12px;
+    margin-left:3px;
+		margin-right:3px;
+		margin-top:3px;
+		margin-bottom:3px
+  }
   .list_tr{
     font-size:20px; 
     font-weight:700; 
@@ -73,9 +94,15 @@
         This is the total number of theater, hall, and seat of each region.<br>
         Click on a city or a district for more detailed information.
       </p>
-      <form action="Main7_detail.php" method="get">
-        <input type="text" style="width:200px;height:40px;font-size:18px;" placeholder="Search a Region"  name="region" size="30">
-        <input id="search" type="submit" value="search">
+      <form action="Main7_insert.php" method="POST">
+        <p><B>Insert a new theater: </B><br>
+        Name: <input type="text" class="input_box" name="theater_name" required/>
+        Branch:<input type="text" class="input_box" name="branch" required/><br>
+        Hall number: <input type="number" class="input_box" placeholder="numeber only" name="hall_num">
+        Seat number: <input type="number" class="input_box" placeholder="number only" name="seat_num"><br>
+        City: <input type="text" class="input_box" name="city" required/>
+        District: <input type="text" class="input_box" name="district" required/><br>
+        <input id="insert" type="submit" value="Insert Record"></p>
       </form>
       <?php
 $mysqli = mysqli_connect("localhost", "team11", "team11", "team11");

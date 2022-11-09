@@ -52,10 +52,6 @@
       <p>
         Information of theaters in the selected region.<br>
       </p>
-      <form action="Main7.php" method="get">
-        <input type="text" style="width:200px;height:40px;font-size:18px;" placeholder="Search a Region"  name="region" size="30">
-        <input id="search" type="submit" value="search">
-      </form>
 
 <?php
 $mysqli = mysqli_connect("localhost", "team11", "team11", "team11");

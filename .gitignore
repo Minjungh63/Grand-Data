@@ -1,6 +1,7 @@
 /node_modules
 package.json
 package-lock.json
+dump.sql
 
 ##### Windows
 # Windows thumbnail cache files

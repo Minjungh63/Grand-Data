@@ -7,10 +7,17 @@
     font-weight:700;
     font-size: 18px;
   }
-  #movie_table{
+  .head_tr{
+    height:60px; 
+    font-weight:700;
+    font-size: 25px;
+  }
+  .toCenter{
     text-align:center; 
     margin-left:auto;
     margin-right:auto;
+    font-size:35px;
+    padding:15px 0px;
   }
 </style>
 <html>
@@ -48,7 +55,9 @@
 <section>
     <div id = "contents">
     <h2 id='title'><?php echo $_GET['director_name'];?></h2>
-    <p>This page is an analysis of <?php echo $_GET['director_name'];?>'s movies.</p>
+    <p>This is the page of the director <?php echo $_GET['director_name'];?>.
+    <br>You can search for an analysis of the director's filmography.
+    <br>Please select the category where you want to receive the analysis.</p>
     <form action="Main5_detail.php?director_id=<?php echo $id;?>&&director_name=<?php echo $name;?>&&state=result" method="post" style="margin-bottom:5%">
        <select id="dropbox" name="menu">
          <option value="0" selected>Movie List 
@@ -66,26 +75,26 @@
         }else{
             if($menu=='1'){
                 $sql = "SELECT AVG(screen_num) as c1, MAX(screen_num) as c2 FROM movie JOIN screening_info USING(movie_id) JOIN director USING(director_id) WHERE director_id=".$_GET['director_id']." GROUP BY director_id";
-                $title = "Screening Number of Films:";
-                $head = "<tr class='normal_tr'><th>Average</th><th>Max</th></tr>";
+                $title = "🎞 Screening Number 🎞";
+                $head = "<tr class='head_tr'><th>Average</th><th>Max</th></tr>";
               } else if($menu=='2') {
                 $sql = "SELECT AVG(spectator_total) as c1, AVG(spectator_seoul) as c3, MAX(spectator_total) as c2, MAX(spectator_seoul) as c4 FROM movie JOIN spectator USING(movie_id) JOIN director USING(director_id) WHERE director_id=".$_GET['director_id']." GROUP BY director_id";
-                $title = "Spectator Number of Films:";
-                $head = "<tr class='normal_tr'><th>Average(Total)</th><th>Max(Total)</th><th>Average(Seoul)</th><th>Max(Seoul)</th</tr>";
+                $title = "🎞 Spectator Number 🎞";
+                $head = "<tr class='head_tr'><th>Average<br>(Total)</th><th>Max<br>(Total)</th><th>Average<br>(Seoul)</th><th>Max<br>(Seoul)</th</tr>";
               }else if($menu=='3') {
                 $sql = "SELECT AVG(sales_total) as c1, AVG(sales_seoul) as c3, MAX(sales_total) as c2, MAX(sales_seoul) as c4 FROM movie JOIN sales USING(movie_id) JOIN director USING(director_id) WHERE director_id=".$_GET['director_id']." GROUP BY director_id";
-                $title = "Sales of Films:";
-                $head = "<tr class='normal_tr'><th>Average(Total)</th><th>Max(Total)</th><th>Average(Seoul)</th><th>Max(Seoul)</th</tr>";
+                $title = "🎞 Sales of Films 🎞";
+                $head = "<tr class='head_tr'><th>Average<br>(Total)</th><th>Max<br>(Total)</th><th>Average<br>(Seoul)</th><th>Max<br>(Seoul)</th</tr>";
               }else{
                 $sql = "SELECT movie_name as c1, released_date as c2 FROM movie JOIN director USING(director_id) WHERE director_id=".$_GET['director_id']." ORDER BY released_date DESC";
-                $title = "List of Films:";
-                $head = "<tr class='normal_tr'><th>Movie Name</th><th>Released Date</th></tr>";
+                $title = "🎞 List of Films 🎞";
+                $head = "<tr class='head_tr'><th>Title</th><th>Released Date</th></tr>";
               }
             $res = mysqli_query($mysqli,$sql);
             $director_list = mysqli_fetch_array($res,MYSQLI_ASSOC);
             if($res){
-                printf('<h2>%s</h2>',$title);
-                printf("<table id=\"movie_table\">%s",$head);
+                printf("<h2 class='toCenter'>%s</h2>",$title);
+                printf("<table class=\"toCenter\">%s",$head);
                 $i=0;
                     do{
                       $c1 = $director_list["c1"];

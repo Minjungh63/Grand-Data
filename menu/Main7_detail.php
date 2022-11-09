@@ -5,18 +5,6 @@
     margin-left:auto;
     margin-right:auto;
   }
-  #insert{
-    width: 180px;
-    height: 40px;
-    font-size: medium;
-    padding: 5px;
-    border-radius: 10px;
-    font-weight: 700;
-    background-color: #000;
-    color:#ffffff;
-    margin-top:5px;
-		margin-bottom:5px
-  }
   .list_tr{
     font-size:20px; 
     font-weight:700; 
@@ -27,15 +15,6 @@
     height:40px; 
     font-weight:700;
     cursor:pointer;
-  }
-  .input_box{
-    width:180px;
-    height:20px;
-    font-size:12px;
-    margin-left:3px;
-		margin-right:3px;
-		margin-top:3px;
-		margin-bottom:3px
   }
 </style>
 <html>
@@ -73,16 +52,6 @@
       <p>
         Information of theaters in the selected region.<br>
       </p>
-      <form action="Main7_insert.php" method="POST">
-        <p><B>Insert a new theater in this region: </B><br>
-        Name: <input type="text" class="input_box" name="theater_name" required/>
-        Branch:<input type="text" class="input_box" name="branch" required/><br>
-        Hall number: <input type="number" class="input_box" placeholer="enter a single number" name="hall_num">
-        Seat number: <input type="number" class="input_box" placeholer="enter a single number" name="seat_num"><br>
-        City: <input type="text" class="input_box" name="city" required/>
-        District: <input type="text" class="input_box" name="district" required/><br>
-        <input id="insert" type="submit" value="Insert Record"></p>
-      </form>
 
 <?php
 $mysqli = mysqli_connect("localhost", "team11", "team11", "team11");

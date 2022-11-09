@@ -70,19 +70,6 @@
 
     <div id = "contents">
     <h2 id = "title">Theater</h2>
-      <p>
-        Information of theaters in the selected region.<br>
-      </p>
-      <form action="Main7_insert.php" method="POST">
-        <p><B>Insert a new theater in this region: </B><br>
-        Name: <input type="text" class="input_box" name="theater_name">
-        Branch:<input type="text" class="input_box" name="branch"><br>
-        Hall number: <input type="number" class="input_box" placeholer="enter a single number" name="hall_num">
-        Seat number: <input type="number" class="input_box" placeholer="enter a single number" name="seat_num"><br>
-        City: <input type="text" class="input_box" name="city">
-        District: <input type="text" class="input_box" name="district"><br>
-        <input id="insert" type="submit" value="Insert Record"></p>
-      </form>
 
       <?php
 $mysqli = mysqli_connect("localhost", "team11", "team11", "team11");

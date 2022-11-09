@@ -11,6 +11,7 @@
     height:60px; 
     font-weight:700;
     font-size: 25px;
+    color: #bf0000;
   }
   .toCenter{
     text-align:center; 
@@ -57,7 +58,7 @@
     <h2 id='title'><?php echo $_GET['director_name'];?></h2>
     <p>This is the page of the director <?php echo $_GET['director_name'];?>.
     <br>You can search for an analysis of the director's filmography.
-    <br>Please select the category where you want to receive the analysis.</p>
+    <br><B>Please select the category where you want to receive the analysis.</B></p>
     <form action="Main5_detail.php?director_id=<?php echo $id;?>&&director_name=<?php echo $name;?>&&state=result" method="post" style="margin-bottom:5%">
        <select id="dropbox" name="menu">
          <option value="0" selected>Movie List 
@@ -80,11 +81,11 @@
               } else if($menu=='2') {
                 $sql = "SELECT AVG(spectator_total) as c1, AVG(spectator_seoul) as c3, MAX(spectator_total) as c2, MAX(spectator_seoul) as c4 FROM movie JOIN spectator USING(movie_id) JOIN director USING(director_id) WHERE director_id=".$_GET['director_id']." GROUP BY director_id";
                 $title = "🎞 Spectator Number 🎞";
-                $head = "<tr class='head_tr'><th>Average<br>(Total)</th><th>Max<br>(Total)</th><th>Average<br>(Seoul)</th><th>Max<br>(Seoul)</th</tr>";
+                $head = "<tr class='head_tr'><th>Average<br>*Total*</th><th>Max<br>*Total*</th><th>Average<br>*Seoul*</th><th>Max<br>*Seoul*</th</tr>";
               }else if($menu=='3') {
                 $sql = "SELECT AVG(sales_total) as c1, AVG(sales_seoul) as c3, MAX(sales_total) as c2, MAX(sales_seoul) as c4 FROM movie JOIN sales USING(movie_id) JOIN director USING(director_id) WHERE director_id=".$_GET['director_id']." GROUP BY director_id";
                 $title = "🎞 Sales of Films 🎞";
-                $head = "<tr class='head_tr'><th>Average<br>(Total)</th><th>Max<br>(Total)</th><th>Average<br>(Seoul)</th><th>Max<br>(Seoul)</th</tr>";
+                $head = "<tr class='head_tr'><th>Average<br>*Total*</th><th>Max<br>*Total*</th><th>Average<br>*Seoul*</th><th>Max<br>*Seoul*</th</tr>";
               }else{
                 $sql = "SELECT movie_name as c1, released_date as c2 FROM movie JOIN director USING(director_id) WHERE director_id=".$_GET['director_id']." ORDER BY released_date DESC";
                 $title = "🎞 List of Films 🎞";

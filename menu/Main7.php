@@ -5,10 +5,38 @@
     margin-left:auto;
     margin-right:auto;
   }
+  #insert{
+    width: 180px;
+    height: 40px;
+    font-size: medium;
+    padding: 5px;
+    border-radius: 10px;
+    font-weight: 700;
+    background-color: #000;
+    color:#ffffff;
+    margin-top:5px;
+		margin-bottom:5px
+  }
+  .input_box{
+    width:180px;
+    height:20px;
+    font-size:12px;
+    margin-left:3px;
+		margin-right:3px;
+		margin-top:3px;
+		margin-bottom:3px
+  }
   .list_tr{
     font-size:20px; 
     font-weight:700; 
     height:70px; 
+    cursor:pointer;
+  }
+  .list_tr:hover{
+    font-size:20px; 
+    font-weight:700; 
+    height:70px; 
+    color:orange;
     cursor:pointer;
   }
   .normal_tr{
@@ -16,22 +44,34 @@
     font-weight:700;
     cursor:pointer;
   }
+  .regionButton{
+    width: 150px;
+    height: 40px;
+    font-size: medium;
+    padding: 3px;
+    border-radius: 5px;
+    font-weight: 700;
+    background-color: #ffffff;
+    color:#000;
+    border-color: #C0C0C0;
+  }
 </style>
 <html>
     <head>
-    <meta charset="UTF-8">
-    <title>Grand Data</title>
-    <link rel="stylesheet" href="Main.css">
+	<meta charset="UTF-8">
+	<title>Grand Data</title>
+	<link rel="stylesheet" href="Main.css">
     </head>
 
     <body>
         
       <div id="updeco">
-        <a href="menu.html">Film Culture Industry Analysis: What makes a movie successful</a>
-      </div>
+        <a href="menu.html">Grand Data &nbsp;&nbsp;&nbsp;&nbsp;</a>
+    </div>
 
       
     <nav role="navigation">
+
       <ul id="main-menu">
         <li><a href="../menu/Main1.html">main1</a></li>
         <li><a href="../menu/Main2.html">main1</a></li>
@@ -39,25 +79,32 @@
         <li><a href="../menu/Main4.html">main4</a></li>
         <li><a href="../menu/Main5.html">main5</a></li>
         <li><a href="../menu/Main6.html">main6</a></li>
-        <li><a href="../menu/Main7.html">main7</a></li>
+        <li><a href="../menu/Main7.php">main7</a></li>
       </ul>
     </nav>
 
-    <section>
-        
-    <p>
+
+<section>
+  
+  <p>
 
     <div id = "contents">
-    <h2 id = "title">Theater</h2>
+      <h2 id = "title">Theater</h2>
       <p>
-        Information of theaters in the selected region.<br>
+        This is the total number of theater, hall, and seat of each region.<br>
+        Click on a city or a district for more detailed information.
       </p>
-      <form action="Main7.php" method="get">
-        <input type="text" style="width:200px;height:40px;font-size:18px;" placeholder="Search a Region"  name="region" size="30">
-        <input id="search" type="submit" value="search">
+      <form action="Main7_insert.php" method="POST">
+        <p><B>Insert a new theater: </B><br>
+        Name: <input type="text" class="input_box" name="theater_name" required/>
+        Branch:<input type="text" class="input_box" name="branch" required/><br>
+        Hall number: <input type="number" class="input_box" placeholder="numeber only" name="hall_num">
+        Seat number: <input type="number" class="input_box" placeholder="number only" name="seat_num"><br>
+        City: <input type="text" class="input_box" name="city" required/>
+        District: <input type="text" class="input_box" name="district" required/><br>
+        <input id="insert" type="submit" value="Insert Record"></p>
       </form>
-
-<?php
+      <?php
 $mysqli = mysqli_connect("localhost", "team11", "team11", "team11");
 
 if(mysqli_connect_errno()){
@@ -65,44 +112,29 @@ if(mysqli_connect_errno()){
     exit();
 }
 else{
-    $sql1 = "SELECT count(theater_id) AS theater_num, sum(hall_num) AS hall_sum, sum(seat_num) AS seat_sum FROM Theater JOIN Theater_Address USING(theater_id) WHERE city=\"".$_GET["region"]."\" OR district=\"".$_GET["region"]."\"";
-    $sql2 = "SELECT * FROM Theater JOIN Theater_Address USING(theater_id) WHERE city=\"".$_GET["region"]."\" OR district=\"".$_GET["region"]."\"";
-    $res1 = mysqli_query($mysqli, $sql1);
-    $res2 = mysqli_query($mysqli, $sql2);
-    if($res1){
-        $newArray = mysqli_fetch_array($res1, MYSQLI_ASSOC);
-        $theater_num = $newArray['theater_num'];
-        $hall_sum = $newArray['hall_sum'];
-        $seat_sum = $newArray['seat_sum'];
-        printf("<p><B>%s</B>의<br>", $_GET["region"]);
-        printf("총 영화관 수: %d  /  ", $theater_num);
-        printf("총 스크린 수: %d  /  ", $hall_sum);
-        printf("총 좌석 수: %d</p>", $seat_sum);
-    }
-    if($res2){
+    $sql = "SELECT count(theater_id) AS theater_num, sum(hall_num) AS hall_sum, sum(seat_num) AS seat_sum, city, district FROM Theater JOIN Theater_Address USING(theater_id) GROUP BY district ORDER BY city";
+    $res = mysqli_query($mysqli, $sql);
+    if($res){
         printf("<table id=\"list_table\">");
-        printf("<tr class=\"list_tr\"><td><B> name </B></td><td><B> branch </B></td><td> hall </td><td> seat </td><td> city </td><td> district </td>");
-        while($newArray = mysqli_fetch_array($res2, MYSQLI_ASSOC)){
-            $theater_name = $newArray['theater_name'];
-            $branch = $newArray['branch'];
-            $hall_num = $newArray['hall_num'];
-            $seat_num = $newArray['seat_num'];
-            $city = $newArray['city'];
-            $district = $newArray['district'];
-            printf("<tr class=\"normal_tr\"><td><B> %s </B></td><td><B> %s </B></td><td> %d </td><td> %d </td><td> %s </td><td> %s </td>",$theater_name, $branch, $hall_num, $seat_num, $city, $district);
+        printf("<class=\"list_tr\"><td><B> City </B><td><B> District </B><td> theater </td><td> hall </td><td> seat </td></tr>");
+        while($newArray = mysqli_fetch_array($res, MYSQLI_ASSOC)){
+          $city = $newArray['city'];
+          $district = $newArray['district'];
+          $theater_num = $newArray['theater_num'];
+          $hall_sum = $newArray['hall_sum'];
+          $seat_sum = $newArray['seat_sum'];
+          printf("<class=\"normal_tr\"><td><button class=\"regionButton\" onclick=\"location.href='Main7_detail.php?region=$city'\"> %s </button></td><td><button class=\"regionButton\" onclick=\"location.href='Main7_detail.php?region=$district'\"> %s </button></td><td> %d </td><td> %d </td><td> %d </td></tr>",$city, $district, $theater_num, $hall_sum, $seat_sum);
         }
         printf("</table>");
     }
     else{
         printf("Could not retrieve records: %s\n", mysqli_error($mysqli));
     }
-    mysqli_free_result($res1);
-    mysqli_free_result($res2);
+    mysqli_free_result($res);
     mysqli_close($mysqli);
 }
 ?>
-
-</div>
+    </div>
   </p>
 </section>
 <div id="downdeco">

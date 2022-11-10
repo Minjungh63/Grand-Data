@@ -64,7 +64,7 @@
                 $continent = $newArray['continent'];
                 $country = $newArray['country'];
                 $city = $newArray['city'];
-                printf("<tr class=\"normal_tr\"><td><B> %s </B></td><td> %s </td><td> %s </td><td> %s </td><td> %s </td><td><button onclick=\"location.href='Main6_update.html?festival_id=$festival_id'\">✏️</button></td>",$festival_name, $category_name, $continent, $country, $city);
+                printf("<tr class=\"normal_tr\"><td><B> %s </B></td><td> %s </td><td> %s </td><td> %s </td><td> %s </td><td><button onclick=\"location.href='Main6_update_input.php?festival_id=$festival_id'\">✏️</button></td>",$festival_name, $category_name, $continent, $country, $city);
             }
             printf("</table><br>");
         }

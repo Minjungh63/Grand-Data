@@ -93,7 +93,7 @@
       <p>
         Update information of the festival selected.
       </p>
-      <form action="Main6_update.php" method="POST">
+      <form action="Main6_update.php?festival_id=<?php echo $_GET['festival_id'] ?>" method="POST">
         <p><B>Update Information: </B><br>
         Name: <input type="text" class="input_box" name="festival_name"/><br>
         Category:

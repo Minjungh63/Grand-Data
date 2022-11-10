@@ -45,18 +45,6 @@
 <section>
     <div id = "contents">
     <h2 id="title">Film Festivals</h2>
-      <p>
-        Please choose the criteria by which you want to sort the film festivals.
-      </p>
-      <form action="Main6.php" method="post">
-       <select id="dropbox" name="sorting">
-         <option value="category" selected>Category
-         <option value="continent">Continent
-         <option value="country">Country
-         <option value="reality">Reality(Correlation between award winning films and films actually loved)
-       </select>
-       <input id="search" type="submit" value="search">
-      </form>
       <?php
       $mysqli = mysqli_connect("localhost", "team11", "team11", "team11");
       if(mysqli_connect_errno()){
@@ -70,12 +58,13 @@
             printf("<table id=\"list_table\">");
             printf("<tr class=\"list_tr\"><td><B> name </B></td><td> category </td><td> continent </td><td> country </td><td> city </td></tr>");
             while($newArray = mysqli_fetch_array($res, MYSQLI_ASSOC)){
+                $festival_id = $newArray['festival_id'];
                 $festival_name = $newArray['festival_name'];
                 $category_name = $newArray['category_name'];
                 $continent = $newArray['continent'];
                 $country = $newArray['country'];
                 $city = $newArray['city'];
-                printf("<tr class=\"normal_tr\"><td><B> %s </B></td><td> %s </td><td> %s </td><td> %s </td><td> %s </td>",$festival_name, $category_name, $continent, $country, $city);
+                printf("<tr class=\"normal_tr\"><td><B> %s </B></td><td> %s </td><td> %s </td><td> %s </td><td> %s </td><td><button onclick=\"location.href='Main6_update.html?festival_id=$festival_id'\">✏️</button></td>",$festival_name, $category_name, $continent, $country, $city);
             }
             printf("</table><br>");
         }

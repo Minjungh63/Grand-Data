@@ -172,7 +172,7 @@
           '</td></tr>';
       }
       echo '</table>';
-    } elseif ($ver == 2) {
+    } else if ($ver == 2) {
       $res2 = mysqli_query($mysqli, $sql2);
       echo '<table id="rk_table">';
       echo '<tr><td>month</td><td>count</td></tr>';
@@ -192,9 +192,9 @@
         $st = (int) ($newArr['st'] / 100000000) . '억원';
         if ($rk == 1) {
           echo '<tr class="rk_tr"><td width:100px> 🥇 </td>';
-        } elseif ($rk == 2) {
+        } else if ($rk == 2) {
           echo '<tr class="rk_tr" style="color:darkslategray;"><td> 🥈 </td>';
-        } elseif ($rk == 3) {
+        } else if ($rk == 3) {
           echo '<tr class="rk_tr" style="color:brown;"><td> 🥉 </td>';
         } else {
           echo '<tr class="normal_tr"><td><B>' . $rk . '</B></td>';
@@ -203,7 +203,7 @@
         echo '<td>' . $mn . '</td><td>' . $sn . '</td><td>' . $st . '</td></tr>';
       }
       echo '</table>';
-    } elseif ($ver == 3) {
+    } else if ($ver == 3) {
       echo '<table>';
       echo '<tr><td>ranking</td><td>movie name</td><td>year</td><td>screening number</td><td>sales total</td></tr>';
       while ($newArr = mysqli_fetch_array($res, MYSQLI_ASSOC)) {

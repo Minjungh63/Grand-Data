@@ -98,7 +98,7 @@
         Name: <input type="text" class="input_box" name="festival_name"/><br>
         Category:
     <select name="category_id">
-        <option value=NULL>---</option>
+        <option value=11 selected>---</option>
         <option value=1>장편</option>
         <option value=2>단편</option>
         <option value=3>애니</option>

@@ -79,52 +79,61 @@ if(mysqli_connect_errno()){
     exit();
 }
 else{
+  mysqli_begin_transaction($mysqli);
+  try{
     if($_POST['festival_name'] != NULL){
-        $sql = "UPDATE Festival SET festival_name=\"".$_POST["festival_name"]."\" WHERE festival_id=".$_GET["festival_id"]."";
-        $res = mysqli_query($mysqli, $sql);
-        if ($res) {
-            echo "'Name' is updated.<br>";
-        } else {
-            printf("Could not update record: %s\n",mysqli_error($mysqli));
-        }
+      $sql = "UPDATE Festival SET festival_name=? WHERE festival_id=?";
+      if($stmt = mysqli_prepare($mysqli, $sql)){
+        mysqli_stmt_bind_param($stmt, 'si', $update, $id);
+        $update = $_REQUEST['festival_name'];
+        $id = $_REQUEST['festival_id'];
+        mysqli_stmt_execute($stmt);
+      }
     }
     if($_POST['category_id'] != 11){
-        $sql = "UPDATE Festival SET category_id=\"".$_POST["category_id"]."\" WHERE festival_id=".$_GET["festival_id"]."";
-        $res = mysqli_query($mysqli, $sql);
-        if ($res) {
-            echo "'Category' is updated.<br>";
-        } else {
-            printf("Could not update record: %s\n",mysqli_error($mysqli));
-        }
+      $sql = "UPDATE Festival SET category_id=? WHERE festival_id=?";
+      if($stmt = mysqli_prepare($mysqli, $sql)){
+        mysqli_stmt_bind_param($stmt, 'si', $update, $id);
+        $update = $_REQUEST['category_id'];
+        $id = $_REQUEST['festival_id'];
+        mysqli_stmt_execute($stmt);
+      }
     }
     if($_POST['continent'] != NULL){
-        $sql = "UPDATE Festival SET continent=\"".$_POST["continent"]."\" WHERE festival_id=".$_GET["festival_id"]."";
-        $res = mysqli_query($mysqli, $sql);
-        if ($res) {
-            echo "'Continent' is updated.<br>";
-        } else {
-            printf("Could not update record: %s\n",mysqli_error($mysqli));
-        }
+      $sql = "UPDATE Festival SET continent=? WHERE festival_id=?";
+      if($stmt = mysqli_prepare($mysqli, $sql)){
+        mysqli_stmt_bind_param($stmt, 'si', $update, $id);
+        $update = $_REQUEST['continent'];
+        $id = $_REQUEST['festival_id'];
+        mysqli_stmt_execute($stmt);
+      }
     }
     if($_POST['country'] != NULL){
-        $sql = "UPDATE Festival SET country=\"".$_POST["country"]."\" WHERE festival_id=".$_GET["festival_id"]."";
-        $res = mysqli_query($mysqli, $sql);
-        if ($res) {
-            echo "'Country' is updated.<br>";
-        } else {
-            printf("Could not update record: %s\n",mysqli_error($mysqli));
-        }
+      $sql = "UPDATE Festival SET country=? WHERE festival_id=?";
+      if($stmt = mysqli_prepare($mysqli, $sql)){
+        mysqli_stmt_bind_param($stmt, 'si', $update, $id);
+        $update = $_REQUEST['country'];
+        $id = $_REQUEST['festival_id'];
+        mysqli_stmt_execute($stmt);
+      }
     }
     if($_POST['city'] != NULL){
-        $sql = "UPDATE Festival SET city=\"".$_POST["city"]."\" WHERE festival_id=".$_GET["festival_id"]."";
-        $res = mysqli_query($mysqli, $sql);
-        if ($res) {
-            echo "'City' is updated.<br>";
-        } else {
-            printf("Could not update record: %s\n",mysqli_error($mysqli));
-        }
+      $sql = "UPDATE Festival SET city=? WHERE festival_id=?";
+      if($stmt = mysqli_prepare($mysqli, $sql)){
+        mysqli_stmt_bind_param($stmt, 'si', $update, $id);
+        $update = $_REQUEST['city'];
+        $id = $_REQUEST['festival_id'];
+        mysqli_stmt_execute($stmt);
+      }
     }
-    mysqli_close($mysqli);
+    mysqli_commit($mysqli);
+    echo "Update Successful.";
+  }
+  catch(mysqli_sql_exception $exception){
+    mysqli_rollback($mysqli);
+    throw $exception;
+  }
+  mysqli_close($mysqli);  
 }
 ?>
 

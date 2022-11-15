@@ -5,37 +5,26 @@
     margin-left:auto;
     margin-right:auto;
   }
-  #insert{
-    width: 180px;
+  #delete{
+    width: 120px;
     height: 40px;
-    font-size: medium;
+    font-size: small;
     padding: 5px;
     border-radius: 10px;
     font-weight: 700;
     background-color: #000;
     color:#ffffff;
-    margin-top:5px;
-		margin-bottom:5px
+    margin: auto;
+    display: block;
   }
   .list_tr{
-    font-size:20px; 
+    font-size:18px; 
     font-weight:700; 
-    height:70px; 
-    cursor:pointer;
+    height:70px;
   }
   .normal_tr{
     height:40px; 
     font-weight:700;
-    cursor:pointer;
-  }
-  .input_box{
-    width:180px;
-    height:20px;
-    font-size:12px;
-    margin-left:3px;
-		margin-right:3px;
-		margin-top:3px;
-		margin-bottom:3px
   }
 </style>
 <html>
@@ -72,6 +61,7 @@
     <h2 id = "title">Theater</h2>
 
       <?php
+      
 $mysqli = mysqli_connect("localhost", "team11", "team11", "team11");
 
 if(mysqli_connect_errno()){
@@ -79,41 +69,35 @@ if(mysqli_connect_errno()){
     exit();
 }
 else{
+  if(!empty($_REQUEST['checkbox'])){
     mysqli_begin_transaction($mysqli);
     try{
-      $sql1 = "INSERT INTO Theater(theater_name, branch, hall_num, seat_num) values(?, ?, ?, ?)";
-      if($stmt1 = mysqli_prepare($mysqli, $sql1)){
-        mysqli_stmt_bind_param($stmt1, 'ssii', $theater_name, $branch, $hall_num, $seat_num);
-        $theater_name = $_REQUEST['theater_name'];
-        $branch = $_REQUEST['branch'];
-        $hall_num = $_REQUEST['hall_num'];
-        $seat_num = $_REQUEST['seat_num'];
-        mysqli_stmt_execute($stmt1);
-
-        $sql2 = "SELECT MAX(theater_id) AS theater_id FROM Theater";
-        $res2 = mysqli_query($mysqli, $sql2);
-        $res2Array = mysqli_fetch_array($res2, MYSQLI_ASSOC);
-
-        $sql3 = "INSERT INTO Theater_Address(theater_id, city, district) values(?, ?, ?)";
-        if($stmt2 = mysqli_prepare($mysqli, $sql3)){
-          mysqli_stmt_bind_param($stmt2, 'iss', $theater_id, $city, $district);
-          $theater_id = $res2Array['theater_id'];
-          $city = $_REQUEST['city'];
-          $district = $_REQUEST['district'];
-          mysqli_stmt_execute($stmt2);
+      foreach($_REQUEST['checkbox'] as $id){
+        $sql = "DELETE FROM Theater WHERE theater_id = ?";
+        if($stmt = mysqli_prepare($mysqli, $sql)){
+            mysqli_stmt_bind_param($stmt, 'i', $theater_id);
+            $theater_id = $id;
+            mysqli_stmt_execute($stmt);
+        }
+        else{
+            echo "ERROR: Could not prepare query: $sql. " . mysqli_error($mysqli);
         }
       }
       mysqli_commit($mysqli);
-      mysqli_free_result($res2);
-      echo "Insertion Successful.";
+      echo "Deletion Successful.";
     }
     catch(mysqli_sql_exception $exception){
       mysqli_rollback($mysqli);
       throw $exception;
     }
     mysqli_close($mysqli);
+  }
+  else{
+    echo "No item is selected.";
+  }
 }
-?>
+      
+      ?>
 
 </div>
   </p>

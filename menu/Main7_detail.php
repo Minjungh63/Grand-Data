@@ -5,16 +5,26 @@
     margin-left:auto;
     margin-right:auto;
   }
+  #delete{
+    width: 120px;
+    height: 40px;
+    font-size: small;
+    padding: 5px;
+    border-radius: 10px;
+    font-weight: 700;
+    background-color: #000;
+    color:#ffffff;
+    margin: auto;
+    display: block;
+  }
   .list_tr{
-    font-size:20px; 
+    font-size:18px; 
     font-weight:700; 
-    height:70px; 
-    cursor:pointer;
+    height:70px;
   }
   .normal_tr{
     height:40px; 
     font-weight:700;
-    cursor:pointer;
   }
 </style>
 <html>
@@ -76,18 +86,21 @@ else{
         printf("총 좌석 수: %d</p>", $seat_sum);
     }
     if($res2){
-        printf("<table id=\"list_table\">");
-        printf("<tr class=\"list_tr\"><td><B> name </B></td><td><B> branch </B></td><td> hall </td><td> seat </td><td> city </td><td> district </td>");
+        printf("<form action=\"Main7_delete.php\" method=\"post\"><table id=\"list_table\">");
+        printf("<tr class=\"list_tr\"><td><B> name </B></td><td><B> branch </B></td><td> hall </td><td> seat </td><td> city </td><td> district </td></tr>");
         while($newArray = mysqli_fetch_array($res2, MYSQLI_ASSOC)){
+            $theater_id = $newArray['theater_id'];
             $theater_name = $newArray['theater_name'];
             $branch = $newArray['branch'];
             $hall_num = $newArray['hall_num'];
             $seat_num = $newArray['seat_num'];
             $city = $newArray['city'];
             $district = $newArray['district'];
-            printf("<tr class=\"normal_tr\"><td><B> %s </B></td><td><B> %s </B></td><td> %d </td><td> %d </td><td> %s </td><td> %s </td>",$theater_name, $branch, $hall_num, $seat_num, $city, $district);
+            printf("<tr class=\"normal_tr\"><td><B> %s </B></td><td><B> %s </B></td><td> %d </td><td> %d </td>
+            <td> %s </td><td> %s </td><td><input type=\"checkbox\" name=\"checkbox[]\" value=\"$theater_id\"></td></tr>",$theater_name, $branch, $hall_num, $seat_num, $city, $district);
         }
-        printf("</table>");
+        printf("</table><br>");
+        printf("<button id=\"delete\" type=\"submit\" name=\"delete\"> Remove Items </button></form>");
     }
     else{
         printf("Could not retrieve records: %s\n", mysqli_error($mysqli));

@@ -116,14 +116,14 @@ else{
     $res = mysqli_query($mysqli, $sql);
     if($res){
         printf("<table id=\"list_table\">");
-        printf("<class=\"list_tr\"><td><B> City </B><td><B> District </B><td> theater </td><td> hall </td><td> seat </td></tr>");
+        printf("<tr class=\"list_tr\"><td><B> City </B><td><B> District </B><td> theater </td><td> hall </td><td> seat </td></tr>");
         while($newArray = mysqli_fetch_array($res, MYSQLI_ASSOC)){
           $city = $newArray['city'];
           $district = $newArray['district'];
           $theater_num = $newArray['theater_num'];
           $hall_sum = $newArray['hall_sum'];
           $seat_sum = $newArray['seat_sum'];
-          printf("<class=\"normal_tr\"><td><button class=\"regionButton\" onclick=\"location.href='Main7_detail.php?region=$city'\"> %s </button></td><td><button class=\"regionButton\" onclick=\"location.href='Main7_detail.php?region=$district'\"> %s </button></td><td> %d </td><td> %d </td><td> %d </td></tr>",$city, $district, $theater_num, $hall_sum, $seat_sum);
+          printf("<tr class=\"normal_tr\"><td><button class=\"regionButton\" onclick=\"location.href='Main7_detail.php?region=$city'\"> %s </button></td><td><button class=\"regionButton\" onclick=\"location.href='Main7_detail.php?region=$district'\"> %s </button></td><td> %d </td><td> %d </td><td> %d </td></tr>",$city, $district, $theater_num, $hall_sum, $seat_sum);
         }
         printf("</table>");
     }

@@ -100,7 +100,7 @@ else{
             <td> %s </td><td> %s </td><td><input type=\"checkbox\" name=\"checkbox[]\" value=\"$theater_id\"></td></tr>",$theater_name, $branch, $hall_num, $seat_num, $city, $district);
         }
         printf("</table><br>");
-        printf("<button id=\"delete\" type=\"submit\" name=\"delete\"> Remove Items </button></form>");
+        printf("<button id=\"delete\" type=\"submit\"> Remove Items </button></form>");
     }
     else{
         printf("Could not retrieve records: %s\n", mysqli_error($mysqli));

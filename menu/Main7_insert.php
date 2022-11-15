@@ -79,23 +79,24 @@ if(mysqli_connect_errno()){
     exit();
 }
 else{
-    $sql1 = "INSERT INTO Theater(theater_name, branch, hall_num, seat_num) values(\"".$_POST["theater_name"]."\", \"".$_POST["branch"]."\", ".$_POST["hall_num"].", ".$_POST["seat_num"].")";
-    $res1 = mysqli_query($mysqli, $sql1);
-    if ($res1 === TRUE) {
-        $sql2 = "SELECT MAX(theater_id) AS theater_id FROM Theater";
-        $res2 = mysqli_query($mysqli, $sql2);
-        $newArray = mysqli_fetch_array($res2, MYSQLI_ASSOC);
+    mysqli_begin_transaction($mysqli);
+    try{
+      $sql1 = "INSERT INTO Theater(theater_name, branch, hall_num, seat_num) values(\"".$_POST["theater_name"]."\", \"".$_POST["branch"]."\", ".$_POST["hall_num"].", ".$_POST["seat_num"].")";
+      $res1 = mysqli_query($mysqli, $sql1);
 
-        $sql3 = "INSERT INTO Theater_Address(theater_id, city, district) values(\"".$newArray["theater_id"]."\", \"".$_POST["city"]."\", \"".$_POST["district"]."\")";
-        $res3 = mysqli_query($mysqli, $sql3);
+      $sql2 = "SELECT MAX(theater_id) AS theater_id FROM Theater";
+      $res2 = mysqli_query($mysqli, $sql2);
+      $res2Array = mysqli_fetch_array($res2, MYSQLI_ASSOC);
 
-        if ($res3==TRUE) {
-            echo "Insertion Successful.";
-        } else {
-            printf("Could not insert record: %s\n",mysqli_error($mysqli));
-        }
-    } else {
-        printf("Could not insert record: %s\n",mysqli_error($mysqli));
+      $sql3 = "INSERT INTO Theater_Address(theater_id, city, district) values(\"".$res2Array["theater_id"]."\", \"".$_POST["city"]."\", \"".$_POST["district"]."\")";
+      $res3 = mysqli_query($mysqli, $sql3);
+
+      mysqli_commit($mysqli);
+      echo "Insertion Successful.";
+    }
+    catch(mysqli_sql_exception $exception){
+      mysqli_rollback($mysqli);
+      throw $exception;
     }
     mysqli_free_result($res2);
     mysqli_close($mysqli);

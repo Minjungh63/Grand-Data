@@ -30,19 +30,10 @@
     font-size:20px; 
     font-weight:700; 
     height:70px; 
-    cursor:pointer;
-  }
-  .list_tr:hover{
-    font-size:20px; 
-    font-weight:700; 
-    height:70px; 
-    color:orange;
-    cursor:pointer;
   }
   .normal_tr{
     height:40px; 
     font-weight:700;
-    cursor:pointer;
   }
   .regionButton{
     width: 150px;
@@ -54,6 +45,7 @@
     background-color: #ffffff;
     color:#000;
     border-color: #C0C0C0;
+    cursor:pointer;
   }
 </style>
 <html>

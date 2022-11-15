@@ -81,24 +81,36 @@ if(mysqli_connect_errno()){
 else{
     mysqli_begin_transaction($mysqli);
     try{
-      $sql1 = "INSERT INTO Theater(theater_name, branch, hall_num, seat_num) values(\"".$_POST["theater_name"]."\", \"".$_POST["branch"]."\", ".$_POST["hall_num"].", ".$_POST["seat_num"].")";
-      $res1 = mysqli_query($mysqli, $sql1);
+      $sql1 = "INSERT INTO Theater(theater_name, branch, hall_num, seat_num) values(?, ?, ?, ?)";
+      if($stmt1 = mysqli_prepare($mysqli, $sql1)){
+        mysqli_stmt_bind_param($stmt1, 'ssii', $theater_name, $branch, $hall_num, $seat_num);
+        $theater_name = $_REQUEST['theater_name'];
+        $branch = $_REQUEST['branch'];
+        $hall_num = $_REQUEST['hall_num'];
+        $seat_num = $_REQUEST['seat_num'];
+        mysqli_stmt_execute($stmt1);
 
-      $sql2 = "SELECT MAX(theater_id) AS theater_id FROM Theater";
-      $res2 = mysqli_query($mysqli, $sql2);
-      $res2Array = mysqli_fetch_array($res2, MYSQLI_ASSOC);
+        $sql2 = "SELECT MAX(theater_id) AS theater_id FROM Theater";
+        $res2 = mysqli_query($mysqli, $sql2);
+        $res2Array = mysqli_fetch_array($res2, MYSQLI_ASSOC);
 
-      $sql3 = "INSERT INTO Theater_Address(theater_id, city, district) values(\"".$res2Array["theater_id"]."\", \"".$_POST["city"]."\", \"".$_POST["district"]."\")";
-      $res3 = mysqli_query($mysqli, $sql3);
-
+        $sql3 = "INSERT INTO Theater_Address(theater_id, city, district) values(?, ?, ?)";
+        if($stmt2 = mysqli_prepare($mysqli, $sql3)){
+          mysqli_stmt_bind_param($stmt2, 'iss', $theater_id, $city, $district);
+          $theater_id = $res2Array['theater_id'];
+          $city = $_REQUEST['city'];
+          $district = $_REQUEST['district'];
+          mysqli_stmt_execute($stmt2);
+        }
+      }
       mysqli_commit($mysqli);
+      mysqli_free_result($res2);
       echo "Insertion Successful.";
     }
     catch(mysqli_sql_exception $exception){
       mysqli_rollback($mysqli);
       throw $exception;
     }
-    mysqli_free_result($res2);
     mysqli_close($mysqli);
 }
 ?>

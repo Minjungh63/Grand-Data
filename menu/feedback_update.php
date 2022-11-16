@@ -80,7 +80,7 @@ session_start(); ?>
   <p>
   <form method="post">
     <div id="contents">
-      <h2 id = "title">Write Feedback</h2>
+      <h2 id = "title">Update Feedback</h2>
       비밀번호 확인 : <input type = "password" name = "pw" SIZE = "10">
       <input id="confirm" type="submit" value="search"><br>
       <?php

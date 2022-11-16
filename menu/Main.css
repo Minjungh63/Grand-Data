@@ -166,6 +166,28 @@ body {
     background-position-x: center;
     text-align: left;
   }
+  #suhhyun{
+    background: #ffffff;
+    vertical-align:top;
+    font: verdana, sans-serif;
+    margin: 0px;
+    padding: 4rem 3rem; 
+    margin-top: 3rem;
+    margin-bottom: 1rem; 
+    margin-left: 10rem;
+    margin-right: 4rem;
+    width: 50rem;
+    float: center;
+    column-count: 1;
+    column-width: 20rem;
+    border-radius: 30px;
+    background-image: linear-gradient(180deg, #ffffff95,#ffffffa7,#ffffffea,#ffffffc7),url('../../asset/logo.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 50%; 
+    background-position-x: center;
+    text-align: center;
+  }
   section {
     background: linear-gradient(180deg, #dadadf,#ffffffda,#ffffff);
     margin: 0px;

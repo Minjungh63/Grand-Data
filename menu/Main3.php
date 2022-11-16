@@ -142,7 +142,7 @@
   }
 
   $res = mysqli_query($mysqli, $sql);
-
+  echo '<div id="contents">';
   if ($res) {
     if ($ver == 1) {
       echo "<br>".$_POST['year']."년 ".$_POST['month']."월<br><br>";
@@ -211,6 +211,7 @@
   } else {
     printf('cannot retrieve records!');
   }
+  echo '</div>';
   mysqli_free_result($res);
   mysqli_close($mysqli);
   ?>

@@ -1,6 +1,38 @@
 <!DOCTYPE html>
+<style>
+  #rk_table{
+    text-align:center; 
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .rk_tr{
+    font-size:20px; 
+    font-weight:700; 
+    height:70px; 
+    color:orange;
+    cursor:pointer;
+  }
+  .sh_tr{
+    font-size:20px; 
+    font-weight:700; 
+    height:35px; 
+    color: black;
+  }
+  .rk_tr:hover{
+    font-size:20px; 
+    font-weight:700; 
+    height:70px; 
+    color:orange;
+    cursor:pointer;
+  }
+  .normal_tr{
+    height:40px; 
+    font-weight:700;
+    cursor:pointer;
+  }
+</style>
 <html>
-    <head>
+  <head>
 	<meta charset="UTF-8">
 	<title>Grand Data</title>
 	<link rel="stylesheet" href="Main.css">
@@ -32,21 +64,24 @@
   <p>
 
     <div>
-      <h2 id = "title">SUB_TITLE</h2>
+      <h2 id = "title">YEAR/MONTH TOTAL SALES</h2>
       &nbsp;&nbsp;&nbsp;
       
-
-내용적기
-
-<div id ="logogreen">
-
-  </div>
-    </div>
-  </p>
-</section>
-<div id="downdeco">
-    &nbsp;&nbsp;&nbsp;&nbsp; Copyright &copy; GRAND_DATA_2022_All Rights Reserved. 
-</div>
-</body >
-
-</html> 
+      <form action="Main4.php", method="post">
+        <div>
+            <label for="1"><input type="checkbox" name="country" id="1" value="한국">한국</label>
+            <label for="2"><input type="checkbox" name="country" id="2" value="미국">미국</label>
+            <label for="3"><input type="checkbox" name="country" id="3" value="일본">일본</label>
+            <label for="4"><input type="checkbox" name="country" id="4" value="프랑스">프랑스</label>
+            <label for="5"><input type="checkbox" name="country" id="5" value="영국">영국</label>
+            <label for="6"><input type="checkbox" name="country" id="6" value="중국">중국</label>   
+            <label for="7"><input type="checkbox" name="country" id="7" value="독일">독일</label>
+            <label for="8"><input type="checkbox" name="country" id="8" value="캐나다">캐나다</label>
+            <label for="9"><input type="checkbox" name="country" id="9" value="홍콩">홍콩</label>
+            <label for="10"><input type="checkbox" name="country" id="10" value="스페인">스페인</label>
+            <label for="11"><input type="checkbox" name="country" id="11" value="러시아">러시아</label>
+            <label for="12"><input type="checkbox" name="country" id="12" value="이탈리아">이탈리아</label>  
+            <br><br>
+            <input type="submit" value="Submit">
+        </div>
+</form>

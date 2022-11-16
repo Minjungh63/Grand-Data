@@ -30,22 +30,13 @@
     font-size:20px; 
     font-weight:700; 
     height:70px; 
-    cursor:pointer;
-  }
-  .list_tr:hover{
-    font-size:20px; 
-    font-weight:700; 
-    height:70px; 
-    color:orange;
-    cursor:pointer;
   }
   .normal_tr{
     height:40px; 
     font-weight:700;
-    cursor:pointer;
   }
   .regionButton{
-    width: 150px;
+    width: 300px;
     height: 40px;
     font-size: medium;
     padding: 3px;
@@ -54,6 +45,7 @@
     background-color: #ffffff;
     color:#000;
     border-color: #C0C0C0;
+    cursor:pointer;
   }
 </style>
 <html>
@@ -112,18 +104,20 @@ if(mysqli_connect_errno()){
     exit();
 }
 else{
-    $sql = "SELECT count(theater_id) AS theater_num, sum(hall_num) AS hall_sum, sum(seat_num) AS seat_sum, city, district FROM Theater JOIN Theater_Address USING(theater_id) GROUP BY district ORDER BY city";
+    $sql = "SELECT count(theater_id) AS theater_num, sum(hall_num) AS hall_sum, sum(seat_num) AS seat_sum,
+    COALESCE(district, city) AS region
+    FROM Theater JOIN Theater_Address USING(theater_id) GROUP BY city, district WITH ROLLUP";
     $res = mysqli_query($mysqli, $sql);
     if($res){
         printf("<table id=\"list_table\">");
-        printf("<class=\"list_tr\"><td><B> City </B><td><B> District </B><td> theater </td><td> hall </td><td> seat </td></tr>");
+        printf("<tr class=\"list_tr\"><td><B> District/City </B></td><td> theater </td><td> hall </td><td> seat </td></tr>");
         while($newArray = mysqli_fetch_array($res, MYSQLI_ASSOC)){
-          $city = $newArray['city'];
-          $district = $newArray['district'];
+          $region = $newArray['region'];
           $theater_num = $newArray['theater_num'];
           $hall_sum = $newArray['hall_sum'];
           $seat_sum = $newArray['seat_sum'];
-          printf("<class=\"normal_tr\"><td><button class=\"regionButton\" onclick=\"location.href='Main7_detail.php?region=$city'\"> %s </button></td><td><button class=\"regionButton\" onclick=\"location.href='Main7_detail.php?region=$district'\"> %s </button></td><td> %d </td><td> %d </td><td> %d </td></tr>",$city, $district, $theater_num, $hall_sum, $seat_sum);
+          if($region==NULL) $region="Total";
+          printf("<tr class=\"normal_tr\"><td><button class=\"regionButton\" onclick=\"location.href='Main7_detail.php?region=$region'\"> %s </button></td><td> %d </td><td> %d </td><td> %d </td></tr>",$region, $theater_num, $hall_sum, $seat_sum);
         }
         printf("</table>");
     }

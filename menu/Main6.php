@@ -63,7 +63,6 @@
          <option value="category" selected>Category
          <option value="continent">Continent
          <option value="country">Country
-         <option value="reality">Reality(Correlation between award winning films and films actually loved)
        </select>
        <input id="search" type="submit" value="search">
       </form>

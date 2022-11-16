@@ -48,7 +48,8 @@
         <li><a href="../menu/Main4.html">main4</a></li>
         <li><a href="../menu/Main5.html">main5</a></li>
         <li><a href="../menu/Main6.html">main6</a></li>
-        <li><a href="../menu/Main7.html">main7</a></li>
+        <li><a href="../menu/Main7.php">main7</a></li>
+        <li><a href="../menu/feedback.html">Feedback</a></li>
       </ul>
     </nav>
 

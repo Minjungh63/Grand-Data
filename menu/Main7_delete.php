@@ -50,6 +50,7 @@
         <li><a href="../menu/Main5.html">main5</a></li>
         <li><a href="../menu/Main6.html">main6</a></li>
         <li><a href="../menu/Main7.php">main7</a></li>
+        <li><a href="../menu/feedback.php">Feedback</a></li>
       </ul>
     </nav>
 
@@ -61,42 +62,36 @@
     <h2 id = "title">Theater</h2>
 
       <?php
-      
-$mysqli = mysqli_connect("localhost", "team11", "team11", "team11");
+      $mysqli = mysqli_connect('localhost', 'team11', 'team11', 'team11');
 
-if(mysqli_connect_errno()){
-    printf("Connect failed: %s\n", mysqli_connect_error());
-    exit();
-}
-else{
-  if(!empty($_REQUEST['checkbox'])){
-    mysqli_begin_transaction($mysqli);
-    try{
-      foreach($_REQUEST['checkbox'] as $id){
-        $sql = "DELETE FROM Theater WHERE theater_id = ?";
-        if($stmt = mysqli_prepare($mysqli, $sql)){
-            mysqli_stmt_bind_param($stmt, 'i', $theater_id);
-            $theater_id = $id;
-            mysqli_stmt_execute($stmt);
-        }
-        else{
-            echo "ERROR: Could not prepare query: $sql. " . mysqli_error($mysqli);
+      if (mysqli_connect_errno()) {
+        printf("Connect failed: %s\n", mysqli_connect_error());
+        exit();
+      } else {
+        if (!empty($_REQUEST['checkbox'])) {
+          mysqli_begin_transaction($mysqli);
+          try {
+            foreach ($_REQUEST['checkbox'] as $id) {
+              $sql = 'DELETE FROM Theater WHERE theater_id = ?';
+              if ($stmt = mysqli_prepare($mysqli, $sql)) {
+                mysqli_stmt_bind_param($stmt, 'i', $theater_id);
+                $theater_id = $id;
+                mysqli_stmt_execute($stmt);
+              } else {
+                echo "ERROR: Could not prepare query: $sql. " . mysqli_error($mysqli);
+              }
+            }
+            mysqli_commit($mysqli);
+            echo 'Deletion Successful.';
+          } catch (mysqli_sql_exception $exception) {
+            mysqli_rollback($mysqli);
+            throw $exception;
+          }
+          mysqli_close($mysqli);
+        } else {
+          echo 'No item is selected.';
         }
       }
-      mysqli_commit($mysqli);
-      echo "Deletion Successful.";
-    }
-    catch(mysqli_sql_exception $exception){
-      mysqli_rollback($mysqli);
-      throw $exception;
-    }
-    mysqli_close($mysqli);
-  }
-  else{
-    echo "No item is selected.";
-  }
-}
-      
       ?>
 
 </div>

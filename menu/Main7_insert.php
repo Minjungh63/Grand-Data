@@ -61,6 +61,7 @@
         <li><a href="../menu/Main5.html">main5</a></li>
         <li><a href="../menu/Main6.html">main6</a></li>
         <li><a href="../menu/Main7.php">main7</a></li>
+        <li><a href="../menu/feedback.php">Feedback</a></li>
       </ul>
     </nav>
 
@@ -72,48 +73,47 @@
     <h2 id = "title">Theater</h2>
 
       <?php
-$mysqli = mysqli_connect("localhost", "team11", "team11", "team11");
+      $mysqli = mysqli_connect('localhost', 'team11', 'team11', 'team11');
 
-if(mysqli_connect_errno()){
-    printf("Connect failed: %s\n", mysqli_connect_error());
-    exit();
-}
-else{
-    mysqli_begin_transaction($mysqli);
-    try{
-      $sql1 = "INSERT INTO Theater(theater_name, branch, hall_num, seat_num) values(?, ?, ?, ?)";
-      if($stmt1 = mysqli_prepare($mysqli, $sql1)){
-        mysqli_stmt_bind_param($stmt1, 'ssii', $theater_name, $branch, $hall_num, $seat_num);
-        $theater_name = $_REQUEST['theater_name'];
-        $branch = $_REQUEST['branch'];
-        $hall_num = $_REQUEST['hall_num'];
-        $seat_num = $_REQUEST['seat_num'];
-        mysqli_stmt_execute($stmt1);
+      if (mysqli_connect_errno()) {
+        printf("Connect failed: %s\n", mysqli_connect_error());
+        exit();
+      } else {
+        mysqli_begin_transaction($mysqli);
+        try {
+          $sql1 =
+            'INSERT INTO Theater(theater_name, branch, hall_num, seat_num) values(?, ?, ?, ?)';
+          if ($stmt1 = mysqli_prepare($mysqli, $sql1)) {
+            mysqli_stmt_bind_param($stmt1, 'ssii', $theater_name, $branch, $hall_num, $seat_num);
+            $theater_name = $_REQUEST['theater_name'];
+            $branch = $_REQUEST['branch'];
+            $hall_num = $_REQUEST['hall_num'];
+            $seat_num = $_REQUEST['seat_num'];
+            mysqli_stmt_execute($stmt1);
 
-        $sql2 = "SELECT MAX(theater_id) AS theater_id FROM Theater";
-        $res2 = mysqli_query($mysqli, $sql2);
-        $res2Array = mysqli_fetch_array($res2, MYSQLI_ASSOC);
+            $sql2 = 'SELECT MAX(theater_id) AS theater_id FROM Theater';
+            $res2 = mysqli_query($mysqli, $sql2);
+            $res2Array = mysqli_fetch_array($res2, MYSQLI_ASSOC);
 
-        $sql3 = "INSERT INTO Theater_Address(theater_id, city, district) values(?, ?, ?)";
-        if($stmt2 = mysqli_prepare($mysqli, $sql3)){
-          mysqli_stmt_bind_param($stmt2, 'iss', $theater_id, $city, $district);
-          $theater_id = $res2Array['theater_id'];
-          $city = $_REQUEST['city'];
-          $district = $_REQUEST['district'];
-          mysqli_stmt_execute($stmt2);
+            $sql3 = 'INSERT INTO Theater_Address(theater_id, city, district) values(?, ?, ?)';
+            if ($stmt2 = mysqli_prepare($mysqli, $sql3)) {
+              mysqli_stmt_bind_param($stmt2, 'iss', $theater_id, $city, $district);
+              $theater_id = $res2Array['theater_id'];
+              $city = $_REQUEST['city'];
+              $district = $_REQUEST['district'];
+              mysqli_stmt_execute($stmt2);
+            }
+          }
+          mysqli_commit($mysqli);
+          mysqli_free_result($res2);
+          echo 'Insertion Successful.';
+        } catch (mysqli_sql_exception $exception) {
+          mysqli_rollback($mysqli);
+          throw $exception;
         }
+        mysqli_close($mysqli);
       }
-      mysqli_commit($mysqli);
-      mysqli_free_result($res2);
-      echo "Insertion Successful.";
-    }
-    catch(mysqli_sql_exception $exception){
-      mysqli_rollback($mysqli);
-      throw $exception;
-    }
-    mysqli_close($mysqli);
-}
-?>
+      ?>
 
 </div>
   </p>

@@ -1,6 +1,5 @@
-<?php 
-session_start();
-?>
+<?php
+session_start(); ?>
 <!DOCTYPE html>
 <style>
   #confirm{
@@ -64,16 +63,16 @@ session_start();
     <nav role="navigation">
 
       <ul id="main-menu">
-        <li><a href="../menu/Main1.html">main1</a></li>
-        <li><a href="../menu/Main2.html">main1</a></li>
-        <li><a href="../menu/Main3.html">main3</a></li>
-        <li><a href="../menu/Main4.html">main4</a></li>
-        <li><a href="../menu/Main5.html">main5</a></li>
-        <li><a href="../menu/Main6.html">main6</a></li>
-        <li><a href="../menu/Main7.php">main7</a></li>
-        <li><a href="../menu/feedback.php">Feedback</a></li>
-      </ul>
-    </nav>
+  <li><a href="../menu/Main1.php">Distributor</a></li>
+  <li><a href="../menu/Main2.html">Genre</a></li>
+  <li><a href="../menu/Main3.html">Release Date</a></li>
+  <li><a href="../menu/Main4.html">Country</a></li>
+  <li><a href="../menu/Main5.html">Director</a></li>
+  <li><a href="../menu/Main6.html">Film Festival</a></li>
+  <li><a href="../menu/Main7.php">Theater</a></li>
+  <li><a href="../menu/feedback.php">Feedback</a></li>
+</ul>
+</nav>
 
 
 <section>
@@ -104,7 +103,7 @@ session_start();
 
         $newArr = mysqli_fetch_array($res, MYSQLI_ASSOC);
         if (isset($newArr['id'])) {
-          header( 'Location: feedback_update_check.php' );
+          header('Location: feedback_update_check.php');
         } elseif (isset($_REQUEST['pw'])) {
           echo 'Password is not valid';
         }

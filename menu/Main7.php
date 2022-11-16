@@ -27,7 +27,8 @@
     margin-left:3px;
 		margin-right:3px;
 		margin-top:3px;
-		margin-bottom:3px
+		margin-bottom:3px;
+    font-family: 'Ycomputer-Regular';
   }
   .list_tr{
     font-size:20px; 

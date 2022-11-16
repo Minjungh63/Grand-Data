@@ -38,6 +38,7 @@
         <li><a href="../menu/Main5.html">main5</a></li>
         <li><a href="../menu/Main6.html">main6</a></li>
         <li><a href="../menu/Main7.php">main7</a></li>
+        <li><a href="../menu/feedback.php">Feedback</a></li>
       </ul>
     </nav>
 
@@ -46,35 +47,42 @@
     <div id = "contents">
     <h2 id="title">Film Festivals</h2>
       <?php
-      $mysqli = mysqli_connect("localhost", "team11", "team11", "team11");
-      if(mysqli_connect_errno()){
+      $mysqli = mysqli_connect('localhost', 'team11', 'team11', 'team11');
+      if (mysqli_connect_errno()) {
         printf("Connect failed: %s\n", mysqli_connect_error());
         exit();
-    }
-    else{
-        $sql = "SELECT * FROM Festival JOIN Category USING(category_id)";
+      } else {
+        $sql = 'SELECT * FROM Festival JOIN Category USING(category_id)';
         $res = mysqli_query($mysqli, $sql);
-        if($res){
-            printf("<table id=\"list_table\">");
-            printf("<tr class=\"list_tr\"><td><B> name </B></td><td> category </td><td> continent </td><td> country </td><td> city </td></tr>");
-            while($newArray = mysqli_fetch_array($res, MYSQLI_ASSOC)){
-                $festival_id = $newArray['festival_id'];
-                $festival_name = $newArray['festival_name'];
-                $category_name = $newArray['category_name'];
-                $continent = $newArray['continent'];
-                $country = $newArray['country'];
-                $city = $newArray['city'];
-                printf("<tr class=\"normal_tr\"><td><B> %s </B></td><td> %s </td><td> %s </td><td> %s </td><td> %s </td><td><button onclick=\"location.href='Main6_update_input.php?festival_id=$festival_id'\">✏️</button></td>",$festival_name, $category_name, $continent, $country, $city);
-            }
-            printf("</table><br>");
-        }
-        else{
-            printf("Could not retrieve records: %s\n", mysqli_error($mysqli));
+        if ($res) {
+          printf("<table id=\"list_table\">");
+          printf(
+            "<tr class=\"list_tr\"><td><B> name </B></td><td> category </td><td> continent </td><td> country </td><td> city </td></tr>"
+          );
+          while ($newArray = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
+            $festival_id = $newArray['festival_id'];
+            $festival_name = $newArray['festival_name'];
+            $category_name = $newArray['category_name'];
+            $continent = $newArray['continent'];
+            $country = $newArray['country'];
+            $city = $newArray['city'];
+            printf(
+              "<tr class=\"normal_tr\"><td><B> %s </B></td><td> %s </td><td> %s </td><td> %s </td><td> %s </td><td><button onclick=\"location.href='Main6_update_input.php?festival_id=$festival_id'\">✏️</button></td>",
+              $festival_name,
+              $category_name,
+              $continent,
+              $country,
+              $city
+            );
+          }
+          printf('</table><br>');
+        } else {
+          printf("Could not retrieve records: %s\n", mysqli_error($mysqli));
         }
         mysqli_free_result($res);
         mysqli_close($mysqli);
-    }
-?>
+      }
+      ?>
 
     </div>
 </section>

@@ -73,6 +73,7 @@
         <li><a href="../menu/Main5.html">main5</a></li>
         <li><a href="../menu/Main6.html">main6</a></li>
         <li><a href="../menu/Main7.php">main7</a></li>
+        <li><a href="../menu/feedback.php">Feedback</a></li>
       </ul>
     </nav>
 
@@ -98,37 +99,45 @@
         <input id="insert" type="submit" value="Insert Record"></p>
       </form>
       <?php
-$mysqli = mysqli_connect("localhost", "team11", "team11", "team11");
+      $mysqli = mysqli_connect('localhost', 'team11', 'team11', 'team11');
 
-if(mysqli_connect_errno()){
-    printf("Connect failed: %s\n", mysqli_connect_error());
-    exit();
-}
-else{
-    $sql = "SELECT count(theater_id) AS theater_num, sum(hall_num) AS hall_sum, sum(seat_num) AS seat_sum,
+      if (mysqli_connect_errno()) {
+        printf("Connect failed: %s\n", mysqli_connect_error());
+        exit();
+      } else {
+        $sql = "SELECT count(theater_id) AS theater_num, sum(hall_num) AS hall_sum, sum(seat_num) AS seat_sum,
     COALESCE(district, city) AS region
     FROM Theater JOIN Theater_Address USING(theater_id) GROUP BY city, district WITH ROLLUP";
-    $res = mysqli_query($mysqli, $sql);
-    if($res){
-        printf("<table id=\"list_table\">");
-        printf("<tr class=\"list_tr\"><td><B> District/City </B></td><td> theater </td><td> hall </td><td> seat </td></tr>");
-        while($newArray = mysqli_fetch_array($res, MYSQLI_ASSOC)){
-          $region = $newArray['region'];
-          $theater_num = $newArray['theater_num'];
-          $hall_sum = $newArray['hall_sum'];
-          $seat_sum = $newArray['seat_sum'];
-          if($region==NULL) $region="Total";
-          printf("<tr class=\"normal_tr\"><td><button class=\"regionButton\" onclick=\"location.href='Main7_detail.php?region=$region'\"> %s </button></td><td> %d </td><td> %d </td><td> %d </td></tr>",$region, $theater_num, $hall_sum, $seat_sum);
+        $res = mysqli_query($mysqli, $sql);
+        if ($res) {
+          printf("<table id=\"list_table\">");
+          printf(
+            "<tr class=\"list_tr\"><td><B> District/City </B></td><td> theater </td><td> hall </td><td> seat </td></tr>"
+          );
+          while ($newArray = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
+            $region = $newArray['region'];
+            $theater_num = $newArray['theater_num'];
+            $hall_sum = $newArray['hall_sum'];
+            $seat_sum = $newArray['seat_sum'];
+            if ($region == null) {
+              $region = 'Total';
+            }
+            printf(
+              "<tr class=\"normal_tr\"><td><button class=\"regionButton\" onclick=\"location.href='Main7_detail.php?region=$region'\"> %s </button></td><td> %d </td><td> %d </td><td> %d </td></tr>",
+              $region,
+              $theater_num,
+              $hall_sum,
+              $seat_sum
+            );
+          }
+          printf('</table>');
+        } else {
+          printf("Could not retrieve records: %s\n", mysqli_error($mysqli));
         }
-        printf("</table>");
-    }
-    else{
-        printf("Could not retrieve records: %s\n", mysqli_error($mysqli));
-    }
-    mysqli_free_result($res);
-    mysqli_close($mysqli);
-}
-?>
+        mysqli_free_result($res);
+        mysqli_close($mysqli);
+      }
+      ?>
     </div>
   </p>
 </section>

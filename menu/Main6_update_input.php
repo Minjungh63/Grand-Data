@@ -80,6 +80,7 @@
         <li><a href="../menu/Main5.html">main5</a></li>
         <li><a href="../menu/Main6.html">main6</a></li>
         <li><a href="../menu/Main7.php">main7</a></li>
+        <li><a href="../menu/feedback.php">Feedback</a></li>
       </ul>
     </nav>
 
@@ -93,7 +94,7 @@
       <p>
         Update information of the festival selected.
       </p>
-      <form action="Main6_update.php?festival_id=<?php echo $_GET['festival_id'] ?>" method="POST">
+      <form action="Main6_update.php?festival_id=<?php echo $_GET['festival_id']; ?>" method="POST">
         <p><B>Update Information: </B><br>
         Name: <input type="text" class="input_box" name="festival_name"/><br>
         Category:

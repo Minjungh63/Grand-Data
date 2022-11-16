@@ -35,14 +35,14 @@
 <html>
   <head>
 	<meta charset="UTF-8">
-	<title>Grand Data</title>
+	<title>Film Culture Industry Analysis: What makes a movie successful</title>
 	<link rel="stylesheet" href="Main.css">
     </head>
 
     <body>
         
       <div id="updeco">
-        <a href="menu.html">Grand Data &nbsp;&nbsp;&nbsp;&nbsp;</a>
+        <a href="menu.html">Film Culture Industry Analysis: What makes a movie successful &nbsp;&nbsp;&nbsp;&nbsp;</a>
     </div>
 
       
@@ -55,7 +55,7 @@
         <li><a href="../menu/Main4.html">main4</a></li>
         <li><a href="../menu/Main5.html">main5</a></li>
         <li><a href="../menu/Main6.html">main6</a></li>
-        <li><a href="../menu/Main7.html">main7</a></li>
+        <li><a href="../menu/Main7.php">main7</a></li>
       </ul>
     </nav>
 
@@ -71,7 +71,7 @@
       <form action="Main3.php", method="post">
   <label for="yearLabel">Choose year:</label>
   <select name="year">
-    <option value="non">---</option>
+    <option value="non" selected>---</option>
     <option value="2022">2022</option>
     <option value="2021">2021</option>
     <option value="2020">2020</option>
@@ -89,7 +89,7 @@
   <br><br>
   <label for="monthLabel">Choose month:</label>
   <select name="month">
-    <option value="non">---</option>
+    <option value="non" selected>---</option>
     <option value="1">1월</option>
     <option value="2">2월</option>
     <option value="3">3월</option>
@@ -104,7 +104,7 @@
     <option value="12">12월</option>
   </select>
   <br><br>
-  <input type="submit" value="Submit">
+  <input type="submit" value="Search" id="search">
 </form>
 
 <p>
@@ -243,8 +243,6 @@
         }
         echo '</table>';
       }
-    } else {
-      printf('cannot retrieve records!');
     }
     echo '</div>';
     mysqli_free_result($res);

@@ -34,14 +34,14 @@
 <html>
   <head>
 	<meta charset="UTF-8">
-	<title>Grand Data</title>
+	<title>Film Culture Industry Analysis: What makes a movie successful</title>
 	<link rel="stylesheet" href="Main.css">
     </head>
 
     <body>
         
       <div id="updeco">
-        <a href="menu.html">Grand Data &nbsp;&nbsp;&nbsp;&nbsp;</a>
+        <a href="menu.html">Film Culture Industry Analysis: What makes a movie successful &nbsp;&nbsp;&nbsp;&nbsp;</a>
     </div>
 
       
@@ -54,7 +54,7 @@
         <li><a href="../menu/Main4.html">main4</a></li>
         <li><a href="../menu/Main5.html">main5</a></li>
         <li><a href="../menu/Main6.html">main6</a></li>
-        <li><a href="../menu/Main7.html">main7</a></li>
+        <li><a href="../menu/Main7.php">main7</a></li>
       </ul>
     </nav>
 
@@ -83,7 +83,7 @@
             <label for="12"><input type="checkbox" name="country" id="12" value="이탈리아">이탈리아</label>  
             <br><br>
             <div style=" text-align: center;">
-                <input type="submit" value="Submit" >
+                <input type="submit" value="Submit" id="search">
             </div>
 
             <p>
@@ -116,6 +116,7 @@
 
   if (isset($res1) && !isset($res)) {
     echo '<table id="rk_table">';
+    echo '<tr class="rk_tr"><td width:160px>순위</td><td width:160px>나라</td><td width:160px>총매출</td><td width:160px>평균매출</td><td width:160px>최대매출</td></tr>';
     while ($newArr = mysqli_fetch_array($res1, MYSQLI_ASSOC)) {
       $rk = $newArr['rk'];
       $ct = $newArr['country'];
@@ -137,7 +138,15 @@
         echo '<tr class="normal_tr"><td><B>' . $rk . '</B></td>';
       }
 
-      echo '<td>' . $ct . '</td><td>' . $sum . '</td><td>' . $avg . '</td><td>' . $max . '</td>';
+      echo '<td width:160px>' .
+        $ct .
+        '</td><td width:160px>' .
+        $sum .
+        '</td><td width:160px>' .
+        $avg .
+        '</td><td width:160px>' .
+        $max .
+        '</td>';
     }
     echo '</table>';
   }
@@ -160,9 +169,12 @@
       echo '<td>&nbsp&nbsp&nbsp&nbsp' . $mn . '&nbsp&nbsp&nbsp&nbsp</td><td>' . $st . '</td></tr>';
     }
     echo '</table>';
+  } else {
+    echo '';
   }
 
-  // mysqli_free_result($res);
+  mysqli_free_result($res);
+  mysqli_close($stmt);
   mysqli_close($mysqli);
   ?>
 </p>

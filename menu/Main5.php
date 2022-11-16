@@ -29,7 +29,7 @@
 <html>
     <head>
     <meta charset="UTF-8">
-    <title>Grand Data</title>
+    <title>Film Culture Industry Analysis: What makes a movie successful</title>
     <link rel="stylesheet" href="Main.css">
     </head>
 
@@ -71,36 +71,54 @@
        <input id="search" type="submit" value="search">
       </form>
       <?php
-        $mysqli=mysqli_connect("localhost","team11", "team11","team11");
-        if(mysqli_connect_errno()){
-            printf("Connect failed:%s\n",mysqli_connect_error());
-            exit();
-        }else{
-            $sql = "SELECT director_id, director_name, count(award_id) as award_cnt FROM movie JOIN award USING(movie_id) JOIN director USING(director_id) group by(director_id) ORDER BY award_cnt DESC";
-            $res = mysqli_query($mysqli,$sql);
-        if($res){
-            printf("<table id=\"ranking_table\">");
-            $i=0;
-                while(($ranking_list = mysqli_fetch_array($res,MYSQLI_ASSOC))&& (int)$_POST["scope"]===0 || $i<(int)$_POST["scope"]){
-                  $i = $i+1;
-                  $director_name = $ranking_list["director_name"];
-                  $award_cnt = $ranking_list["award_cnt"];
-                  $director_id = $ranking_list["director_id"];
-                  printf("<tr onclick= location.href='../menu/Main5_detail.php?director_id=%d&&director_name=%s&&state=search' ",$director_id,$director_name);
-                  if($i==1) printf("class=\"ranking_tr\"><td width:100px> 🥇 </td>");
-                  else if($i==2) printf("class=\"ranking_tr\" style=\"color:darkslategray;\"><td> 🥈 </td>");
-                  else if($i==3) printf("class=\"ranking_tr\" style=\"color:brown;\"><td> 🥉 </td>");
-                  else printf("class=\"normal_tr\"><td><B> %d </B></td>",$i);
-                  printf("<td style=\"width:400px\">%s</td><td style=\"width:100px\">🏆 %d</td></tr>",$director_name,$award_cnt);
-                }
-            
-            printf("</table>");
-        } else{
-        printf("Could not get the ranking of directors: %s\n", mysqli_error($mysqli));
+      $mysqli = mysqli_connect('localhost', 'team11', 'team11', 'team11');
+      if (mysqli_connect_errno()) {
+        printf("Connect failed:%s\n", mysqli_connect_error());
+        exit();
+      } else {
+        $sql =
+          'SELECT director_id, director_name, count(award_id) as award_cnt FROM movie JOIN award USING(movie_id) JOIN director USING(director_id) group by(director_id) ORDER BY award_cnt DESC';
+        $res = mysqli_query($mysqli, $sql);
+        if ($res) {
+          printf("<table id=\"ranking_table\">");
+          $i = 0;
+          while (
+            (($ranking_list = mysqli_fetch_array($res, MYSQLI_ASSOC)) &&
+              (int) $_POST['scope'] === 0) ||
+            $i < (int) $_POST['scope']
+          ) {
+            $i = $i + 1;
+            $director_name = $ranking_list['director_name'];
+            $award_cnt = $ranking_list['award_cnt'];
+            $director_id = $ranking_list['director_id'];
+            printf(
+              "<tr onclick= location.href='../menu/Main5_detail.php?director_id=%d&&director_name=%s&&state=search' ",
+              $director_id,
+              $director_name
+            );
+            if ($i == 1) {
+              printf("class=\"ranking_tr\"><td width:100px> 🥇 </td>");
+            } elseif ($i == 2) {
+              printf("class=\"ranking_tr\" style=\"color:darkslategray;\"><td> 🥈 </td>");
+            } elseif ($i == 3) {
+              printf("class=\"ranking_tr\" style=\"color:brown;\"><td> 🥉 </td>");
+            } else {
+              printf("class=\"normal_tr\"><td><B> %d </B></td>", $i);
+            }
+            printf(
+              "<td style=\"width:400px\">%s</td><td style=\"width:100px\">🏆 %d</td></tr>",
+              $director_name,
+              $award_cnt
+            );
+          }
+
+          printf('</table>');
+        } else {
+          printf("Could not get the ranking of directors: %s\n", mysqli_error($mysqli));
         }
         mysqli_close($mysqli);
-        }
-        ?>
+      }
+      ?>
 
     </div>
 </section>

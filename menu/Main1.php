@@ -2,14 +2,14 @@
 <html>
     <head>
 	<meta charset="UTF-8">
-	<title>Grand Data</title>
+	<title>Film Culture Industry Analysis: What makes a movie successful</title>
 	<link rel="stylesheet" href="Main.css">
     </head>
 
     <body>
         
       <div id="updeco">
-        <a href="menu.html">Grand Data &nbsp;&nbsp;&nbsp;&nbsp;</a>
+        <a href="menu.html">Film Culture Industry Analysis: What makes a movie successful &nbsp;&nbsp;&nbsp;&nbsp;</a>
     </div>
 
       
@@ -40,36 +40,46 @@
        </select>
        <input id="search" type="submit" value="search">
       </form>
-      <?php header("Content-Type:text/html;charset=utf-8");
-        $mysqli=mysqli_connect("localhost","team11", "team11","team11");
-        if(mysqli_connect_errno()){
-            printf("Connect failed:%s\n",mysqli_connect_error());
-            exit();
-        }else{
-          $sql = "SELECT distributor_id, distributor_name, count(genre_id) as genre_cnt, genre_name FROM movie JOIN genre USING(genre_id) JOIN distributor USING(distributor_id) group by(distributor_id) ORDER BY genre_cnt DESC";
-          $res = mysqli_query($mysqli,$sql);
-         
-        if($res){
-            printf("<table id=\"ranking_table\">");
-            //printf("%s",$table_title);
-            $i=0;
-                while(($ranking_list = mysqli_fetch_array($res,MYSQLI_ASSOC))&& (int)$_POST["scope"]===0 || $i<(int)$_POST["scope"]){
-                  $i = $i+1;
-                  $distributor_name = $ranking_list["distributor_name"];
-                  $genre_name = $ranking_list["genre_name"];
-                  //$distributor_id = $ranking_list["distributor_id"];->배급사 누르면 배급사별 각 장르를 몇개 배급했는지 나오는 상세페이지..?
-                  //printf("<tr onclick= location.href='../menu/Main1_detail.php?distributor_id='+$distributor_id ");
-                  printf("<tr class=\"normal_tr\"><td><B> %d </B></td>",$i);
-                  printf("<td style=\"width:460px\">%s</td><td style=\"width:200px\">🏆 %s</td></tr>",$distributor_name,$genre_name);
-                }
-            
-            printf("</table>");
-        } else{
-        printf("Could not get the ranking of directors: %s\n", mysqli_error($mysqli));
+      <?php
+      header('Content-Type:text/html;charset=utf-8');
+      $mysqli = mysqli_connect('localhost', 'team11', 'team11', 'team11');
+      if (mysqli_connect_errno()) {
+        printf("Connect failed:%s\n", mysqli_connect_error());
+        exit();
+      } else {
+        $sql =
+          'SELECT distributor_id, distributor_name, count(genre_id) as genre_cnt, genre_name FROM movie JOIN genre USING(genre_id) JOIN distributor USING(distributor_id) group by(distributor_id) ORDER BY genre_cnt DESC';
+        $res = mysqli_query($mysqli, $sql);
+
+        if ($res) {
+          printf("<table id=\"ranking_table\">");
+          //printf("%s",$table_title);
+          $i = 0;
+          while (
+            (($ranking_list = mysqli_fetch_array($res, MYSQLI_ASSOC)) &&
+              (int) $_POST['scope'] === 0) ||
+            $i < (int) $_POST['scope']
+          ) {
+            $i = $i + 1;
+            $distributor_name = $ranking_list['distributor_name'];
+            $genre_name = $ranking_list['genre_name'];
+            //$distributor_id = $ranking_list["distributor_id"];->배급사 누르면 배급사별 각 장르를 몇개 배급했는지 나오는 상세페이지..?
+            //printf("<tr onclick= location.href='../menu/Main1_detail.php?distributor_id='+$distributor_id ");
+            printf("<tr class=\"normal_tr\"><td><B> %d </B></td>", $i);
+            printf(
+              "<td style=\"width:460px\">%s</td><td style=\"width:200px\">🏆 %s</td></tr>",
+              $distributor_name,
+              $genre_name
+            );
+          }
+
+          printf('</table>');
+        } else {
+          printf("Could not get the ranking of directors: %s\n", mysqli_error($mysqli));
         }
         mysqli_close($mysqli);
-        }
-        ?>
+      }
+      ?>
 
     </div>
 </section>

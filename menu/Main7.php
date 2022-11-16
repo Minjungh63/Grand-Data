@@ -51,14 +51,14 @@
 <html>
     <head>
 	<meta charset="UTF-8">
-	<title>Grand Data</title>
+	<title>WhatMakesAMovieSuccessful</title>
 	<link rel="stylesheet" href="Main.css">
     </head>
 
     <body>
         
       <div id="updeco">
-        <a href="menu.html">Grand Data &nbsp;&nbsp;&nbsp;&nbsp;</a>
+        <a href="menu.html">Film Culture Industry Analysis: What makes a movie successful</a>
     </div>
 
       

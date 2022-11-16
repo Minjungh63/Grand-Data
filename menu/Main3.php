@@ -24,6 +24,13 @@
     font-weight:700;
     cursor:pointer;
   }
+
+  #semi{
+    text-align:left;
+    font-weight:700;
+    margin-left:70px;
+    margin-right:auto;
+  }
 </style>
 <html>
   <head>
@@ -57,11 +64,11 @@
   
   <p>
 
-    <div>
+    <div id="suhhyun">
       <h2 id = "title">YEAR/MONTH TOTAL SALES</h2>
       &nbsp;&nbsp;&nbsp;
       
-      <form action="main3.php", method="post">
+      <form action="Main3.php", method="post">
   <label for="yearLabel">Choose year:</label>
   <select name="year">
     <option value="non">---</option>
@@ -109,111 +116,128 @@
   } else {
     $res_conn = 'Success!';
   }
-  if ($_POST['year'] != 'non') {
-    if ($_POST['month'] != 'non') {
+
+  $sql = 'SELECT rank() OVER (ORDER BY st DESC) AS ranking, M.movie_name AS mn, SUBSTRING(M.released_date,1,7) AS mm, S.sales_total AS st, SCR.screen_num AS sn 
+  FROM movie M, sales S, screening_info SCR 
+  WHERE M.released_date LIKE ? AND M.movie_id=S.movie_id AND M.movie_id=SCR.movie_id LIMIT 100;';
+
+  if (isset($_POST['year']) && $_POST['year'] != 'non') {
+    if (isset($_POST['month']) && $_POST['month'] != 'non') {
       $ver = 1;
 
-      $sql =
-        'SELECT rank() OVER (ORDER BY st DESC) AS ranking, M.movie_name AS mn, SUBSTRING(M.released_date,1,7) AS mm, S.sales_total AS st, SCR.screen_num AS sn FROM movie M, sales S, screening_info SCR WHERE SUBSTRING(M.released_date,1,7)=' .
-        $_POST['year'] .
-        '-' .
-        $_POST['month'] .
-        ' AND M.movie_id=S.movie_id AND M.movie_id=SCR.movie_id LIMIT 100;';
+      if ($stmt = mysqli_prepare($mysqli, $sql)) {
+        mysqli_stmt_bind_param($stmt, 's', $ym);
+        $ym = '%' . $_REQUEST['year'] . '-';
 
+        if ((int)($_REQUEST['month'])<10) {
+          $ym = $ym . '0' . $_REQUEST['month'] . '%';
+        } else {
+          $ym = $ym . $_REQUEST['month'] . '%';
+        }
+        mysqli_stmt_execute($stmt);
+        $res = mysqli_stmt_get_result($stmt);
+      }
     } else {
       $ver = 2;
 
-      $sql =
-        'SELECT rank() OVER (ORDER BY st DESC) AS ranking, M.movie_name AS mn, SUBSTRING(M.released_date,1,4) AS yy, S.sales_total AS st, SCR.screen_num AS sn FROM movie M, sales S, screening_info SCR WHERE SUBSTRING(M.released_date,1,4)=' .
-        $_POST['year'] .
-        ' AND M.movie_id=S.movie_id AND M.movie_id=SCR.movie_id LIMIT 100;';
+      if ($stmt = mysqli_prepare($mysqli, $sql)) {
+        mysqli_stmt_bind_param($stmt, 's', $y);
+        $y = '%' . $_REQUEST['year'] . '%';
+        mysqli_stmt_execute($stmt);
+        $res = mysqli_stmt_get_result($stmt);
+      }
     }
   } else {
-    if ($_POST['month'] != 'non') {
+    if (isset($_POST['month']) && $_POST['month'] != 'non') {
       $ver = 3;
 
-      $sql =
-        'SELECT rank() OVER (ORDER BY st DESC) AS ranking, M.movie_name AS mn, SUBSTRING(M.released_date,6,7) AS mm, S.sales_total AS st, SCR.screen_num AS sn FROM movie M, sales S, screening_info SCR WHERE SUBSTRING(M.released_date,6,7)=' .
-        $_POST['month'] .
-        ' AND M.movie_id=S.movie_id AND M.movie_id=SCR.movie_id LIMIT 100;';
+      if ($stmt = mysqli_prepare($mysqli, $sql)) {
+        mysqli_stmt_bind_param($stmt, 's', $m);
+        if ((int)($_REQUEST['month'])<10) {
+          $m = '%-0' . $_REQUEST['month'] . '%';
+        } else {
+          $m = '%-' . $_REQUEST['month'] . '%';
+        }
+
+        mysqli_stmt_execute($stmt);
+        $res = mysqli_stmt_get_result($stmt);
+      }
+    }
+  }
+
+  if (isset($sql)) {
+    if ($res) {
+      if ($ver == 1) {
+        echo '<div id="semi">'.$_POST['year'] . '년 ' . $_POST['month'] . '월</div>';
+        echo '<table id=rk_table>';
+        while ($newArr = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
+          $rk = $newArr['ranking'];
+          $mn = $newArr['mn'];
+          $sn = $newArr['sn'] . '관' . '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp';
+          $st = (int) ($newArr['st'] / 100000000) . '억원';
+          if ($rk == 1) {
+            echo '<tr class="rk_tr"><td width:100px> 🥇 </td>';
+          } elseif ($rk == 2) {
+            echo '<tr class="rk_tr" style="color:darkslategray;"><td> 🥈 </td>';
+          } elseif ($rk == 3) {
+            echo '<tr class="rk_tr" style="color:brown;"><td> 🥉 </td>';
+          } else {
+            echo '<tr class="normal_tr"><td><B>' . $rk . '</B></td>';
+          }
+
+          echo '<td>' . $mn . '</td><td>' . $sn . '</td><td>' . $st . '</td></tr>';
+        }
+        echo '</table>';
+      } elseif ($ver == 2) {
+        echo '<div id="semi">'.$_POST['year'] . '년</div>';
+        echo '<table id=rk_table>';
+        while ($newArr = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
+          $rk = $newArr['ranking'];
+          $mn = $newArr['mn'];
+          $sn = $newArr['sn'] . '관' . '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp';
+          $st = (int) ($newArr['st'] / 100000000) . '억원';
+          if ($rk == 1) {
+            echo '<tr class="rk_tr"><td width:100px> 🥇 </td>';
+          } elseif ($rk == 2) {
+            echo '<tr class="rk_tr" style="color:darkslategray;"><td> 🥈 </td>';
+          } elseif ($rk == 3) {
+            echo '<tr class="rk_tr" style="color:brown;"><td> 🥉 </td>';
+          } else {
+            echo '<tr class="normal_tr"><td><B>' . $rk . '</B></td>';
+          }
+
+          echo '<td>' . $mn . '</td><td>' . $sn . '</td><td>' . $st . '</td></tr>';
+        }
+        echo '</table>';
+      } elseif ($ver == 3) {
+        echo '<div id="semi">'.$_POST['month'] . '월</div>';
+        echo '<table id=rk_table>';
+        while ($newArr = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
+          $rk = $newArr['ranking'];
+          $mn = $newArr['mn'];
+          $sn = $newArr['sn'] . '관' . '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp';
+          $st = (int) ($newArr['st'] / 100000000) . '억원';
+          if ($rk == 1) {
+            echo '<tr class="rk_tr"><td width:100px> 🥇 </td>';
+          } elseif ($rk == 2) {
+            echo '<tr class="rk_tr" style="color:darkslategray;"><td> 🥈 </td>';
+          } elseif ($rk == 3) {
+            echo '<tr class="rk_tr" style="color:brown;"><td> 🥉 </td>';
+          } else {
+            echo '<tr class="normal_tr"><td><B>' . $rk . '</B></td>';
+          }
+
+          echo '<td>' . $mn . '</td><td>' . $sn . '</td><td>' . $st . '</td></tr>';
+        }
+        echo '</table>';
+      }
     } else {
-      echo 'Choose something!';
+      printf('cannot retrieve records!');
     }
+    echo '</div>';
+    mysqli_free_result($res);
+    mysqli_close($mysqli);
   }
-
-  $res = mysqli_query($mysqli, $sql);
-  echo '<div id="contents">';
-  if ($res) {
-    if ($ver == 1) {
-      echo "<br>".$_POST['year']."년 ".$_POST['month']."월<br><br>";
-      echo '<table id=rk_table>';
-      while ($newArr = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
-        $rk = $newArr['ranking'];
-        $mn = $newArr['mn'];
-        $sn = $newArr['sn'].'관'.'&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp';
-        $st = (int) ($newArr['st'] / 100000000) . '억원';
-        if ($rk == 1) {
-          echo '<tr class="rk_tr"><td width:100px> 🥇 </td>';
-        } elseif ($rk == 2) {
-          echo '<tr class="rk_tr" style="color:darkslategray;"><td> 🥈 </td>';
-        } elseif ($rk == 3) {
-          echo '<tr class="rk_tr" style="color:brown;"><td> 🥉 </td>';
-        } else {
-          echo '<tr class="normal_tr"><td><B>' . $rk . '</B></td>';
-        }
-
-        echo '<td>' . $mn . '</td><td>' . $sn . '</td><td>' . $st . '</td></tr>';
-      }
-      echo '</table>';
-    } elseif ($ver == 2) {
-      echo "<br>".$_POST['year']."년<br><br>";
-      echo '<table id=rk_table>';
-      while ($newArr = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
-        $rk = $newArr['ranking'];
-        $mn = $newArr['mn'];
-        $sn = $newArr['sn'].'관'.'&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp';
-        $st = (int) ($newArr['st'] / 100000000) . '억원';
-        if ($rk == 1) {
-          echo '<tr class="rk_tr"><td width:100px> 🥇 </td>';
-        } elseif ($rk == 2) {
-          echo '<tr class="rk_tr" style="color:darkslategray;"><td> 🥈 </td>';
-        } elseif ($rk == 3) {
-          echo '<tr class="rk_tr" style="color:brown;"><td> 🥉 </td>';
-        } else {
-          echo '<tr class="normal_tr"><td><B>' . $rk . '</B></td>';
-        }
-
-        echo '<td>' . $mn . '</td><td>' . $sn . '</td><td>' . $st . '</td></tr>';
-      }
-      echo '</table>';
-    } elseif ($ver == 3) {
-      echo "<br>".$_POST['month']."월<br><br>";
-      echo '<table id=rk_table>';
-      while ($newArr = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
-        $rk = $newArr['ranking'];
-        $mn = $newArr['mn'];
-        $sn = $newArr['sn'].'관'.'&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp';
-        $st = (int) ($newArr['st'] / 100000000) . '억원';
-        if ($rk == 1) {
-          echo '<tr class="rk_tr"><td width:100px> 🥇 </td>';
-        } elseif ($rk == 2) {
-          echo '<tr class="rk_tr" style="color:darkslategray;"><td> 🥈 </td>';
-        } elseif ($rk == 3) {
-          echo '<tr class="rk_tr" style="color:brown;"><td> 🥉 </td>';
-        } else {
-          echo '<tr class="normal_tr"><td><B>' . $rk . '</B></td>';
-        }
-
-        echo '<td>' . $mn . '</td><td>' . $sn . '</td><td>' . $st . '</td></tr>';
-      }
-      echo '</table>';
-    }
-  } else {
-    printf('cannot retrieve records!');
-  }
-  echo '</div>';
-  mysqli_free_result($res);
-  mysqli_close($mysqli);
   ?>
 </p>
 

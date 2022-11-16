@@ -41,7 +41,7 @@
 <html>
     <head>
     <meta charset="UTF-8">
-    <title>Grand Data</title>
+    <title>WhatMakesAMovieSuccessful</title>
     <link rel="stylesheet" href="Main.css">
     </head>
 

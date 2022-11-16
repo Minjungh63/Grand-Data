@@ -4,6 +4,7 @@
     text-align:center; 
     margin-left:auto;
     margin-right:auto;
+    width:70%;
   }
   .rk_tr{
     font-size:20px; 

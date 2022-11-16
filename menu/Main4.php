@@ -55,7 +55,7 @@
         <li><a href="../menu/Main5.html">main5</a></li>
         <li><a href="../menu/Main6.html">main6</a></li>
         <li><a href="../menu/Main7.php">main7</a></li>
-        <li><a href="../menu/feedback.php">Feedback</a></li>
+       <li><a href="../menu/feedback.php">Feedback</a></li>
       </ul>
     </nav>
 
@@ -70,18 +70,18 @@
       
       <form action="Main4.php", method="post">
         <div>
-            <label for="1"><input type="checkbox" name="country" id="1" value="한국">한국</label>
-            <label for="2"><input type="checkbox" name="country" id="2" value="미국">미국</label>
-            <label for="3"><input type="checkbox" name="country" id="3" value="일본">일본</label>
-            <label for="4"><input type="checkbox" name="country" id="4" value="프랑스">프랑스</label>
-            <label for="5"><input type="checkbox" name="country" id="5" value="영국">영국</label>
-            <label for="6"><input type="checkbox" name="country" id="6" value="중국">중국</label>   
-            <label for="7"><input type="checkbox" name="country" id="7" value="독일">독일</label>
-            <label for="8"><input type="checkbox" name="country" id="8" value="캐나다">캐나다</label>
-            <label for="9"><input type="checkbox" name="country" id="9" value="홍콩">홍콩</label>
-            <label for="10"><input type="checkbox" name="country" id="10" value="스페인">스페인</label>
-            <label for="11"><input type="checkbox" name="country" id="11" value="러시아">러시아</label>
-            <label for="12"><input type="checkbox" name="country" id="12" value="이탈리아">이탈리아</label>  
+            <input type="radio" name="country" id="1" value="한국">한국
+            <input type="radio" name="country" id="2" value="미국">미국
+            <input type="radio" name="country" id="3" value="일본">일본
+            <input type="radio" name="country" id="4" value="프랑스">프랑스
+            <input type="radio" name="country" id="5" value="영국">영국
+            <input type="radio" name="country" id="6" value="중국">중국   
+            <input type="radio" name="country" id="7" value="독일">독일
+            <input type="radio" name="country" id="8" value="캐나다">캐나다
+            <input type="radio" name="country" id="9" value="홍콩">홍콩
+            <input type="radio" name="country" id="10" value="스페인">스페인
+            <input type="radio" name="country" id="11" value="러시아">러시아
+            <input type="radio" name="country" id="12" value="이탈리아">이탈리아  
             <br><br>
             <div style=" text-align: center;">
                 <input type="submit" value="Submit" id="search">

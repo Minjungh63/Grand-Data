@@ -1,5 +1,17 @@
 <!DOCTYPE html>
 <style>
+  #confirm{
+    width: 60px;
+    height: 30px;
+    font-size: small;
+    padding: 5px;
+    border-radius: 10px;
+    font-weight: 700;
+    background-color: #f3e5ab;
+    border-color: #ffffff;
+    color:#000;
+    margin: auto;
+  }
   #rk_table{
     text-align:center; 
     margin-left:auto;
@@ -64,13 +76,30 @@
 <section>
   
   <p>
-
+  <form action="feedback_update.php", method="post">
     <div id="contents">
       <h2 id = "title">Write Feedback</h2>
-      비밀번호 확인 : 
-      
-      <?php
+      비밀번호 확인 : <INPUT TYPE = "password"  NAME = "pw" SIZE = "10" >
+      <button id='confirm' value="confirm">confirm</button>
 
+      <?php
+        $mysqli = mysqli_connect('localhost', 'team11', 'team11', 'team11');
+        if (mysqli_connect_errno()) {
+          $res_conn = 'Connect failed: ' . mysqli_connect_error();
+          exit();
+        } else {
+          $res_conn = 'Success!';
+        }
+        $sql = 'SELECT pw FROM feedback WHERE id='.$_POST['update'];
+        if ($stmt = mysqli_prepare($mysqli, $sql)) {
+          mysqli_stmt_bind_param($stmt, 's', $_POST['id']);
+          mysqli_stmt_execute($stmt);
+          $res = mysqli_stmt_get_result($stmt);
+          if($res)
+            echo 'contents  : <br><INPUT TYPE = "TEXT"  NAME = "cts" style="width:300px;height:200px;font-size:30px;">';
+        }
+        $sql = '';
+      
       ?>
 
 

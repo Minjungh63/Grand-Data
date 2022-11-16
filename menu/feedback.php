@@ -90,7 +90,7 @@
         while ($newArr = mysqli_fetch_array($res, MYSQLI_ASSOC)) { 
           echo '<b>' . $newArr['contents'] . ' written by ' . $newArr['nickname'] . '</b>'; ?>
           <div>
-            <button id='update' type="button" name='update' value='<?php echo $newArr['id'] ?>' onclick="location.href='feedback_update.php'"> update </button>
+            <input id='update' type="submit" name='update' value='<?php echo $newArr['id'] ?>' onclick="location.href='feedback_update.php'"> update </button>
             <button id='delete' type='button' name='delete' value='<?php echo $newArr['id'] ?>' onclick="location.href='feedback>delete.php'"> delete </button>
           </div>
           <?php }

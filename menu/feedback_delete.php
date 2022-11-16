@@ -81,7 +81,7 @@ session_start();
   <p>
   <form method="post">
     <div id="contents">
-      <h2 id = "title">Write Feedback</h2>
+      <h2 id = "title">Delete Feedback</h2>
       비밀번호 확인 : <input type = "password" name = "pw" SIZE = "10">
       <input id="confirm" type="submit" value="confirm"><br>
       <?php

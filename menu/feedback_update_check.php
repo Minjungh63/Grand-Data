@@ -80,7 +80,7 @@ session_start(); ?>
   <p>
   <form action="feedback_update_check.php", method="post">
     <div id="contents">
-      <h2 id = "title">Write Feedback</h2>
+      <h2 id = "title">Update Feedback</h2>
       contents : <br><input type = "text"  name = "cts" style="width:300px;height:200px;font-size:30px;"><br><br>
       <input type="submit" id='confirm' value="confirm"><br>
 

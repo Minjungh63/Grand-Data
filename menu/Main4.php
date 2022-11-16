@@ -89,35 +89,20 @@
   } else {
     $res_conn = 'Success!';
   }
-  if ($_POST['year'] != 'non') {
-    if ($_POST['month'] != 'non') {
-      $ver = 1;
-
-      $sql =
-        'SELECT rank() OVER (ORDER BY st DESC) AS ranking, M.movie_name AS mn, SUBSTRING(M.released_date,1,7) AS mm, S.sales_total AS st, SCR.screen_num AS sn FROM movie M, sales S, screening_info SCR WHERE SUBSTRING(M.released_date,1,7)=' .
-        $_POST['year'] .
-        '-' .
-        $_POST['month'] .
-        ' AND M.movie_id=S.movie_id AND M.movie_id=SCR.movie_id LIMIT 100;';
-    } else {
-      $ver = 2;
-
-      $sql =
-        'SELECT rank() OVER (ORDER BY st DESC) AS ranking, M.movie_name AS mn, SUBSTRING(M.released_date,1,4) AS yy, S.sales_total AS st, SCR.screen_num AS sn FROM movie M, sales S, screening_info SCR WHERE SUBSTRING(M.released_date,1,4)=' .
-        $_POST['year'] .
-        ' AND M.movie_id=S.movie_id AND M.movie_id=SCR.movie_id LIMIT 100;';
-    }
-  } else {
-    if ($_POST['month'] != 'non') {
-      $ver = 3;
-
-      $sql =
-        'SELECT rank() OVER (ORDER BY st DESC) AS ranking, M.movie_name AS mn, SUBSTRING(M.released_date,6,7) AS mm, S.sales_total AS st, SCR.screen_num AS sn FROM movie M, sales S, screening_info SCR WHERE SUBSTRING(M.released_date,6,7)=' .
-        $_POST['month'] .
-        ' AND M.movie_id=S.movie_id AND M.movie_id=SCR.movie_id LIMIT 100;';
-    } else {
-      echo 'Choose something!';
-    }
+  if ($_POST['year'] == null) {
+    $ver = 1;
+    $sql =
+      'SELECT TOP(10) country, SUM(sales_total) AS sum, MAX(sales_total) AS max, movie_name AS mn, AVG(sales_total) AS avg 
+       FROM movie Join sales ON movie.movie_id=sales.movie_id 
+       WHERE county = ?
+       GROUP BY country HAVING count(*)>100;
+      ';
+  } else{
+    $ver = 2;
+    $sql = 
+    'SELECT rank() OVER (ORDER BY st DESC), movie_name AS mn, country, s.sales_total AS st 
+    FROM movie m, sales s 
+    WHERE m.movie_id=s.movie_id AND country=? LIMIT 10;';
   }
 
   $res = mysqli_query($mysqli, $sql);

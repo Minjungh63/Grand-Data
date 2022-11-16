@@ -12,7 +12,8 @@
     padding: 5px;
     border-radius: 10px;
     font-weight: 700;
-    background-color: #000;
+    background-color: rgb(135, 20, 20);
+    border-color: #ffffff;
     color:#ffffff;
     margin-top:5px;
 		margin-bottom:5px

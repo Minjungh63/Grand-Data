@@ -7,9 +7,11 @@
     padding: 5px;
     border-radius: 10px;
     font-weight: 700;
-    background-color: #ffffff;
+    background-color: #f3e5ab;
+    border-color: #ffffff;
     color:#000;
     margin: auto;
+    font-family: 'Ycomputer-Regular';
   }
   #viewAll{
     width: 150px;
@@ -18,9 +20,11 @@
     padding: 5px;
     border-radius: 10px;
     font-weight: 700;
-    background-color: #ffffff;
+    background-color: #f3e5ab;
+    border-color: #ffffff;
     color:#000;
     margin: auto;
+    font-family: 'Ycomputer-Regular';
   }
 </style>
 <html>
@@ -40,16 +44,17 @@
 
   <nav role="navigation">
 
-    <ul id="main-menu">
-      <li><a href="../menu/Main1.html">main1</a></li>
-      <li><a href="../menu/Main2.html">main1</a></li>
-      <li><a href="../menu/Main3.html">main3</a></li>
-      <li><a href="../menu/Main4.html">main4</a></li>
-      <li><a href="../menu/Main5.html">main5</a></li>
-      <li><a href="../menu/Main6.html">main6</a></li>
-      <li><a href="../menu/Main7.php">main7</a></li>
-    </ul>
-  </nav>
+<ul id="main-menu">
+  <li><a href="../menu/Main1.html">Distributor</a></li>
+  <li><a href="../menu/Main2.html">Genre</a></li>
+  <li><a href="../menu/Main3.html">Release Date</a></li>
+  <li><a href="../menu/Main4.html">Country</a></li>
+  <li><a href="../menu/Main5.html">Director</a></li>
+  <li><a href="../menu/Main6.html">Film Festival</a></li>
+  <li><a href="../menu/Main7.php">Theater</a></li>
+  <li><a href="../menu/feedback.php">Feedback</a></li>
+</ul>
+</nav>
 
 
   <section>
@@ -62,12 +67,12 @@
         Please choose the criteria by which you want to sort the film festivals.
       </p>
       <form action="Main6.php" method="post">
-       <select id="dropbox" name="sorting">
+       <select class="dropbox" name="sorting">
          <option value="category" selected>Category
          <option value="continent">Continent
          <option value="country">Country
        </select>
-       <input id="search" type="submit" value="search">
+       <input class="search" type="submit" value="search">
       </form>
 
       <p>
@@ -80,9 +85,10 @@
     </div>
     </p>
   </section>
-  <div id="downdeco">
-    Copyright &copy; GRAND_DATA_2022_All Rights Reserved.
-  </div>
+  <footer id="downdeco">
+    Team 11 | Grand Data <br>
+    JeongHyeon Lee, Minjung Jung, Minso Fwak, Suhyeon Choe
+  </footer>
 </body>
 
 </html>

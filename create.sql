@@ -89,3 +89,13 @@ CREATE TABLE Award(
     FOREIGN KEY (movie_id) REFERENCES Movie(movie_id) ON DELETE CASCADE,
     FOREIGN KEY (festival_id) REFERENCES Festival(festival_id) ON DELETE CASCADE
 );
+
+CREATE TABLE Feedback (
+  id INT NOT NULL AUTO_INCREMENT,
+  nickname VARCHAR(10) NOT NULL,
+  pw VARCHAR(45) NOT NULL,
+  contents VARCHAR(100) NULL,
+  PRIMARY KEY (id));
+
+
+CREATE INDEX movie_index ON Movie(movie_id);

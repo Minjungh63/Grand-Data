@@ -1,0 +1,131 @@
+<?php 
+session_start();
+?>
+<!DOCTYPE html>
+<style>
+  #confirm{
+    width: 60px;
+    height: 30px;
+    font-size: small;
+    padding: 5px;
+    border-radius: 10px;
+    font-weight: 700;
+    background-color: #f3e5ab;
+    border-color: #ffffff;
+    color:#000;
+    margin: auto;
+  }
+  #rk_table{
+    text-align:center; 
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .rk_tr{
+    font-size:20px; 
+    font-weight:700; 
+    height:70px; 
+    color:orange;
+    cursor:pointer;
+  }
+  .rk_tr:hover{
+    font-size:20px; 
+    font-weight:700; 
+    height:70px; 
+    color:orange;
+    cursor:pointer;
+  }
+  .normal_tr{
+    height:40px; 
+    font-weight:700;
+    cursor:pointer;
+  }
+
+  #semi{
+    text-align:left;
+    font-weight:700;
+    margin-left:70px;
+    margin-right:auto;
+  }
+</style>
+<html>
+  <head>
+	<meta charset="UTF-8">
+	<title>Film Culture Industry Analysis: What makes a movie successful</title>
+	<link rel="stylesheet" href="Main.css">
+    </head>
+
+    <body>
+        
+      <div id="updeco">
+        <a href="menu.html">Film Culture Industry Analysis: What makes a movie successful &nbsp;&nbsp;&nbsp;&nbsp;</a>
+    </div>
+
+      
+    <nav role="navigation">
+
+      <ul id="main-menu">
+        <li><a href="../menu/Main1.html">main1</a></li>
+        <li><a href="../menu/Main2.html">main1</a></li>
+        <li><a href="../menu/Main3.html">main3</a></li>
+        <li><a href="../menu/Main4.html">main4</a></li>
+        <li><a href="../menu/Main5.html">main5</a></li>
+        <li><a href="../menu/Main6.html">main6</a></li>
+        <li><a href="../menu/Main7.php">main7</a></li>
+        <li><a href="../menu/feedback.php">Feedback</a></li>
+      </ul>
+    </nav>
+
+
+<section>
+  
+  <p>
+  <form method="post">
+    <div id="contents">
+      <h2 id = "title">Write Feedback</h2>
+      비밀번호 확인 : <input type = "password" name = "pw" SIZE = "10">
+      <input id="confirm" type="submit" value="confirm"><br>
+      <?php
+      $_SESSION['id'] = $_GET['id'];
+
+      $mysqli = mysqli_connect('localhost', 'team11', 'team11', 'team11');
+      if (mysqli_connect_errno()) {
+        $res_conn = 'Connect failed: ' . mysqli_connect_error();
+        exit();
+      } else {
+        $res_conn = 'Success!';
+      }
+
+      $sql = 'SELECT id FROM feedback WHERE id=? AND pw=?';
+
+      if ($stmt = mysqli_prepare($mysqli, $sql)) {
+        mysqli_stmt_bind_param($stmt, 'is', $_SESSION['id'], $_REQUEST['pw']);
+        mysqli_stmt_execute($stmt);
+        $res = mysqli_stmt_get_result($stmt);
+
+        $newArr = mysqli_fetch_array($res, MYSQLI_ASSOC);
+        if (isset($newArr['id'])) {
+          $sql2 = 'DELETE FROM feedback WHERE id=?';
+          if ($stmt2 = mysqli_prepare($mysqli, $sql2)) {
+            mysqli_stmt_bind_param($stmt2, 'i', $_SESSION['id']);
+            mysqli_stmt_execute($stmt2);
+            header( 'Location: feedback.php' );
+        }
+        }
+      }
+      ?>
+  <br><br>
+
+  </form>
+
+<div id ="logogreen">
+
+  </div>
+    </div>
+  </p>
+</section>
+<div id="downdeco">
+    &nbsp;&nbsp;&nbsp;&nbsp; Copyright &copy; GRAND_DATA_2022_All Rights Reserved. 
+</div>
+</body >
+
+</html> 

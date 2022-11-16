@@ -1,9 +1,9 @@
 /*body 초기화*/
-/*font-family:"Roboto", serif;*/
+
 body {
     margin: 0;
     padding: 0;
-    font-family: verdana, sans-serif; 
+    font-family: 'ChosunCentennial';
     display: flex;
     flex-flow: column nowrap;
     overflow-x: hidden;  
@@ -22,8 +22,6 @@ body {
   #Menu_logo{
   display:inline-block;
   vertical-align:top;
-  font: verdana, sans-serif;
-  color: #096622fb;
   text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
   background-color: #ffffff;
   margin: 0px;
@@ -44,7 +42,6 @@ body {
   justify-content: center;
   position: relative;
   background: #ffffff;
-  border: #084e22;
   }
   
   ul, li {
@@ -60,7 +57,7 @@ body {
   }
   
   #main-menu > li > a {
-  font-size: 0.85rem;
+  font-size: 17px;
   color: #000000;
   text-align: center;
   text-decoration: none;
@@ -108,7 +105,7 @@ body {
     vertical-align:top;
     font: verdana, sans-serif;
     color: #ffffffb8;
-    background-color: #096622fb;
+    background-color: #000;
     margin: 0px;
     padding: 10px; 
     text-align: right;
@@ -120,7 +117,7 @@ body {
     vertical-align:top;
     font: verdana, sans-serif;
     color: #ffffffb8;
-    background-color: #096622fb;
+    background-color: #000;
     margin: 0px;
     padding: 10px; 
     padding-left: 20px;
@@ -178,23 +175,25 @@ body {
     text-align: left;
     font-size: xx-large;
   }
-  #dropbox{
+  .dropbox{
     width: 300px;
     height: 50px;
     font-size: medium;
     padding: 3px;
     border-radius: 5px;
     font-weight: 700;
+    font-family: 'Ycomputer-Regular';
   }
-  #search{
+  .search{
     width: 90px;
     height: 50px;
     font-size: medium;
     padding: 3px;
     border-radius: 5px;
-    font-weight: 700;
-    background-color: #000;
+    background-color: rgb(135, 20, 20);
+    border-color: #ffffff;
     color:#ffffff;
+    font-family: 'Ycomputer-Regular';
   }
   #sidemenu > li >  a {
     color: rgba(255,255,255,0.6);
@@ -243,6 +242,17 @@ body {
     margin-left: 2rem;
     
   }
-  
+  @font-face {
+    font-family: 'ChosunCentennial';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/ChosunCentennial.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Ycomputer-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/Ycomputer-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
   
   

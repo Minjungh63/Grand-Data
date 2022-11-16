@@ -41,18 +41,19 @@
       </div>
 
       
-    <nav role="navigation">
-      <ul id="main-menu">
-        <li><a href="../menu/Main1.html">main1</a></li>
-        <li><a href="../menu/Main2.html">main1</a></li>
-        <li><a href="../menu/Main3.html">main3</a></li>
-        <li><a href="../menu/Main4.html">main4</a></li>
-        <li><a href="../menu/Main5.html">main5</a></li>
-        <li><a href="../menu/Main6.html">main6</a></li>
-        <li><a href="../menu/Main7.php">main7</a></li>
-        <li><a href="../menu/feedback.php">Feedback</a></li>
-      </ul>
-    </nav>
+      <nav role="navigation">
+
+<ul id="main-menu">
+  <li><a href="../menu/Main1.html">Distributor</a></li>
+  <li><a href="../menu/Main2.html">Genre</a></li>
+  <li><a href="../menu/Main3.html">Release Date</a></li>
+  <li><a href="../menu/Main4.html">Country</a></li>
+  <li><a href="../menu/Main5.html">Director</a></li>
+  <li><a href="../menu/Main6.html">Film Festival</a></li>
+  <li><a href="../menu/Main7.php">Theater</a></li>
+  <li><a href="../menu/feedback.php">Feedback</a></li>
+</ul>
+</nav>
 
     <section>
         
@@ -111,12 +112,7 @@ if (mysqli_connect_errno()) {
       printf(
         "<tr class=\"normal_tr\"><td><B> %s </B></td><td><B> %s </B></td><td> %d </td><td> %d </td>
             <td> %s </td><td> %s </td><td><input type=\"checkbox\" name=\"checkbox[]\" value=\"$theater_id\"></td></tr>",
-        $theater_name,
-        $branch,
-        $hall_num,
-        $seat_num,
-        $city,
-        $district
+            $theater_name, $branch, $hall_num, $seat_num, $city, $district
       );
     }
     printf('</table><br>');

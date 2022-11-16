@@ -1,6 +1,5 @@
-<?php 
-session_start();
-?>
+<?php
+session_start(); ?>
 <!DOCTYPE html>
 <style>
   #confirm{
@@ -79,14 +78,13 @@ session_start();
 <section>
   
   <p>
-  <form method="post">
+  <form action="feedback_update_check.php", method="post">
     <div id="contents">
       <h2 id = "title">Write Feedback</h2>
-      비밀번호 확인 : <input type = "password" name = "pw" SIZE = "10">
-      <input id="confirm" type="submit" value="search"><br>
-      <?php
-      $_SESSION['id'] = $_GET['id'];
+      contents : <br><input type = "text"  name = "cts" style="width:300px;height:200px;font-size:30px;"><br><br>
+      <input type="submit" id='confirm' value="confirm"><br>
 
+      <?php
       $mysqli = mysqli_connect('localhost', 'team11', 'team11', 'team11');
       if (mysqli_connect_errno()) {
         $res_conn = 'Connect failed: ' . mysqli_connect_error();
@@ -94,21 +92,18 @@ session_start();
       } else {
         $res_conn = 'Success!';
       }
-
-      $sql = 'SELECT id FROM feedback WHERE id=? AND pw=?';
-
-      if ($stmt = mysqli_prepare($mysqli, $sql)) {
-        mysqli_stmt_bind_param($stmt, 'is', $_SESSION['id'], $_REQUEST['pw']);
-        mysqli_stmt_execute($stmt);
-        $res = mysqli_stmt_get_result($stmt);
-
-        $newArr = mysqli_fetch_array($res, MYSQLI_ASSOC);
-        if (isset($newArr['id'])) {
-          header( 'Location: feedback_update_check.php' );
-        } elseif (isset($_REQUEST['pw'])) {
-          echo 'Password is not valid';
+      $sql = 'UPDATE feedback SET contents = ? WHERE id = ?';
+      if(isset($_REQUEST['cts'])){
+        if ($stmt = mysqli_prepare($mysqli, $sql)) {
+          mysqli_stmt_bind_param($stmt, 'si', $_REQUEST['cts'], $_SESSION['id']);
+          mysqli_stmt_execute($stmt);
+          $res = mysqli_stmt_get_result($stmt);
+          header( 'Location: feedback.php' );
+        } else {
+          echo 'fail';
         }
       }
+      
       ?>
 
 

@@ -1,5 +1,20 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <style>
+  #confirm{
+    width: 60px;
+    height: 30px;
+    font-size: small;
+    padding: 5px;
+    border-radius: 10px;
+    font-weight: 700;
+    background-color: #f3e5ab;
+    border-color: #ffffff;
+    color:#000;
+    margin: auto;
+  }
   #rk_table{
     text-align:center; 
     margin-left:auto;
@@ -64,165 +79,43 @@
 <section>
   
   <p>
-
+  <form method="post">
     <div id="contents">
       <h2 id = "title">Write Feedback</h2>
-      nickname : <INPUT TYPE = "TEXT"  NAME = "nickname" SIZE = "20" >
-      <br>
-      password : <INPUT TYPE = "password"  NAME = "pw" SIZE = "20" >
-      <br>
-      contents  : <br><INPUT TYPE = "TEXT"  NAME = "contents" style="width:300px;height:200px;font-size:30px;">
-      
-      <form action="Main3.php", method="post">
+      비밀번호 확인 : <input type = "password" name = "pw" SIZE = "10">
+      <input id="confirm" type="submit" value="confirm"><br>
+      <?php
+      $_SESSION['id'] = $_GET['id'];
 
+      $mysqli = mysqli_connect('localhost', 'team11', 'team11', 'team11');
+      if (mysqli_connect_errno()) {
+        $res_conn = 'Connect failed: ' . mysqli_connect_error();
+        exit();
+      } else {
+        $res_conn = 'Success!';
+      }
 
+      $sql = 'SELECT id FROM feedback WHERE id=? AND pw=?';
+
+      if ($stmt = mysqli_prepare($mysqli, $sql)) {
+        mysqli_stmt_bind_param($stmt, 'is', $_SESSION['id'], $_REQUEST['pw']);
+        mysqli_stmt_execute($stmt);
+        $res = mysqli_stmt_get_result($stmt);
+
+        $newArr = mysqli_fetch_array($res, MYSQLI_ASSOC);
+        if (isset($newArr['id'])) {
+          $sql2 = 'DELETE FROM feedback WHERE id=?';
+          if ($stmt2 = mysqli_prepare($mysqli, $sql2)) {
+            mysqli_stmt_bind_param($stmt2, 'i', $_SESSION['id']);
+            mysqli_stmt_execute($stmt2);
+            header( 'Location: feedback.php' );
+        }
+        }
+      }
+      ?>
   <br><br>
-  <input type="submit" value="" id="search">
-</form>
 
-<p>
-  <?php
-  $mysqli = mysqli_connect('localhost', 'team11', 'team11', 'team11');
-  if (mysqli_connect_errno()) {
-    $res_conn = 'Connect failed: ' . mysqli_connect_error();
-    exit();
-  } else {
-    $res_conn = 'Success!';
-  }
-
-  $sql = 'INSERT  OVER (ORDER BY st DESC) AS ranking, M.movie_name AS mn, SUBSTRING(M.released_date,1,7) AS mm, S.sales_total AS st, SCR.screen_num AS sn 
-  FROM movie M, sales S, screening_info SCR 
-  WHERE M.released_date LIKE ? AND M.movie_id=S.movie_id AND M.movie_id=SCR.movie_id LIMIT 30;';
-
-  if (isset($_POST['year']) && $_POST['year'] != 'non') {
-    if (isset($_POST['month']) && $_POST['month'] != 'non') {
-      $ver = 1;
-
-      if ($stmt = mysqli_prepare($mysqli, $sql)) {
-        mysqli_stmt_bind_param($stmt, 's', $ym);
-        $ym = '%' . $_REQUEST['year'] . '-';
-
-        if ((int) $_REQUEST['month'] < 10) {
-          $ym = $ym . '0' . $_REQUEST['month'] . '%';
-        } else {
-          $ym = $ym . $_REQUEST['month'] . '%';
-        }
-        mysqli_stmt_execute($stmt);
-        $res = mysqli_stmt_get_result($stmt);
-      }
-    } else {
-      $ver = 2;
-
-      if ($stmt = mysqli_prepare($mysqli, $sql)) {
-        mysqli_stmt_bind_param($stmt, 's', $y);
-        $y = '%' . $_REQUEST['year'] . '-%';
-        mysqli_stmt_execute($stmt);
-        $res = mysqli_stmt_get_result($stmt);
-      }
-    }
-  } else {
-    if (isset($_POST['month']) && $_POST['month'] != 'non') {
-      $ver = 3;
-
-      if ($stmt = mysqli_prepare($mysqli, $sql)) {
-        mysqli_stmt_bind_param($stmt, 's', $m);
-        if ((int) $_REQUEST['month'] < 10) {
-          $m = '%-0' . $_REQUEST['month'] . '-%';
-        } else {
-          $m = '%-' . $_REQUEST['month'] . '-%';
-        }
-
-        mysqli_stmt_execute($stmt);
-        $res = mysqli_stmt_get_result($stmt);
-      }
-    }
-  }
-
-  if (isset($sql)) {
-    if (isset($res)) {
-      if ($ver == 1) {
-        echo '<div id="semi">' . $_POST['year'] . '년 ' . $_POST['month'] . '월</div>';
-        echo '<table id=rk_table>';
-        while ($newArr = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
-          $rk = $newArr['ranking'];
-          $mn = $newArr['mn'];
-          $sn = $newArr['sn'] . '관' . '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp';
-          if ($newArr['st'] > 100000000) {
-            $st = (int) ($newArr['st'] / 100000000) . '억원';
-          } else {
-            $st = (int) ($newArr['st'] / 10000000) . '천만원';
-          }
-          if ($rk == 1) {
-            echo '<tr class="rk_tr"><td width:100px> 🥇 </td>';
-          } elseif ($rk == 2) {
-            echo '<tr class="rk_tr" style="color:darkslategray;"><td> 🥈 </td>';
-          } elseif ($rk == 3) {
-            echo '<tr class="rk_tr" style="color:brown;"><td> 🥉 </td>';
-          } else {
-            echo '<tr class="normal_tr"><td><B>' . $rk . '</B></td>';
-          }
-
-          echo '<td>' . $mn . '</td><td>' . $sn . '</td><td>' . $st . '</td></tr>';
-        }
-        echo '</table>';
-      } elseif ($ver == 2) {
-        echo '<div id="semi">' . $_POST['year'] . '년</div>';
-        echo '<table id=rk_table>';
-        while ($newArr = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
-          $rk = $newArr['ranking'];
-          $mn = $newArr['mn'];
-          $sn = $newArr['sn'] . '관' . '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp';
-          if ($newArr['st'] > 100000000) {
-            $st = (int) ($newArr['st'] / 100000000) . '억원';
-          } else {
-            $st = (int) ($newArr['st'] / 10000000) . '천만원';
-          }
-          if ($rk == 1) {
-            echo '<tr class="rk_tr"><td width:100px> 🥇 </td>';
-          } elseif ($rk == 2) {
-            echo '<tr class="rk_tr" style="color:darkslategray;"><td> 🥈 </td>';
-          } elseif ($rk == 3) {
-            echo '<tr class="rk_tr" style="color:brown;"><td> 🥉 </td>';
-          } else {
-            echo '<tr class="normal_tr"><td><B>' . $rk . '</B></td>';
-          }
-
-          echo '<td>' . $mn . '</td><td>' . $sn . '</td><td>' . $st . '</td></tr>';
-        }
-        echo '</table>';
-      } elseif ($ver == 3) {
-        echo '<div id="semi">' . $_POST['month'] . '월</div>';
-        echo '<table id=rk_table>';
-        while ($newArr = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
-          $rk = $newArr['ranking'];
-          $mn = $newArr['mn'];
-          $sn = $newArr['sn'] . '관' . '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp';
-          if ($newArr['st'] > 100000000) {
-            $st = (int) ($newArr['st'] / 100000000) . '억원';
-          } else {
-            $st = (int) ($newArr['st'] / 10000000) . '천만원';
-          }
-          if ($rk == 1) {
-            echo '<tr class="rk_tr"><td width:100px> 🥇 </td>';
-          } elseif ($rk == 2) {
-            echo '<tr class="rk_tr" style="color:darkslategray;"><td> 🥈 </td>';
-          } elseif ($rk == 3) {
-            echo '<tr class="rk_tr" style="color:brown;"><td> 🥉 </td>';
-          } else {
-            echo '<tr class="normal_tr"><td><B>' . $rk . '</B></td>';
-          }
-
-          echo '<td>' . $mn . '</td><td>' . $sn . '</td><td>' . $st . '</td></tr>';
-        }
-        echo '</table>';
-      }
-    }
-    echo '</div>';
-    mysqli_free_result($res);
-    mysqli_close($mysqli);
-  }
-  ?>
-</p>
+  </form>
 
 <div id ="logogreen">
 

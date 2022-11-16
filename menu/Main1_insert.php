@@ -67,24 +67,18 @@
         else{
         mysqli_begin_transaction($mysqli);
         try{
-            if($_POST['distributor_name'] != NULL){
-            $sql = "UPDATE distributor SET distributor_name=? WHERE distributor_id=?";
-                if($stmt = mysqli_prepare($mysqli, $sql)){
-                    mysqli_stmt_bind_param($stmt, 'si', $update, $id);
-                    $update = $_REQUEST['distributor_name'];
-                    $id = $_REQUEST['distributor_id'];
-                    mysqli_stmt_execute($stmt);
-                }
-            }
-            if($_POST['genre_id'] != 22){
-            $sql = "UPDATE genre SET genre_id=? WHERE distributor_id=?";
-                if($stmt = mysqli_prepare($mysqli, $sql)){
-                    mysqli_stmt_bind_param($stmt, 'si', $update, $id);
-                    $update = $_REQUEST['genre_id'];
-                    $id = $_REQUEST['genre_id'];
-                    mysqli_stmt_execute($stmt);
-                }
-            }
+
+            $stmt1 = $mysqli->prepare("INSERT INTO distributor(distributor_id, distributor_name) VALUES (?, ?)");
+            $stmt1->bind_param('sssdi', $_POST['distributor_name']);
+            $stmt1->execute(); 
+            $stmt1->close();
+
+            $stmt2 = $mysqli->prepare("UPDATE genre SET genre_name = ? WHERE genre_id = ?");
+            $stmt2->bind_param('sssdii', $_POST['genre_id']);
+            $stmt2->execute(); 
+            $stmt2->close();
+
+
             mysqli_commit($mysqli);
             echo "Update Successful.";
         }

@@ -12,7 +12,8 @@
     padding: 5px;
     border-radius: 10px;
     font-weight: 700;
-    background-color: #000;
+    background-color: rgb(135, 20, 20);
+    border-color: #ffffff;
     color:#ffffff;
     margin-top:5px;
 		margin-bottom:5px
@@ -51,14 +52,14 @@
 <html>
     <head>
 	<meta charset="UTF-8">
-	<title>Grand Data</title>
+	<title>WhatMakesAMovieSuccessful</title>
 	<link rel="stylesheet" href="Main.css">
     </head>
 
     <body>
         
       <div id="updeco">
-        <a href="menu.html">Grand Data &nbsp;&nbsp;&nbsp;&nbsp;</a>
+        <a href="menu.html">Film Culture Industry Analysis: What makes a movie successful</a>
     </div>
 
       

@@ -39,7 +39,7 @@ nav {
   position: relative; left: 0px; right:0px;
   border: #084e22;
   background: linear-gradient(90deg, #053715, #066d1d, #4d8b0a, #85b101, #9fdf14);
-  background: #096622fb;
+  background: #000;
 }
 
 ul, li {
@@ -134,7 +134,7 @@ section {
   vertical-align:top;
   font: verdana, sans-serif;
   color: #ffffffb8;
-  background-color: #096622fb;
+  background-color: #000;
   margin: 0px;
   padding: 10px; 
   text-align: left;

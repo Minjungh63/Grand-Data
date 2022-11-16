@@ -57,7 +57,7 @@
   
   <p>
 
-    <div id = "contents">
+    <div>
       <h2 id = "title">YEAR/MONTH TOTAL SALES</h2>
       &nbsp;&nbsp;&nbsp;
       

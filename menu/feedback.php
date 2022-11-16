@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <style>
   #write{
@@ -90,8 +91,8 @@
         while ($newArr = mysqli_fetch_array($res, MYSQLI_ASSOC)) { 
           echo '<b>' . $newArr['contents'] . ' written by ' . $newArr['nickname'] . '</b>'; ?>
           <div>
-            <button id='update' type="button" name='update' value='<?php echo $newArr['id'] ?>' onclick="location.href='feedback_update.php?id='<?php echo $newArr['id'] ?>''"> update </button>
-            <button id='delete' type='button' name='delete' value='<?php echo $newArr['id'] ?>' onclick="location.href='feedback>delete.php'"> delete </button>
+            <button id='update' type="button" name='update' value='<?php echo $newArr['id'] ?>' onclick="location.href='feedback_update.php?id=<?php echo $newArr['id'] ?>'"> update </button>
+            <button id='delete' type='button' name='delete' value='<?php echo $newArr['id'] ?>' onclick="location.href='feedback_delete.php?id=<?php echo $newArr['id'] ?>'"> delete </button>
           </div>
           <?php }
         echo '</form><br>';

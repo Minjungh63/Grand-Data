@@ -78,6 +78,7 @@
                 mysqli_stmt_bind_param($stmt, 'i', $theater_id);
                 $theater_id = $id;
                 mysqli_stmt_execute($stmt);
+                mysqli_stmt_close($stmt);
               } else {
                 echo "ERROR: Could not prepare query: $sql. " . mysqli_error($mysqli);
               }

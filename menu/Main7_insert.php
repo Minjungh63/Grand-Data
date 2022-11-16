@@ -103,7 +103,9 @@
               $city = $_REQUEST['city'];
               $district = $_REQUEST['district'];
               mysqli_stmt_execute($stmt2);
+              mysqli_stmt_close($stmt2);
             }
+            mysqli_stmt_close($stmt1);
           }
           mysqli_commit($mysqli);
           mysqli_free_result($res2);

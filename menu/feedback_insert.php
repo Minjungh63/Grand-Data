@@ -61,16 +61,16 @@
     <nav role="navigation">
 
       <ul id="main-menu">
-        <li><a href="../menu/Main1.html">main1</a></li>
-        <li><a href="../menu/Main2.html">main1</a></li>
-        <li><a href="../menu/Main3.html">main3</a></li>
-        <li><a href="../menu/Main4.html">main4</a></li>
-        <li><a href="../menu/Main5.html">main5</a></li>
-        <li><a href="../menu/Main6.html">main6</a></li>
-        <li><a href="../menu/Main7.php">main7</a></li>
-        <li><a href="../menu/feedback.php">Feedback</a></li>
-      </ul>
-    </nav>
+  <li><a href="../menu/Main1.php">Distributor</a></li>
+  <li><a href="../menu/Main2.html">Genre</a></li>
+  <li><a href="../menu/Main3.html">Release Date</a></li>
+  <li><a href="../menu/Main4.html">Country</a></li>
+  <li><a href="../menu/Main5.html">Director</a></li>
+  <li><a href="../menu/Main6.html">Film Festival</a></li>
+  <li><a href="../menu/Main7.php">Theater</a></li>
+  <li><a href="../menu/feedback.php">Feedback</a></li>
+</ul>
+</nav>
 
 
 <section>
@@ -90,29 +90,28 @@
 </form>
 
 <?php
-  $mysqli = mysqli_connect('localhost', 'team11', 'team11', 'team11');
-  if (mysqli_connect_errno()) {
-    $res_conn = 'Connect failed: ' . mysqli_connect_error();
-    exit();
-  } else {
-    $res_conn = 'Success!';
-  }
+$mysqli = mysqli_connect('localhost', 'team11', 'team11', 'team11');
+if (mysqli_connect_errno()) {
+  $res_conn = 'Connect failed: ' . mysqli_connect_error();
+  exit();
+} else {
+  $res_conn = 'Success!';
+}
 
-  $sql = "INSERT INTO Feedback(nickname, pw, contents) VALUES(?,?,?)";
-  if(isset($_POST['nn']) & isset($_POST['pw']) & isset($_POST['cts'])){
-    if ($stmt = mysqli_prepare($mysqli, $sql)) {
-      mysqli_stmt_bind_param($stmt, 'sss', $nn, $pw, $cts);
-      $nn = $_POST['nn'];
-      $pw = $_POST['pw'];
-      $cts = $_POST['cts'];
-  
-      mysqli_stmt_execute($stmt);
-    }
-    mysqli_close($mysqli);
-    header("Location: feedback.php", TRUE, 301);
-    exit();
-  
+$sql = 'INSERT INTO Feedback(nickname, pw, contents) VALUES(?,?,?)';
+if (isset($_POST['nn']) & isset($_POST['pw']) & isset($_POST['cts'])) {
+  if ($stmt = mysqli_prepare($mysqli, $sql)) {
+    mysqli_stmt_bind_param($stmt, 'sss', $nn, $pw, $cts);
+    $nn = $_POST['nn'];
+    $pw = $_POST['pw'];
+    $cts = $_POST['cts'];
+
+    mysqli_stmt_execute($stmt);
   }
+  mysqli_close($mysqli);
+  header('Location: feedback.php', true, 301);
+  exit();
+}
 ?>
 <div id ="logogreen">
 

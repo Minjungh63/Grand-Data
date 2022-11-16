@@ -56,16 +56,16 @@
     <nav role="navigation">
 
       <ul id="main-menu">
-        <li><a href="../menu/Main1.html">main1</a></li>
-        <li><a href="../menu/Main2.html">main1</a></li>
-        <li><a href="../menu/Main3.html">main3</a></li>
-        <li><a href="../menu/Main4.html">main4</a></li>
-        <li><a href="../menu/Main5.html">main5</a></li>
-        <li><a href="../menu/Main6.html">main6</a></li>
-        <li><a href="../menu/Main7.php">main7</a></li>
-        <li><a href="../menu/feedback.php">Feedback</a></li>
-      </ul>
-    </nav>
+  <li><a href="../menu/Main1.php">Distributor</a></li>
+  <li><a href="../menu/Main2.html">Genre</a></li>
+  <li><a href="../menu/Main3.html">Release Date</a></li>
+  <li><a href="../menu/Main4.html">Country</a></li>
+  <li><a href="../menu/Main5.html">Director</a></li>
+  <li><a href="../menu/Main6.html">Film Festival</a></li>
+  <li><a href="../menu/Main7.php">Theater</a></li>
+  <li><a href="../menu/feedback.php">Feedback</a></li>
+</ul>
+</nav>
 
 
 <section>
@@ -88,13 +88,22 @@
         $res = mysqli_query($mysqli, $sql);
         echo '<form method="get">';
 
-        while ($newArr = mysqli_fetch_array($res, MYSQLI_ASSOC)) { 
+        while ($newArr = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
           echo '<b>' . $newArr['contents'] . ' written by ' . $newArr['nickname'] . '</b>'; ?>
           <div>
-            <button id='update' type="button" name='update' value='<?php echo $newArr['id'] ?>' onclick="location.href='feedback_update.php?id=<?php echo $newArr['id'] ?>'"> update </button>
-            <button id='delete' type='button' name='delete' value='<?php echo $newArr['id'] ?>' onclick="location.href='feedback_delete.php?id=<?php echo $newArr['id'] ?>'"> delete </button>
+            <button id='update' type="button" name='update' value='<?php echo $newArr[
+              'id'
+            ]; ?>' onclick="location.href='feedback_update.php?id=<?php echo $newArr[
+  'id'
+]; ?>'"> update </button>
+            <button id='delete' type='button' name='delete' value='<?php echo $newArr[
+              'id'
+            ]; ?>' onclick="location.href='feedback_delete.php?id=<?php echo $newArr[
+  'id'
+]; ?>'"> delete </button>
           </div>
-          <?php }
+          <?php
+        }
         echo '</form><br>';
         ?>
 

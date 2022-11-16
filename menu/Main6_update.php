@@ -89,6 +89,7 @@
               $update = $_REQUEST['festival_name'];
               $id = $_REQUEST['festival_id'];
               mysqli_stmt_execute($stmt);
+              mysqli_stmt_close($stmt);
             }
           }
           if ($_POST['category_id'] != 11) {
@@ -98,6 +99,7 @@
               $update = $_REQUEST['category_id'];
               $id = $_REQUEST['festival_id'];
               mysqli_stmt_execute($stmt);
+              mysqli_stmt_close($stmt);
             }
           }
           if ($_POST['continent'] != null) {
@@ -107,6 +109,7 @@
               $update = $_REQUEST['continent'];
               $id = $_REQUEST['festival_id'];
               mysqli_stmt_execute($stmt);
+              mysqli_stmt_close($stmt);
             }
           }
           if ($_POST['country'] != null) {
@@ -116,6 +119,7 @@
               $update = $_REQUEST['country'];
               $id = $_REQUEST['festival_id'];
               mysqli_stmt_execute($stmt);
+              mysqli_stmt_close($stmt);
             }
           }
           if ($_POST['city'] != null) {
@@ -125,6 +129,7 @@
               $update = $_REQUEST['city'];
               $id = $_REQUEST['festival_id'];
               mysqli_stmt_execute($stmt);
+              mysqli_stmt_close($stmt);
             }
           }
           mysqli_commit($mysqli);
@@ -140,9 +145,10 @@
 </div>
   </p>
 </section>
-<div id="downdeco">
-    Copyright &copy; GRAND_DATA_2022_All Rights Reserved. 
-</div>
+<footer id="downdeco">
+      Team 11 | Grand Data <br>
+      JeongHyeon Lee, Minjung Jung, Minso Fwak, Suhyeon Choe
+    </footer>
 </body >
 
 </html> 

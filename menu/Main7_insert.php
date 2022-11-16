@@ -103,7 +103,9 @@
               $city = $_REQUEST['city'];
               $district = $_REQUEST['district'];
               mysqli_stmt_execute($stmt2);
+              mysqli_stmt_close($stmt2);
             }
+            mysqli_stmt_close($stmt1);
           }
           mysqli_commit($mysqli);
           mysqli_free_result($res2);
@@ -119,9 +121,10 @@
 </div>
   </p>
 </section>
-<div id="downdeco">
-    Copyright &copy; GRAND_DATA_2022_All Rights Reserved. 
-</div>
+<footer id="downdeco">
+      Team 11 | Grand Data <br>
+      JeongHyeon Lee, Minjung Jung, Minso Fwak, Suhyeon Choe
+    </footer>
 </body >
 
 </html> 

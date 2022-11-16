@@ -4,6 +4,7 @@
     text-align:center; 
     margin-left:auto;
     margin-right:auto;
+    width:70%;
   }
   .rk_tr{
     font-size:20px; 
@@ -47,15 +48,14 @@
 
       
     <nav role="navigation">
-
       <ul id="main-menu">
-        <li><a href="../menu/Main1.html">main1</a></li>
-        <li><a href="../menu/Main2.html">main1</a></li>
-        <li><a href="../menu/Main3.html">main3</a></li>
-        <li><a href="../menu/Main4.html">main4</a></li>
-        <li><a href="../menu/Main5.html">main5</a></li>
-        <li><a href="../menu/Main6.html">main6</a></li>
-        <li><a href="../menu/Main7.php">main7</a></li>
+        <li><a href="../menu/Main1.html">Distributor</a></li>
+        <li><a href="../menu/Main2.html">Genre</a></li>
+        <li><a href="../menu/Main3.html">Released Date</a></li>
+        <li><a href="../menu/Main4.html">Country</a></li>
+        <li><a href="../menu/Main5.html">Director</a></li>
+        <li><a href="../menu/Main6.html">Film Festivals</a></li>
+        <li><a href="../menu/Main7.php">Theater</a></li>
         <li><a href="../menu/feedback.php">Feedback</a></li>
       </ul>
     </nav>
@@ -73,45 +73,46 @@
       </p>
       
       <form action="Main3.php", method="post">
-  <label for="yearLabel">Choose year:</label>
-  <select name="year">
-    <option value="non" selected>---</option>
-    <option value="2022">2022</option>
-    <option value="2021">2021</option>
-    <option value="2020">2020</option>
-    <option value="2019">2019</option>
-    <option value="2018">2018</option>
-    <option value="2017">2017</option>
-    <option value="2016">2016</option>
-    <option value="2015">2015</option>
-    <option value="2014">2014</option>
-    <option value="2013">2013</option>
-    <option value="2012">2012</option>
-    <option value="2011">2011</option>
-    <option value="2010">2010</option>
-  </select>
-  <br><br>
-  <label for="monthLabel">Choose month:</label>
-  <select name="month">
-    <option value="non" selected>---</option>
-    <option value="1">1월</option>
-    <option value="2">2월</option>
-    <option value="3">3월</option>
-    <option value="4">4월</option>
-    <option value="5">5월</option>
-    <option value="6">6월</option>
-    <option value="7">7월</option>
-    <option value="8">8월</option>
-    <option value="9">9월</option>
-    <option value="10">10월</option>
-    <option value="11">11월</option>
-    <option value="12">12월</option>
-  </select>
-  <br><br>
-  <input type="submit" value="Search" id="search">
-</form>
+        <label for="yearLabel">Choose year:</label>
+        <select name="year" class="dropbox" style="margin-left:16px;">
+          <option value="non" selected>---</option>
+          <option value="2022">2022</option>
+          <option value="2021">2021</option>
+          <option value="2020">2020</option>
+          <option value="2019">2019</option>
+          <option value="2018">2018</option>
+          <option value="2017">2017</option>
+          <option value="2016">2016</option>
+          <option value="2015">2015</option>
+          <option value="2014">2014</option>
+          <option value="2013">2013</option>
+          <option value="2012">2012</option>
+          <option value="2011">2011</option>
+          <option value="2010">2010</option>
+        </select>
+        <br><br>
+        <label for="monthLabel">Choose month:</label>
+        <select name="month" class="dropbox">
+          <option value="non" selected>---</option>
+          <option value="1">1월</option>
+          <option value="2">2월</option>
+          <option value="3">3월</option>
+          <option value="4">4월</option>
+          <option value="5">5월</option>
+          <option value="6">6월</option>
+          <option value="7">7월</option>
+          <option value="8">8월</option>
+          <option value="9">9월</option>
+          <option value="10">10월</option>
+          <option value="11">11월</option>
+          <option value="12">12월</option>
+        </select>
+        <br><br>
+        <input type="submit" value="Submit" class="search">
+      </form>
 
-<p>
+
+      <p>
   <?php
   $mysqli = mysqli_connect('localhost', 'team11', 'team11', 'team11');
   if (mysqli_connect_errno()) {
@@ -185,9 +186,9 @@
           }
           if ($rk == 1) {
             echo '<tr class="rk_tr"><td width:100px> 🥇 </td>';
-          } elseif ($rk == 2) {
+          } else if ($rk == 2) {
             echo '<tr class="rk_tr" style="color:darkslategray;"><td> 🥈 </td>';
-          } elseif ($rk == 3) {
+          } else if ($rk == 3) {
             echo '<tr class="rk_tr" style="color:brown;"><td> 🥉 </td>';
           } else {
             echo '<tr class="normal_tr"><td><B>' . $rk . '</B></td>';
@@ -210,9 +211,9 @@
           }
           if ($rk == 1) {
             echo '<tr class="rk_tr"><td width:100px> 🥇 </td>';
-          } elseif ($rk == 2) {
+          } else if ($rk == 2) {
             echo '<tr class="rk_tr" style="color:darkslategray;"><td> 🥈 </td>';
-          } elseif ($rk == 3) {
+          } else if ($rk == 3) {
             echo '<tr class="rk_tr" style="color:brown;"><td> 🥉 </td>';
           } else {
             echo '<tr class="normal_tr"><td><B>' . $rk . '</B></td>';
@@ -235,9 +236,9 @@
           }
           if ($rk == 1) {
             echo '<tr class="rk_tr"><td width:100px> 🥇 </td>';
-          } elseif ($rk == 2) {
+          } else if ($rk == 2) {
             echo '<tr class="rk_tr" style="color:darkslategray;"><td> 🥈 </td>';
-          } elseif ($rk == 3) {
+          } else if ($rk == 3) {
             echo '<tr class="rk_tr" style="color:brown;"><td> 🥉 </td>';
           } else {
             echo '<tr class="normal_tr"><td><B>' . $rk . '</B></td>';
@@ -261,9 +262,10 @@
     </div>
   </p>
 </section>
-<div id="downdeco">
-    &nbsp;&nbsp;&nbsp;&nbsp; Copyright &copy; GRAND_DATA_2022_All Rights Reserved. 
-</div>
+<footer id="downdeco">
+      Team 11 | Grand Data <br>
+      JeongHyeon Lee, Minjung Jung, Minso Fwak, Suhyeon Choe
+    </footer>
 </body >
 
-</html> 
+</html>

@@ -4,6 +4,7 @@
     text-align:center; 
     margin-left:auto;
     margin-right:auto;
+    width:70%;
   }
   .rk_tr{
     font-size:20px; 
@@ -46,18 +47,17 @@
 
       
     <nav role="navigation">
-
-      <ul id="main-menu">
-        <li><a href="../menu/Main1.html">main1</a></li>
-        <li><a href="../menu/Main2.html">main1</a></li>
-        <li><a href="../menu/Main3.html">main3</a></li>
-        <li><a href="../menu/Main4.html">main4</a></li>
-        <li><a href="../menu/Main5.html">main5</a></li>
-        <li><a href="../menu/Main6.html">main6</a></li>
-        <li><a href="../menu/Main7.php">main7</a></li>
-       <li><a href="../menu/feedback.php">Feedback</a></li>
-      </ul>
-    </nav>
+        <ul id="main-menu">
+          <li><a href="../menu/Main1.html">Distributor</a></li>
+          <li><a href="../menu/Main2.html">Genre</a></li>
+          <li><a href="../menu/Main3.html">Released Date</a></li>
+          <li><a href="../menu/Main4.html">Country</a></li>
+          <li><a href="../menu/Main5.html">Director</a></li>
+          <li><a href="../menu/Main6.html">Film Festivals</a></li>
+          <li><a href="../menu/Main7.php">Theater</a></li>
+          <li><a href="../menu/feedback.php">Feedback</a></li>
+        </ul>
+      </nav>
 
 
 <section>
@@ -73,7 +73,7 @@
       <br>
       </p>
       <form action="Main4.php", method="post">
-        <div>
+      <div>
             <input type="radio" name="country" id="1" value="한국">한국
             <input type="radio" name="country" id="2" value="미국">미국
             <input type="radio" name="country" id="3" value="일본">일본
@@ -88,7 +88,7 @@
             <input type="radio" name="country" id="12" value="이탈리아">이탈리아  
             <br><br>
             <div style=" text-align: center;">
-                <input type="submit" value="Submit" id="search">
+                <input type="submit" value="Submit" class="search">
             </div>
   <?php
   $mysqli = mysqli_connect('localhost', 'team11', 'team11', 'team11');
@@ -191,9 +191,10 @@
     </div>
   </p>
 </section>
-<div id="downdeco">
-    &nbsp;&nbsp;&nbsp;&nbsp; Copyright &copy; GRAND_DATA_2022_All Rights Reserved. 
-</div>
+<footer id="downdeco">
+      Team 11 | Grand Data <br>
+      JeongHyeon Lee, Minjung Jung, Minso Fwak, Suhyeon Choe
+    </footer>
 </body >
 
 </html> 

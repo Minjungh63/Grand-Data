@@ -4,6 +4,7 @@
     text-align:center; 
     margin-left:auto;
     margin-right:auto;
+    width:75%;
   }
   #delete{
     width: 120px;
@@ -11,11 +12,14 @@
     font-size: small;
     padding: 5px;
     border-radius: 10px;
-    font-weight: 700;
-    background-color: #000;
-    color:#ffffff;
+    font-weight: 400;
     margin: auto;
     display: block;
+    background-color: rgb(135, 20, 20);
+    border-color: #ffffff;
+    color:#ffffff;
+    font-family: 'Ycomputer-Regular';
+    
   }
   .list_tr{
     font-size:18px; 
@@ -43,17 +47,17 @@
       
       <nav role="navigation">
 
-<ul id="main-menu">
-  <li><a href="../menu/Main1.html">Distributor</a></li>
-  <li><a href="../menu/Main2.html">Genre</a></li>
-  <li><a href="../menu/Main3.html">Release Date</a></li>
-  <li><a href="../menu/Main4.html">Country</a></li>
-  <li><a href="../menu/Main5.html">Director</a></li>
-  <li><a href="../menu/Main6.html">Film Festival</a></li>
-  <li><a href="../menu/Main7.php">Theater</a></li>
-  <li><a href="../menu/feedback.php">Feedback</a></li>
-</ul>
-</nav>
+      <ul id="main-menu">
+        <li><a href="../menu/Main1.html">Distributor</a></li>
+        <li><a href="../menu/Main2.html">Genre</a></li>
+        <li><a href="../menu/Main3.html">Release Date</a></li>
+        <li><a href="../menu/Main4.html">Country</a></li>
+        <li><a href="../menu/Main5.html">Director</a></li>
+        <li><a href="../menu/Main6.html">Film Festival</a></li>
+        <li><a href="../menu/Main7.php">Theater</a></li>
+        <li><a href="../menu/feedback.php">Feedback</a></li>
+      </ul>
+      </nav>
 
     <section>
         
@@ -93,7 +97,6 @@ if (mysqli_connect_errno()) {
     $seat_sum = $newArray['seat_sum'];
     printf('<p><B>%s</B>의<br>', $_GET['region']);
     printf('총 영화관 수: %d  /  ', $theater_num);
-    printf('총 스크린 수: %d  /  ', $hall_sum);
     printf('총 좌석 수: %d</p>', $seat_sum);
   }
   if ($res2) {
@@ -129,9 +132,10 @@ if (mysqli_connect_errno()) {
 </div>
   </p>
 </section>
-<div id="downdeco">
-    Copyright &copy; GRAND_DATA_2022_All Rights Reserved. 
-</div>
+<footer id="downdeco">
+      Team 11 | Grand Data <br>
+      JeongHyeon Lee, Minjung Jung, Minso Fwak, Suhyeon Choe
+    </footer>
 </body >
 
 </html> 

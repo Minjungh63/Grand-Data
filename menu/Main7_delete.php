@@ -78,6 +78,7 @@
                 mysqli_stmt_bind_param($stmt, 'i', $theater_id);
                 $theater_id = $id;
                 mysqli_stmt_execute($stmt);
+                mysqli_stmt_close($stmt);
               } else {
                 echo "ERROR: Could not prepare query: $sql. " . mysqli_error($mysqli);
               }
@@ -98,9 +99,10 @@
 </div>
   </p>
 </section>
-<div id="downdeco">
-    Copyright &copy; GRAND_DATA_2022_All Rights Reserved. 
-</div>
+<footer id="downdeco">
+      Team 11 | Grand Data <br>
+      JeongHyeon Lee, Minjung Jung, Minso Fwak, Suhyeon Choe
+    </footer>
 </body >
 
 </html> 

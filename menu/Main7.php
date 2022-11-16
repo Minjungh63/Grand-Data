@@ -4,6 +4,7 @@
     text-align:center; 
     margin-left:auto;
     margin-right:auto;
+    width:75%;
   }
   #insert{
     width: 180px;
@@ -11,12 +12,13 @@
     font-size: medium;
     padding: 5px;
     border-radius: 10px;
-    font-weight: 700;
+    font-weight: 300;
     background-color: rgb(135, 20, 20);
     border-color: #ffffff;
     color:#ffffff;
     margin-top:5px;
-		margin-bottom:5px
+		margin-bottom:5px;
+    font-family: 'Ycomputer-Regular';
   }
   .input_box{
     width:180px;
@@ -25,7 +27,8 @@
     margin-left:3px;
 		margin-right:3px;
 		margin-top:3px;
-		margin-bottom:3px
+		margin-bottom:3px;
+    font-family: 'Ycomputer-Regular';
   }
   .list_tr{
     font-size:20px; 
@@ -90,12 +93,12 @@
       </p>
       <form action="Main7_insert.php" method="POST">
         <p><B>Insert a new theater: </B><br>
-        Name: <input type="text" class="input_box" name="theater_name" required/>
-        Branch:<input type="text" class="input_box" name="branch" required/><br>
+        Name: <input type="text" class="input_box" name="theater_name" style="margin-left:51px" required/>
+        Branch:<input type="text" class="input_box" name="branch" style="margin-left:50px"  required/><br>
         Hall number: <input type="number" class="input_box" placeholder="numeber only" name="hall_num">
         Seat number: <input type="number" class="input_box" placeholder="number only" name="seat_num"><br>
-        City: <input type="text" class="input_box" name="city" required/>
-        District: <input type="text" class="input_box" name="district" required/><br>
+        City: <input type="text" class="input_box" name="city" style="margin-left:62px"  required/>
+        District: <input type="text" class="input_box" name="district" style="margin-left:43px"  required/><br>
         <input id="insert" type="submit" value="Insert Record"></p>
       </form>
       <?php
@@ -141,9 +144,10 @@
     </div>
   </p>
 </section>
-<div id="downdeco">
-    Copyright &copy; GRAND_DATA_2022_All Rights Reserved. 
-</div>
+<footer id="downdeco">
+      Team 11 | Grand Data <br>
+      JeongHyeon Lee, Minjung Jung, Minso Fwak, Suhyeon Choe
+    </footer>
 </body >
 
 </html> 

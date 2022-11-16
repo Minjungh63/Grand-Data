@@ -41,17 +41,17 @@
       
     <nav role="navigation">
 
-      <ul id="main-menu">
-        <li><a href="../menu/Main1.php">main1</a></li>
-        <li><a href="../menu/Main2.html">main2</a></li>
-        <li><a href="../menu/Main3.html">main3</a></li>
-        <li><a href="../menu/Main4.html">main4</a></li>
-        <li><a href="../menu/Main5.html">main5</a></li>
-        <li><a href="../menu/Main6.html">main6</a></li>
-        <li><a href="../menu/Main7.php">main7</a></li>
-        <li><a href="../menu/feedback.html">Feedback</a></li>
-      </ul>
-    </nav>
+<ul id="main-menu">
+  <li><a href="../menu/Main1.html">Distributor</a></li>
+  <li><a href="../menu/Main2.html">Genre</a></li>
+  <li><a href="../menu/Main3.html">Release Date</a></li>
+  <li><a href="../menu/Main4.html">Country</a></li>
+  <li><a href="../menu/Main5.html">Director</a></li>
+  <li><a href="../menu/Main6.html">Film Festival</a></li>
+  <li><a href="../menu/Main7.php">Theater</a></li>
+  <li><a href="../menu/feedback.php">Feedback</a></li>
+</ul>
+</nav>
 
 
     <section>

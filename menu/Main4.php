@@ -175,7 +175,7 @@
   }
 
   mysqli_free_result($res);
-  mysqli_close($stmt);
+  mysqli_stmt_close($stmt);
   mysqli_close($mysqli);
   ?>
 </p>

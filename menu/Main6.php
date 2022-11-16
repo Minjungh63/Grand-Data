@@ -61,12 +61,12 @@
         Please choose the criteria by which you want to sort the film festivals.
       </p>
       <form action="Main6.php" method="post">
-       <select id="dropbox" name="sorting">
+       <select class="dropbox" name="sorting">
          <option value="category" selected>Category
          <option value="continent">Continent
          <option value="country">Country
        </select>
-       <input id="search" type="submit" value="search">
+       <input class="search" type="submit" value="search">
       </form>
       <?php
       $mysqli = mysqli_connect('localhost', 'team11', 'team11', 'team11');
@@ -188,8 +188,9 @@
 
     </div>
 </section>
-<div id="downdeco">
-Copyright &copy; GRAND_DATA_2022_All Rights Reserved. 
-</div>
+<footer id="downdeco">
+      Team 11 | Grand Data <br>
+      JeongHyeon Lee, Minjung Jung, Minso Fwak, Suhyeon Choe
+    </footer>
 </body >
 </html> 

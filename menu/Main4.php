@@ -114,7 +114,7 @@
     }
   }
 
-  if (isset($res1)) {
+  if (isset($res1) && !isset($res)) {
     echo '<div id="suhhyun">';
     echo '<table id="rk_table">';
     while ($newArr = mysqli_fetch_array($res1, MYSQLI_ASSOC)) {
@@ -138,31 +138,31 @@
         echo '<tr class="normal_tr"><td><B>' . $rk . '</B></td>';
       }
 
-      echo '<td><button name="country" type=hidden>' . $ct . '</td><td>' . $sum . '</td><td>' . $avg . '</td><td>' . $max . '</td>';
+      echo '<td>' . $ct . '</td><td>' . $sum . '</td><td>' . $avg . '</td><td>' . $max . '</td>';
     }
     echo '</table>';
-    if (isset($res)) {
-      echo '<br>' . $_POST['country'] . '<br><br>';
-      echo '<table id=rk_table>';
-      while ($newArr = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
-        $rk = $newArr['rk'];
-        $mn = $newArr['mn'];
-        $st = (int) ($newArr['st'] / 100000000) . '억원';
-        if ($rk == 1) {
-          echo '<tr class="rk_tr"><td width:100px> 🥇 </td>';
-        } elseif ($rk == 2) {
-          echo '<tr class="rk_tr" style="color:darkslategray;"><td> 🥈 </td>';
-        } elseif ($rk == 3) {
-          echo '<tr class="rk_tr" style="color:brown;"><td> 🥉 </td>';
-        } else {
-          echo '<tr class="normal_tr"><td><B>' . $rk . '</B></td>';
-        }
-
-        echo '<td>' . $mn . '</td><td>' . $st . '</td></tr>';
+  }
+  if (isset($res)) {
+    echo '<div id="suhhyun">';
+    echo '<table id=rk_table>';
+    while ($newArr = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
+      $rk = $newArr['rk'];
+      $mn = $newArr['mn'];
+      $st = (int) ($newArr['st'] / 100000000) . '억원';
+      if ($rk == 1) {
+        echo '<tr class="rk_tr"><td width:100px> 🥇 </td>';
+      } elseif ($rk == 2) {
+        echo '<tr class="rk_tr" style="color:darkslategray;"><td> 🥈 </td>';
+      } elseif ($rk == 3) {
+        echo '<tr class="rk_tr" style="color:brown;"><td> 🥉 </td>';
+      } else {
+        echo '<tr class="normal_tr"><td><B>' . $rk . '</B></td>';
       }
-      echo '</table>';
-      echo '</div>';
+
+      echo '<td>' . $mn . '</td><td>' . $st . '</td></tr>';
     }
+    echo '</table>';
+    echo '</div>';
   }
 
   // mysqli_free_result($res);

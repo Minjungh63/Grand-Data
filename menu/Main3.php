@@ -64,7 +64,7 @@
   
   <p>
 
-    <div id="suhhyun">
+    <div id="contents">
       <h2 id = "title">YEAR/MONTH TOTAL SALES</h2>
       &nbsp;&nbsp;&nbsp;
       
@@ -119,7 +119,7 @@
 
   $sql = 'SELECT rank() OVER (ORDER BY st DESC) AS ranking, M.movie_name AS mn, SUBSTRING(M.released_date,1,7) AS mm, S.sales_total AS st, SCR.screen_num AS sn 
   FROM movie M, sales S, screening_info SCR 
-  WHERE M.released_date LIKE ? AND M.movie_id=S.movie_id AND M.movie_id=SCR.movie_id LIMIT 100;';
+  WHERE M.released_date LIKE ? AND M.movie_id=S.movie_id AND M.movie_id=SCR.movie_id LIMIT 30;';
 
   if (isset($_POST['year']) && $_POST['year'] != 'non') {
     if (isset($_POST['month']) && $_POST['month'] != 'non') {
@@ -142,7 +142,7 @@
 
       if ($stmt = mysqli_prepare($mysqli, $sql)) {
         mysqli_stmt_bind_param($stmt, 's', $y);
-        $y = '%' . $_REQUEST['year'] . '%';
+        $y = '%' . $_REQUEST['year'] . '-%';
         mysqli_stmt_execute($stmt);
         $res = mysqli_stmt_get_result($stmt);
       }
@@ -154,9 +154,9 @@
       if ($stmt = mysqli_prepare($mysqli, $sql)) {
         mysqli_stmt_bind_param($stmt, 's', $m);
         if ((int)($_REQUEST['month'])<10) {
-          $m = '%-0' . $_REQUEST['month'] . '%';
+          $m = '%-0' . $_REQUEST['month'] . '-%';
         } else {
-          $m = '%-' . $_REQUEST['month'] . '%';
+          $m = '%-' . $_REQUEST['month'] . '-%';
         }
 
         mysqli_stmt_execute($stmt);
@@ -166,7 +166,7 @@
   }
 
   if (isset($sql)) {
-    if ($res) {
+    if (isset($res)) {
       if ($ver == 1) {
         echo '<div id="semi">'.$_POST['year'] . '년 ' . $_POST['month'] . '월</div>';
         echo '<table id=rk_table>';
@@ -174,7 +174,11 @@
           $rk = $newArr['ranking'];
           $mn = $newArr['mn'];
           $sn = $newArr['sn'] . '관' . '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp';
-          $st = (int) ($newArr['st'] / 100000000) . '억원';
+          if ($newArr['st'] > 100000000) {
+            $st = (int) ($newArr['st'] / 100000000) . '억원';
+          } else {
+            $st = (int) ($newArr['st'] / 10000000) . '천만원';
+          }
           if ($rk == 1) {
             echo '<tr class="rk_tr"><td width:100px> 🥇 </td>';
           } elseif ($rk == 2) {
@@ -195,7 +199,11 @@
           $rk = $newArr['ranking'];
           $mn = $newArr['mn'];
           $sn = $newArr['sn'] . '관' . '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp';
-          $st = (int) ($newArr['st'] / 100000000) . '억원';
+          if ($newArr['st'] > 100000000) {
+            $st = (int) ($newArr['st'] / 100000000) . '억원';
+          } else {
+            $st = (int) ($newArr['st'] / 10000000) . '천만원';
+          }
           if ($rk == 1) {
             echo '<tr class="rk_tr"><td width:100px> 🥇 </td>';
           } elseif ($rk == 2) {
@@ -216,7 +224,11 @@
           $rk = $newArr['ranking'];
           $mn = $newArr['mn'];
           $sn = $newArr['sn'] . '관' . '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp';
-          $st = (int) ($newArr['st'] / 100000000) . '억원';
+          if ($newArr['st'] > 100000000) {
+            $st = (int) ($newArr['st'] / 100000000) . '억원';
+          } else {
+            $st = (int) ($newArr['st'] / 10000000) . '천만원';
+          }
           if ($rk == 1) {
             echo '<tr class="rk_tr"><td width:100px> 🥇 </td>';
           } elseif ($rk == 2) {

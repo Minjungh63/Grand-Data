@@ -63,7 +63,7 @@
   
   <p>
 
-    <div>
+    <div id="contents">
       <h2 id = "title">YEAR/MONTH TOTAL SALES</h2>
       &nbsp;&nbsp;&nbsp;
       
@@ -82,11 +82,11 @@
             <label for="11"><input type="checkbox" name="country" id="11" value="러시아">러시아</label>
             <label for="12"><input type="checkbox" name="country" id="12" value="이탈리아">이탈리아</label>  
             <br><br>
-            <input type="submit" value="Submit">
-        </div>
-</form>
+            <div style=" text-align: center;">
+                <input type="submit" value="Submit" >
+            </div>
 
-<p>
+            <p>
   <?php
   $mysqli = mysqli_connect('localhost', 'team11', 'team11', 'team11');
   if (mysqli_connect_errno()) {
@@ -115,7 +115,6 @@
   }
 
   if (isset($res1) && !isset($res)) {
-    echo '<div id="suhhyun">';
     echo '<table id="rk_table">';
     while ($newArr = mysqli_fetch_array($res1, MYSQLI_ASSOC)) {
       $rk = $newArr['rk'];
@@ -143,7 +142,6 @@
     echo '</table>';
   }
   if (isset($res)) {
-    echo '<div id="suhhyun">';
     echo '<table id=rk_table>';
     while ($newArr = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
       $rk = $newArr['rk'];
@@ -159,16 +157,18 @@
         echo '<tr class="normal_tr"><td><B>' . $rk . '</B></td>';
       }
 
-      echo '<td>' . $mn . '</td><td>' . $st . '</td></tr>';
+      echo '<td>&nbsp&nbsp&nbsp&nbsp' . $mn . '&nbsp&nbsp&nbsp&nbsp</td><td>' . $st . '</td></tr>';
     }
     echo '</table>';
-    echo '</div>';
   }
 
   // mysqli_free_result($res);
   mysqli_close($mysqli);
   ?>
 </p>
+
+        </div>
+</form>
 
 <div id ="logogreen">
 

@@ -244,9 +244,9 @@
         }
         echo '</table>';
       }
+      mysqli_free_result($res);
     }
     echo '</div>';
-    mysqli_free_result($res);
     mysqli_close($mysqli);
   }
   ?>

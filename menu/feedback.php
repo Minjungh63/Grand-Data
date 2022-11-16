@@ -85,12 +85,12 @@
         }
         $sql = 'SELECT id, contents, nickname FROM feedback';
         $res = mysqli_query($mysqli, $sql);
-        echo '<form method="post">';
+        echo '<form method="get">';
 
         while ($newArr = mysqli_fetch_array($res, MYSQLI_ASSOC)) { 
           echo '<b>' . $newArr['contents'] . ' written by ' . $newArr['nickname'] . '</b>'; ?>
           <div>
-            <input id='update' type="submit" name='update' value='<?php echo $newArr['id'] ?>' onclick="location.href='feedback_update.php'"> update </button>
+            <button id='update' type="button" name='update' value='<?php echo $newArr['id'] ?>' onclick="location.href='feedback_update.php?id='<?php echo $newArr['id'] ?>''"> update </button>
             <button id='delete' type='button' name='delete' value='<?php echo $newArr['id'] ?>' onclick="location.href='feedback>delete.php'"> delete </button>
           </div>
           <?php }

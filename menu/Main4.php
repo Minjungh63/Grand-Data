@@ -12,6 +12,12 @@
     color:orange;
     cursor:pointer;
   }
+  .sh_tr{
+    font-size:20px; 
+    font-weight:700; 
+    height:35px; 
+    color: black;
+  }
   .rk_tr:hover{
     font-size:20px; 
     font-weight:700; 
@@ -90,11 +96,10 @@
     $res_conn = 'Success!';
   }
 
-  $sql1 = 'SELECT country, SUM(sales_total) AS sum, AVG(sales_total) AS avg, MAX(sales_total) AS max
+  $sql1 = 'SELECT rank() OVER (ORDER BY sum DESC) AS rk, country, SUM(sales_total) AS sum, AVG(sales_total) AS avg, MAX(sales_total) AS max
        FROM movie Join sales ON movie.movie_id=sales.movie_id 
        GROUP BY country HAVING count(*)>100
-       ORDER BY sum DESC;
-      ';
+       ORDER BY sum DESC;';
   $res1 = mysqli_query($mysqli, $sql1);
 
   if (isset($_POST['country'])) {
@@ -113,42 +118,53 @@
     echo '<div id="suhhyun">';
     echo '<table id="rk_table">';
     while ($newArr = mysqli_fetch_array($res1, MYSQLI_ASSOC)) {
+      $rk = $newArr['rk'];
       $ct = $newArr['country'];
       $sum = (int) ($newArr['sum'] / 100000000) . '억원';
-      if($newArr['avg'] > 100000000)
+      if ($newArr['avg'] > 100000000) {
         $avg = (int) ($newArr['avg'] / 100000000) . '억원';
-      else {
+      } else {
         $avg = (int) ($newArr['avg'] / 10000000) . '천만원';
       }
       $max = (int) ($newArr['max'] / 100000000) . '억원';
 
-      echo '<tr><td>' . $ct . '</td><td>' . $sum . '</td><td>' . $avg . '</td><td>' . $max . '</td></tr>';
+      if ($rk == 1) {
+        echo '<tr class="rk_tr"><td width:100px> 🥇 </td>';
+      } elseif ($rk == 2) {
+        echo '<tr class="rk_tr" style="color:darkslategray;"><td> 🥈 </td>';
+      } elseif ($rk == 3) {
+        echo '<tr class="rk_tr" style="color:brown;"><td> 🥉 </td>';
+      } else {
+        echo '<tr class="normal_tr"><td><B>' . $rk . '</B></td>';
+      }
+
+      echo '<td><button name="country" type=hidden>' . $ct . '</td><td>' . $sum . '</td><td>' . $avg . '</td><td>' . $max . '</td>';
     }
     echo '</table>';
-    if(isset($res)){
-        echo '<br>' . $_POST['country'] . '<br><br>';
-        echo '<table id=rk_table>';
-        while ($newArr = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
-          $rk = $newArr['rk'];
-          $mn = $newArr['mn'];
-          $st = (int) ($newArr['st'] / 100000000) . '억원';
-          if ($rk == 1) {
-            echo '<tr class="rk_tr"><td width:100px> 🥇 </td>';
-          } elseif ($rk == 2) {
-            echo '<tr class="rk_tr" style="color:darkslategray;"><td> 🥈 </td>';
-          } elseif ($rk == 3) {
-            echo '<tr class="rk_tr" style="color:brown;"><td> 🥉 </td>';
-          } else {
-            echo '<tr class="normal_tr"><td><B>' . $rk . '</B></td>';
-          }
-  
-          echo '<td>' . $mn . '</td><td>' . $st . '</td></tr>';
+    if (isset($res)) {
+      echo '<br>' . $_POST['country'] . '<br><br>';
+      echo '<table id=rk_table>';
+      while ($newArr = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
+        $rk = $newArr['rk'];
+        $mn = $newArr['mn'];
+        $st = (int) ($newArr['st'] / 100000000) . '억원';
+        if ($rk == 1) {
+          echo '<tr class="rk_tr"><td width:100px> 🥇 </td>';
+        } elseif ($rk == 2) {
+          echo '<tr class="rk_tr" style="color:darkslategray;"><td> 🥈 </td>';
+        } elseif ($rk == 3) {
+          echo '<tr class="rk_tr" style="color:brown;"><td> 🥉 </td>';
+        } else {
+          echo '<tr class="normal_tr"><td><B>' . $rk . '</B></td>';
+        }
+
+        echo '<td>' . $mn . '</td><td>' . $st . '</td></tr>';
+      }
+      echo '</table>';
+      echo '</div>';
     }
-    echo '</table>';
-    echo '</div>';
-    }
-}
-    
+  }
+
   // mysqli_free_result($res);
   mysqli_close($mysqli);
   ?>

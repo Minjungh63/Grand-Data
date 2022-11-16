@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,12 +10,11 @@
     <body>
         
       <div id="updeco">
-        <a href="menu.html">Grand Data &nbsp;&nbsp;&nbsp;&nbsp;</a>
-    </div>
+        <a href="menu.html">Film Culture Industry Analysis: What makes a movie successful</a>
+      </div>
 
       
     <nav role="navigation">
-
       <ul id="main-menu">
         <li><a href="../menu/Main1.html">main1</a></li>
         <li><a href="../menu/Main2.html">main1</a></li>
@@ -22,31 +22,31 @@
         <li><a href="../menu/Main4.html">main4</a></li>
         <li><a href="../menu/Main5.html">main5</a></li>
         <li><a href="../menu/Main6.html">main6</a></li>
-        <li><a href="../menu/Main7.html">main7</a></li>
+        <li><a href="../menu/Main7.php">main7</a></li>
       </ul>
     </nav>
 
 
 <section>
-  
-  <p>
-
     <div id = "contents">
-      <h2 id = "title">SUB_TITLE</h2>
-      &nbsp;&nbsp;&nbsp;
-      
-
-내용적기
-
-<div id ="logogreen">
-
-  </div>
+      <h2 id = "title">Ranking of<br>Most Award-winning Directors</h2>
+      <p>
+        This is the ranking of directors based on the number of awards they received at the film festival.<br>
+        Please choose the range you want to search for.
+      </p>
+      <form action="Main5.php" method="post">
+       <select id="dropbox" name="scope">
+         <option value="0" selected>Total
+         <option value="10">Top 10
+         <option value="100">Top 100
+         <option value="300">Top 300 
+       </select>
+       <input id="search" type="submit" value="search">
+      </form>
     </div>
-  </p>
 </section>
 <div id="downdeco">
-    &nbsp;&nbsp;&nbsp;&nbsp; Copyright &copy; GRAND_DATA_2022_All Rights Reserved. 
+Copyright &copy; GRAND_DATA_2022_All Rights Reserved. 
 </div>
 </body >
-
 </html> 

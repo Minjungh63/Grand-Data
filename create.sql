@@ -27,7 +27,7 @@ CREATE TABLE Festival(
     continent VARCHAR(20),
     country VARCHAR(20),
     city VARCHAR(30),
-    FOREIGN KEY (category_id) REFERENCES Category(category_id)
+    FOREIGN KEY (category_id) REFERENCES Category(category_id) ON DELETE SET NULL
 );
 
 CREATE TABLE Theater(
@@ -42,7 +42,7 @@ CREATE TABLE Theater_Address(
     theater_id INT PRIMARY KEY,
     city VARCHAR(30) NOT NULL,
     district VARCHAR(30) NOT NULL,
-    FOREIGN KEY (theater_id) REFERENCES Theater(theater_id)
+    FOREIGN KEY (theater_id) REFERENCES Theater(theater_id) ON DELETE CASCADE
 );
 
 CREATE TABLE Movie(
@@ -55,30 +55,30 @@ CREATE TABLE Movie(
     country VARCHAR(20),
     released_date DATE NOT NULL,
     film_rating VARCHAR(20),
-    FOREIGN KEY (genre_id) REFERENCES Genre(genre_id),
-    FOREIGN KEY (director_id) REFERENCES Director(director_id),
-    FOREIGN KEY (category_id) REFERENCES Category(category_id),
-    FOREIGN KEY (distributor_id) REFERENCES Distributor(distributor_id)
+    FOREIGN KEY (genre_id) REFERENCES Genre(genre_id) ON DELETE SET NULL,
+    FOREIGN KEY (director_id) REFERENCES Director(director_id) ON DELETE SET NULL,
+    FOREIGN KEY (category_id) REFERENCES Category(category_id) ON DELETE SET NULL,
+    FOREIGN KEY (distributor_id) REFERENCES Distributor(distributor_id) ON DELETE SET NULL
 );
 
 CREATE TABLE Screening_Info(
     movie_id INT PRIMARY KEY,
     screen_num INT,
-    FOREIGN KEY (movie_id) REFERENCES Movie(movie_id)
+    FOREIGN KEY (movie_id) REFERENCES Movie(movie_id) ON DELETE CASCADE
 );
 
 CREATE TABLE Sales(
     movie_id INT PRIMARY KEY,
     sales_total BIGINT(15) NOT NULL,
     sales_seoul BIGINT(15) NOT NULL,
-    FOREIGN KEY (movie_id) REFERENCES Movie(movie_id)
+    FOREIGN KEY (movie_id) REFERENCES Movie(movie_id) ON DELETE CASCADE
 );
 
 CREATE TABLE Spectator(
     movie_id INT PRIMARY KEY,
     spectator_total INT NOT NULL,
     spectator_seoul INT NOT NULL,
-    FOREIGN KEY (movie_id) REFERENCES Movie(movie_id)
+    FOREIGN KEY (movie_id) REFERENCES Movie(movie_id) ON DELETE CASCADE
 );
 
 CREATE TABLE Award(
@@ -86,6 +86,6 @@ CREATE TABLE Award(
     movie_id INT NOT NULL,
     festival_id INT NOT NULL,
     award_year INT NOT NULL,
-    FOREIGN KEY (movie_id) REFERENCES Movie(movie_id),
-    FOREIGN KEY (festival_id) REFERENCES Festival(festival_id)
+    FOREIGN KEY (movie_id) REFERENCES Movie(movie_id) ON DELETE CASCADE,
+    FOREIGN KEY (festival_id) REFERENCES Festival(festival_id) ON DELETE CASCADE
 );

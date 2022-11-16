@@ -75,7 +75,7 @@
         }
       </script>
       <form id = "btn" action="Main1_insert.php" method="POST" >
-        <p><B>Insert a new theater: </B><br><br>
+        <p><B>Insert a new Distributor: </B><br><br>
         Distributor Name: <input type="text" class="input_box" name="distributor_name" required/><br>
         Genre       Name: <input type="text" class="input_box" name="genre_name" required/><br><br>
         &nbsp;<input id="insert" type="submit" value="Insert"></p>

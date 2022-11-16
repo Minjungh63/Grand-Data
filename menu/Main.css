@@ -108,7 +108,7 @@ body {
     vertical-align:top;
     font: verdana, sans-serif;
     color: #ffffffb8;
-    background-color: #096622fb;
+    background-color: #000;
     margin: 0px;
     padding: 10px; 
     text-align: right;
@@ -120,7 +120,7 @@ body {
     vertical-align:top;
     font: verdana, sans-serif;
     color: #ffffffb8;
-    background-color: #096622fb;
+    background-color: #000;
     margin: 0px;
     padding: 10px; 
     padding-left: 20px;
@@ -193,7 +193,8 @@ body {
     padding: 3px;
     border-radius: 5px;
     font-weight: 700;
-    background-color: #000;
+    background-color: rgb(135, 20, 20);
+    border-color: #ffffff;
     color:#ffffff;
   }
   #sidemenu > li >  a {

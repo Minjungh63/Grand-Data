@@ -55,7 +55,7 @@
     <div id = "contents">
       <h2 id = "title">Prefered Genre <br>by Distributor</h2>
       <br>
-      
+
       <?php
       $mysqli = mysqli_connect('localhost', 'team11', 'team11', 'team11');
 
@@ -63,36 +63,30 @@
         printf("Connect failed: %s\n", mysqli_connect_error());
         exit();
       } else {
-        if (!empty($_REQUEST['checkbox'])) {
-          mysqli_begin_transaction($mysqli);
-          try {
-            
-            $SQL = $db_found->prepare("DELETE FROM members WHERE email=?");
-            foreach ($_REQUEST['checkbox'] as $id) {
-              $sql = 'DELETE FROM Theater WHERE theater_id = ?';
+        mysqli_begin_transaction($mysqli);
+        try {
+
+              $distributor_name = $_REQUEST['distributor_name'];
+              $sql = 'DELETE FROM distributor WHERE distributor_name = ?';
               if ($stmt = mysqli_prepare($mysqli, $sql)) {
-                mysqli_stmt_bind_param($stmt, 'i', $distributor_id);
-                $distributor_id = $id;
+                mysqli_stmt_bind_param($stmt, 's', $distributor_name);
                 mysqli_stmt_execute($stmt);
                 mysqli_stmt_close($stmt);
               } else {
                 echo "ERROR: Could not prepare query: $sql. " . mysqli_error($mysqli);
               }
-            }
+            
             mysqli_commit($mysqli);
             echo 'Deletion Successful.';
-          } catch (mysqli_sql_exception $exception) {
-            mysqli_rollback($mysqli);
-            throw $exception;
-          }
-          mysqli_close($mysqli);
-        } else {
-          echo 'No item is selected.';
+    
+        } catch (mysqli_sql_exception $exception) {
+          mysqli_rollback($mysqli);
+          throw $exception;
         }
+        mysqli_close($mysqli);
       }
       ?>
-
-
+      
   
 
     </div>

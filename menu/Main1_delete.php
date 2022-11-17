@@ -91,10 +91,12 @@
 
     </div>
 </section>
+
 <footer id="downdeco">
       Team 11 | Grand Data <br>
       Jeonghyun Lee, Minjung Jung, Meenso kwak, Suhyeon Choi
     </footer>
+
 </body >
 
 </html> 

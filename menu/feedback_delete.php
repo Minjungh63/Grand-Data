@@ -1,5 +1,5 @@
-<?php 
-session_start();
+<?php
+session_start(); 
 ?>
 <!DOCTYPE html>
 <style>
@@ -103,20 +103,28 @@ session_start();
         $res = mysqli_stmt_get_result($stmt);
 
         $newArr = mysqli_fetch_array($res, MYSQLI_ASSOC);
-        if (isset($newArr['id'])) {
-          $sql2 = 'DELETE FROM feedback WHERE id=?';
-          if ($stmt2 = mysqli_prepare($mysqli, $sql2)) {
-            mysqli_stmt_bind_param($stmt2, 'i', $_SESSION['id']);
-            mysqli_stmt_execute($stmt2);
 
-            mysqli_stmt_close($stmt);
-            mysqli_stmt_close($stmt2);
-            mysqli_free_result($res);
-            mysqli_close($mysqli);
-            
-            header( 'Location: feedback.php' );
+        if (isset($_REQUEST['pw'])) {
+          if (isset($newArr['id'])) {
+            $sql2 = 'DELETE FROM feedback WHERE id=?';
+            if ($stmt2 = mysqli_prepare($mysqli, $sql2)) {
+              mysqli_stmt_bind_param($stmt2, 'i', $_SESSION['id']);
+              mysqli_stmt_execute($stmt2);
+
+              mysqli_stmt_close($stmt);
+              mysqli_stmt_close($stmt2);
+              mysqli_free_result($res);
+              mysqli_close($mysqli);
+
+              header('Location: feedback.php');
+            }
+          } else {
+            echo 'Password is not valid';
+          }
         }
-        }
+        mysqli_stmt_close($stmt);
+        mysqli_free_result($res);
+        mysqli_close($mysqli);
       }
       ?>
   <br><br>

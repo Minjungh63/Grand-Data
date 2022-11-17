@@ -99,7 +99,6 @@ session_start(); ?>
           mysqli_stmt_execute($stmt);
           $res = mysqli_stmt_get_result($stmt);
 
-          mysqli_free_result($res);
           mysqli_stmt_close($stmt);
           mysqli_close($mysqli);
           header('Location: feedback.php');

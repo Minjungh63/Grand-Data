@@ -11,19 +11,10 @@
     font-weight:700; 
     height:70px; 
     color:orange;
-    cursor:pointer;
-  }
-  .rk_tr:hover{
-    font-size:20px; 
-    font-weight:700; 
-    height:70px; 
-    color:orange;
-    cursor:pointer;
   }
   .normal_tr{
     height:40px; 
     font-weight:700;
-    cursor:pointer;
   }
 
   #semi{

@@ -10,19 +10,10 @@
     font-weight:700; 
     height:70px; 
     color:orange;
-    cursor:pointer;
-  }
-  .ranking_tr:hover{
-    font-size:20px; 
-    font-weight:700; 
-    height:70px; 
-    color:orange;
-    cursor:pointer;
   }
   .normal_tr{
     height:40px; 
     font-weight:700;
-    cursor:pointer;
   }
 </style>
 <html>
@@ -59,12 +50,12 @@
       <h2 id = "title">Ranking of<br>Genre</h2>
  
       <form action="Main2.php" method="post" style="margin-bottom:5%">
-       <select id="dropbox" name="menu">
+       <select class="dropbox" name="menu">
          <option value="sales" >Sales
          <option value="spectator">Spectator
          <option value="screen">Screen Number
        </select>
-       <input id="search" type="submit" value="search">
+       <input class="search" type="submit" value="search">
       </form>
       <?php
       header('Content-Type:text/html;charset=utf-8');

@@ -35,6 +35,7 @@
         <a href="menu.html">Grand Data &nbsp;&nbsp;&nbsp;&nbsp;</a>
     </div>
 
+
       <nav role="navigation">
 
 <ul id="main-menu">
@@ -48,6 +49,7 @@
   <li><a href="../menu/feedback.php">Feedback</a></li>
 </ul>
 </nav>
+
 
     <section>
     <div id = "contents">

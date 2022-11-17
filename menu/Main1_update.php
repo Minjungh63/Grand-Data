@@ -71,10 +71,10 @@
             $res2Array = mysqli_fetch_array($res2, MYSQLI_ASSOC);
 
           if ($_POST['distributor_name'] != null) {
-            $sql = 'UPDATE distributor SET distributor_name=? WHERE distributor_id=?';
+            $sql = 'UPDATE distributor SET distributor_name=? WHERE distributor_name=?';
             if ($stmt = mysqli_prepare($mysqli, $sql)) {
-              mysqli_stmt_bind_param($stmt, 'is', $id, $update);
-              $id = $res2Array['distributor_id'];
+              mysqli_stmt_bind_param($stmt, 'ss', $update, $name);
+              $name = $_REQUEST['dname'];
               $update = $_REQUEST['distributor_name'];
               mysqli_stmt_execute($stmt);
               mysqli_stmt_close($stmt);

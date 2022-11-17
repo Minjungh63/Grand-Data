@@ -132,9 +132,10 @@ session_start(); ?>
     </div>
   </p>
 </section>
-<div id="downdeco">
-    &nbsp;&nbsp;&nbsp;&nbsp; Copyright &copy; GRAND_DATA_2022_All Rights Reserved. 
-</div>
+<footer id="downdeco">
+      Team 11 | Grand Data <br>
+      JeongHyeon Lee, Minjung Jung, Meenso kwak, Suhyeon Choi
+    </footer>
 </body >
 
 </html> 

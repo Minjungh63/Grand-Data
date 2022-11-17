@@ -77,10 +77,11 @@
             printf("Connect failed:%s\n",mysqli_connect_error());
             exit();
         }else{
-            $sql = "SELECT director_id, director_name, count(award_id) as award_cnt FROM movie JOIN award USING(movie_id) JOIN director USING(director_id) group by(director_id) ORDER BY award_cnt DESC";
+            $sql = "SELECT rank() over (ORDER BY award_cnt DESC) rank, director_id, director_name, count(award_id) as award_cnt, avg(sales_total) as sales_avg FROM movie JOIN award USING(movie_id) JOIN director USING(director_id) JOIN sales using(movie_id) group by(director_id) ORDER BY award_cnt DESC";
             $res = mysqli_query($mysqli,$sql);
         if($res){
             printf("<table id=\"ranking_table\">");
+            print("<th><td><B>Director</B></td><td><B>Awards</B></td><td><B>Average Sales</B></td><td></td></th>");
             $i=0;
                 while(($ranking_list = mysqli_fetch_array($res,MYSQLI_ASSOC))&& (int)$_POST["scope"]===0 || $i<(int)$_POST["scope"]){
                   $i = $i+1;
@@ -91,8 +92,8 @@
                   if($i==1) printf("class=\"ranking_tr\"><td width:100px> 🥇 </td>");
                   else if($i==2) printf("class=\"ranking_tr\" style=\"color:darkslategray;\"><td> 🥈 </td>");
                   else if($i==3) printf("class=\"ranking_tr\" style=\"color:brown;\"><td> 🥉 </td>");
-                  else printf("class=\"normal_tr\"><td><B> %d </B></td>",$i);
-                  printf("<td style=\"width:400px\">%s</td><td style=\"width:100px\">🏆 %d</td></tr>",$director_name,$award_cnt);
+                  else printf("class=\"normal_tr\"><td><B> %d </B></td>",$ranking_list["rank"]);
+                  printf("<td style=\"width:300px\">%s</td><td style=\"width:100px\">🏆 %d</td><td style=\"width:200px\">\ %d</td></tr>",$director_name,$award_cnt, $ranking_list["sales_avg"]);
                 }
                 mysqli_free_result($res);
             

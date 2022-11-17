@@ -122,9 +122,14 @@
     $res_conn = 'Success!';
   }
 
-  $sql = 'SELECT rank() OVER (ORDER BY st DESC) AS ranking, M.movie_name AS mn, SUBSTRING(M.released_date,1,7) AS mm, S.sales_total AS st, SCR.screen_num AS sn 
+  $sql = 'SELECT rank() OVER (ORDER BY st DESC) AS ranking, M.movie_name AS mn, SUBSTRING(M.released_date,1,7) AS mm, S.sales_total AS st, SCR.screen_num AS sn  
   FROM movie M, sales S, screening_info SCR 
   WHERE M.released_date LIKE ? AND M.movie_id=S.movie_id AND M.movie_id=SCR.movie_id LIMIT 30;';
+
+  $sql2 = 'SELECT sum(st) AS total_sales 
+  FROM (SELECT rank() OVER (ORDER BY st DESC) AS ranking, M.movie_name AS mn, SUBSTRING(M.released_date,1,7) AS mm, S.sales_total AS st, SCR.screen_num AS sn  
+    FROM movie M, sales S, screening_info SCR 
+    WHERE M.released_date LIKE ? AND M.movie_id=S.movie_id AND M.movie_id=SCR.movie_id LIMIT 30) t;';
 
   if (isset($_POST['year']) && $_POST['year'] != 'non') {
     if (isset($_POST['month']) && $_POST['month'] != 'non') {
@@ -172,6 +177,8 @@
 
   if (isset($sql)) {
     if (isset($res)) {
+      $ts = 0;
+      $i = 0;
       if ($ver == 1) {
         echo '<div id="semi">' . $_POST['year'] . '년 ' . $_POST['month'] . '월</div>';
         echo '<table id=rk_table>';
@@ -179,16 +186,22 @@
           $rk = $newArr['ranking'];
           $mn = $newArr['mn'];
           $sn = $newArr['sn'] . '관' . '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp';
+          $i++;
+          $ts += $newArr['st'];
           if ($newArr['st'] > 100000000) {
             $st = (int) ($newArr['st'] / 100000000) . '억원';
           } else {
             $st = (int) ($newArr['st'] / 10000000) . '천만원';
           }
+          if ($i == 30) {
+            $ts = (int) ($ts / 100000000) . '억원';
+            echo '<div id="semi">total sales : ' . $ts . '</div>';
+          }
           if ($rk == 1) {
             echo '<tr class="rk_tr"><td width:100px> 🥇 </td>';
-          } else if ($rk == 2) {
+          } elseif ($rk == 2) {
             echo '<tr class="rk_tr" style="color:darkslategray;"><td> 🥈 </td>';
-          } else if ($rk == 3) {
+          } elseif ($rk == 3) {
             echo '<tr class="rk_tr" style="color:brown;"><td> 🥉 </td>';
           } else {
             echo '<tr class="normal_tr"><td><B>' . $rk . '</B></td>';
@@ -204,16 +217,23 @@
           $rk = $newArr['ranking'];
           $mn = $newArr['mn'];
           $sn = $newArr['sn'] . '관' . '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp';
+          $i++;
+          $ts += $newArr['st'];
           if ($newArr['st'] > 100000000) {
             $st = (int) ($newArr['st'] / 100000000) . '억원';
           } else {
             $st = (int) ($newArr['st'] / 10000000) . '천만원';
           }
+          if ($i == 30) {
+            $ts = (int) ($ts / 100000000) . '억원';
+            echo '<div id="semi">total sales : ' . $ts . '</div>';
+          }
+
           if ($rk == 1) {
             echo '<tr class="rk_tr"><td width:100px> 🥇 </td>';
-          } else if ($rk == 2) {
+          } elseif ($rk == 2) {
             echo '<tr class="rk_tr" style="color:darkslategray;"><td> 🥈 </td>';
-          } else if ($rk == 3) {
+          } elseif ($rk == 3) {
             echo '<tr class="rk_tr" style="color:brown;"><td> 🥉 </td>';
           } else {
             echo '<tr class="normal_tr"><td><B>' . $rk . '</B></td>';
@@ -229,16 +249,22 @@
           $rk = $newArr['ranking'];
           $mn = $newArr['mn'];
           $sn = $newArr['sn'] . '관' . '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp';
+          $i++;
+          $ts += $newArr['st'];
           if ($newArr['st'] > 100000000) {
             $st = (int) ($newArr['st'] / 100000000) . '억원';
           } else {
             $st = (int) ($newArr['st'] / 10000000) . '천만원';
           }
+          if ($i == 30) {
+            $ts = (int) ($ts / 100000000) . '억원';
+            echo '<div id="semi">total sales : ' . $ts . '</div>';
+          }
           if ($rk == 1) {
             echo '<tr class="rk_tr"><td width:100px> 🥇 </td>';
-          } else if ($rk == 2) {
+          } elseif ($rk == 2) {
             echo '<tr class="rk_tr" style="color:darkslategray;"><td> 🥈 </td>';
-          } else if ($rk == 3) {
+          } elseif ($rk == 3) {
             echo '<tr class="rk_tr" style="color:brown;"><td> 🥉 </td>';
           } else {
             echo '<tr class="normal_tr"><td><B>' . $rk . '</B></td>';
@@ -252,8 +278,9 @@
     }
     echo '</div>';
   }
-  if(isset($stmt))
+  if (isset($stmt)) {
     mysqli_stmt_close($stmt);
+  }
   mysqli_close($mysqli);
   ?>
 </p>

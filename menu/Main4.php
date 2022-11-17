@@ -31,6 +31,13 @@
     font-weight:700;
     cursor:pointer;
   }
+  #tt_tr{
+    font-size:20px; 
+    font-weight:700; 
+    height:70px; 
+    color:black;
+    cursor:pointer;
+  }
 </style>
 <html>
   <head>
@@ -119,7 +126,7 @@
 
   if (isset($res1) && !isset($res)) {
     echo '<table id="rk_table">';
-    echo '<tr class="rk_tr"><td width:160px>순위</td><td width:160px>나라</td><td width:160px>총매출</td><td width:160px>평균매출</td><td width:160px>최대매출</td></tr>';
+    echo '<tr id="tt_tr"><td width:160px>순위</td><td width:160px>나라</td><td width:160px>총매출</td><td width:160px>평균매출</td><td width:160px>최대매출</td></tr>';
     while ($newArr = mysqli_fetch_array($res1, MYSQLI_ASSOC)) {
       $rk = $newArr['rk'];
       $ct = $newArr['country'];

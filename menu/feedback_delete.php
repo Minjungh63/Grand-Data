@@ -108,6 +108,12 @@ session_start();
           if ($stmt2 = mysqli_prepare($mysqli, $sql2)) {
             mysqli_stmt_bind_param($stmt2, 'i', $_SESSION['id']);
             mysqli_stmt_execute($stmt2);
+
+            mysqli_stmt_close($stmt);
+            mysqli_stmt_close($stmt2);
+            mysqli_free_result($res);
+            mysqli_close($mysqli);
+            
             header( 'Location: feedback.php' );
         }
         }

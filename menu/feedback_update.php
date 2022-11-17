@@ -103,8 +103,18 @@ session_start(); ?>
 
         $newArr = mysqli_fetch_array($res, MYSQLI_ASSOC);
         if (isset($newArr['id'])) {
+
+          mysqli_stmt_close($stmt);
+          mysqli_free_result($res);
+          mysqli_close($mysqli);
+
           header('Location: feedback_update_check.php');
         } elseif (isset($_REQUEST['pw'])) {
+          
+          mysqli_stmt_close($stmt);
+          mysqli_free_result($res);
+          mysqli_close($mysqli);
+
           echo 'Password is not valid';
         }
       }

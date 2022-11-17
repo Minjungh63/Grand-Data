@@ -82,7 +82,7 @@
       <br>
       password : <INPUT TYPE = "password"  NAME = "pw" SIZE = "20" >
       <br>
-      contents  : <br><INPUT TYPE = "TEXT"  NAME = "cts" style="width:300px;height:200px;font-size:30px;">
+      contents  : <br><INPUT TYPE = "TEXT"  NAME = "cts" style="width:300px;height:200px;font-size:18px;">
       
       <form action="feedback_insert.php", method="post">
   <br><br>
@@ -105,9 +105,9 @@ if (isset($_POST['nn']) & isset($_POST['pw']) & isset($_POST['cts'])) {
     $nn = $_POST['nn'];
     $pw = $_POST['pw'];
     $cts = $_POST['cts'];
-
     mysqli_stmt_execute($stmt);
   }
+  mysqli_stmt_close($stmt);
   mysqli_close($mysqli);
   header('Location: feedback.php', true, 301);
   exit();

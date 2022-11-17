@@ -242,8 +242,10 @@
       mysqli_free_result($res);
     }
     echo '</div>';
-    mysqli_close($mysqli);
   }
+  if(isset($stmt))
+    mysqli_stmt_close($stmt);
+  mysqli_close($mysqli);
   ?>
 </p>
 

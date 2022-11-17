@@ -2,9 +2,9 @@
 <!DOCTYPE html>
 <style>
   #write{
-    width: 60px;
-    height: 30px;
-    font-size: small;
+    width: 100px;
+    height: 45px;
+    font-size: medium;
     padding: 5px;
     border-radius: 10px;
     font-weight: 700;
@@ -23,7 +23,7 @@
     background-color: rgb(152, 188, 67);
     border-color: #ffffff;
     color:#000;
-    text-align: right;
+    text-align: center;
   }
   #delete{
     width: 60px;
@@ -35,7 +35,7 @@
     background-color: rgb(135, 20, 20);
     border-color: #ffffff;
     color:#000;
-    text-align: right;
+    text-align: center;
   }
 
 </style>
@@ -89,7 +89,7 @@
         echo '<form method="get">';
 
         while ($newArr = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
-          echo '<b>' . $newArr['contents'] . ' written by ' . $newArr['nickname'] . '</b>'; ?>
+          echo '<b>"' . $newArr['contents'] . '" written by ' . $newArr['nickname'] . '</b>'; ?>
           <div>
             <button id='update' type="button" name='update' value='<?php echo $newArr[
               'id'

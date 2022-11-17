@@ -81,7 +81,7 @@ session_start(); ?>
   <form action="feedback_update_check.php", method="post">
     <div id="contents">
       <h2 id = "title">Update Feedback</h2>
-      contents : <br><input type = "text"  name = "cts" style="width:300px;height:200px;font-size:30px;"><br><br>
+      contents : <br><input type = "text"  name = "cts" style="width:300px;height:200px;font-size:18px;"><br><br>
       <input type="submit" id='confirm' value="confirm"><br>
 
       <?php
@@ -98,6 +98,9 @@ session_start(); ?>
           mysqli_stmt_bind_param($stmt, 'si', $_REQUEST['cts'], $_SESSION['id']);
           mysqli_stmt_execute($stmt);
           $res = mysqli_stmt_get_result($stmt);
+
+          mysqli_stmt_close($stmt);
+          mysqli_close($mysqli);
           header('Location: feedback.php');
         } else {
           echo 'fail';

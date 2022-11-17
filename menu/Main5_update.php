@@ -46,64 +46,57 @@
         $key = $_GET['key'];
         $year = date("Y");
         $mysqli=mysqli_connect("localhost","team11", "team11","team11");
-
+        $sql = "UPDATE movie SET ?=? WHERE movie_id=?";
       if($mysqli === false){
         die("ERROR: Could not connect. " . mysqli_connect_error());
       }
       if($_GET['state']=="updated"){
-        $sql = "UPDATE movie SET movie_name = '".$_POST['new_title']."' WHERE movie_id=".$key;
-        $res = mysqli_query($mysqli,$sql);
-        if(!$res){
+        if($stmt=mysqli_prepare($mysqli,$sql)){
+          mysqli_stmt_bind_param($stmt,"si",$val,$movie_title,$movie_id);
+          $val = "movie_name";
+          $movie_title=$_POST['new_title'];
+          $movie_id=$key;
+          mysqli_stmt_execute($stmt);
+
+          $val = "genre_id";
+          $movie_title=$_POST['new_genre'];
+          $movie_id=$key;
+          mysqli_stmt_execute($stmt);
+
+          $val = "category_id";
+          $movie_title=$_POST['new_category'];
+          $movie_id=$key;
+          mysqli_stmt_execute($stmt);
+
+          $val = "distributor_id";
+          $movie_title=$_POST['new_distributor'];
+          $movie_id=$key;
+          mysqli_stmt_execute($stmt);
+          
+          $val = "country";
+          $movie_title=$_POST['new_country'];
+          $movie_id=$key;
+          mysqli_stmt_execute($stmt);
+
+          $val = "released_date";
+          $movie_title=$_POST['new_year'];
+          $movie_id=$key;
+          mysqli_stmt_execute($stmt);
+
+          $val = "film_rating";
+          $movie_title=$_POST['new_film_rating'];
+          $movie_id=$key;
+          mysqli_stmt_execute($stmt);
+
+          echo '<script>alert("Update Successfully.")</script>';
+          printf('<script>location.href="Main5_update.php?key=%s&&name=%s&&state=write";</script>',$key,$_POST['new_title']);
+
+          mysqli_stmt_close($stmt);
+          mysqli_close($mysqli);
+        }else{
           // Display error alert window
           echo '<script>alert("Error occurred during insertion. Please try again.")</script>';
         }
-
-        $sql = "UPDATE movie SET genre_id = ".$_POST['new_genre']." WHERE movie_id=".$key;
-        $res = mysqli_query($mysqli,$sql);
-        if(!$res){
-            // Display error alert window
-            echo '<script>alert("Error occurred during insertion. Please try again.")</script>';
-          }
-
-        $sql = "UPDATE movie SET category_id = ".$_POST['new_category']." WHERE movie_id=".$key;
-        $res = mysqli_query($mysqli,$sql);
-        if(!$res){
-            // Display error alert window
-            echo '<script>alert("Error occurred during insertion. Please try again.")</script>';
-          }
-
-        $sql = "UPDATE movie SET distributor_id = ".$_POST['new_distributor']." WHERE movie_id=".$key;
-        $res = mysqli_query($mysqli,$sql);
-        if(!$res){
-            // Display error alert window
-            echo '<script>alert("Error occurred during insertion. Please try again.")</script>';
-          }
-
-        $sql = "UPDATE movie SET country ='".$_POST['new_country']."' WHERE movie_id=".$key;
-        $res = mysqli_query($mysqli,$sql);
-        if(!$res){
-            // Display error alert window
-            echo '<script>alert("Error occurred during insertion. Please try again.")</script>';
-          }
-
-        $sql = "UPDATE movie SET released_date ='".$_POST['new_year']."-".$_POST['new_month']."-".$_POST['new_day']."' WHERE movie_id=".$key;
-        $res = mysqli_query($mysqli,$sql);
-        if(!$res){
-            // Display error alert window
-            echo '<script>alert("Error occurred during insertion. Please try again.")</script>';
-          }
-
-        $sql = "UPDATE movie SET film_rating = ".$_POST['new_film_rating']." WHERE movie_id=".$key;
-        $res = mysqli_query($mysqli,$sql);
-        if(!$res){
-          // Display error alert window
-          echo '<script>alert("Error occurred during insertion. Please try again.")</script>';
-        }
-
-        echo '<script>alert("Update Successfully.")</script>';
-        printf('<script>location.href="Main5_update.php?key=%s&&name=%s&&state=write";</script>',$key,$_POST['new_title']);
-
-        mysqli_close($link);
       }
       ?>
     <head>

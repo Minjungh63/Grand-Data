@@ -59,37 +59,69 @@
 
 
       <?php
-        $mysqli = mysqli_connect("localhost", "team11", "team11", "team11");
+      $mysqli = mysqli_connect('localhost', 'team11', 'team11', 'team11');
 
-        if(mysqli_connect_errno()){
-            printf("Connect failed: %s\n", mysqli_connect_error());
-            exit();
-        }
-        else{
+      if (mysqli_connect_errno()) {
+        printf("Connect failed: %s\n", mysqli_connect_error());
+        exit();
+      } else {
         mysqli_begin_transaction($mysqli);
-        try{
+        try {
 
-            $stmt1 = $mysqli->prepare("INSERT INTO distributor(distributor_id, distributor_name) VALUES (?, ?)");
-            $stmt1->bind_param('sssdi', $_POST['distributor_name']);
-            $stmt1->execute(); 
-            $stmt1->close();
+            $sql2 = 'SELECT MAX(distributor_id)+1 AS distributor_id FROM distributor';
+            $res2 = mysqli_query($mysqli, $sql2);
+            $res2Array = mysqli_fetch_array($res2, MYSQLI_ASSOC);
 
-            $stmt2 = $mysqli->prepare("UPDATE genre SET genre_name = ? WHERE genre_id = ?");
-            $stmt2->bind_param('sssdii', $_POST['genre_id']);
-            $stmt2->execute(); 
-            $stmt2->close();
-
-
-            mysqli_commit($mysqli);
-            echo "Update Successful.";
+            $sql3 = 'INSERT INTO distributor(distributor_id, distributor_name) values(?, ?)';
+            if ($stmt2 = mysqli_prepare($mysqli, $sql3)) {
+              mysqli_stmt_bind_param($stmt2, 'is', $distributor_id, $distributor_name);
+              $distributor_id = $res2Array['distributor_id'];
+              $distributor_name = $_REQUEST['distributor_name'];
+              mysqli_stmt_execute($stmt2);
+              mysqli_stmt_close($stmt2);
+            }
+            
+          
+          mysqli_commit($mysqli);
+          mysqli_free_result($res2);
+          echo 'Insertion Successful.';
+        } catch (mysqli_sql_exception $exception) {
+          mysqli_rollback($mysqli);
+          throw $exception;
         }
-        catch(mysqli_sql_exception $exception){
-            mysqli_rollback($mysqli);
-            throw $exception;
+        mysqli_close($mysqli);
+      }
+      ?>
+
+      <?php
+      $mysqli = mysqli_connect('localhost', 'team11', 'team11', 'team11');
+
+      if (mysqli_connect_errno()) {
+        printf("Connect failed: %s\n", mysqli_connect_error());
+        exit();
+      } else {
+        mysqli_begin_transaction($mysqli);
+        try {
+          if ($_POST['distributor_name'] != null) {
+            $sql = 'UPDATE distributor SET distributor_name=? WHERE distributor_id=?';
+            if ($stmt = mysqli_prepare($mysqli, $sql)) {
+              mysqli_stmt_bind_param($stmt, 'is', $id, $update);
+              $id = $_REQUEST['distributor_id'];
+              $update = $_REQUEST['distributor_name'];
+              mysqli_stmt_execute($stmt);
+              mysqli_stmt_close($stmt);
+            }
+          }
+         
+          mysqli_commit($mysqli);
+          echo 'Update Successful.';
+        } catch (mysqli_sql_exception $exception) {
+          mysqli_rollback($mysqli);
+          throw $exception;
         }
-        mysqli_close($mysqli);  
-        }
-        ?>
+        mysqli_close($mysqli);
+      }
+      ?>
 
     </div>
 </section>

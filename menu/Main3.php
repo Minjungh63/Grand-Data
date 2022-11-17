@@ -49,7 +49,7 @@
       
     <nav role="navigation">
       <ul id="main-menu">
-        <li><a href="../menu/Main1.html">Distributor</a></li>
+        <li><a href="../menu/Main1.php">Distributor</a></li>
         <li><a href="../menu/Main2.html">Genre</a></li>
         <li><a href="../menu/Main3.html">Released Date</a></li>
         <li><a href="../menu/Main4.html">Country</a></li>
@@ -67,7 +67,10 @@
 
     <div id="contents">
       <h2 id = "title">YEAR/MONTH TOTAL SALES</h2>
-      &nbsp;&nbsp;&nbsp;
+      <p>
+      Please choose the year/month in which you want to filter the movie.
+      <br>
+      </p>
       
       <form action="Main3.php", method="post">
         <label for="yearLabel">Choose year:</label>
@@ -131,7 +134,7 @@
         mysqli_stmt_bind_param($stmt, 's', $ym);
         $ym = '%' . $_REQUEST['year'] . '-';
 
-        if ((int)($_REQUEST['month'])<10) {
+        if ((int) $_REQUEST['month'] < 10) {
           $ym = $ym . '0' . $_REQUEST['month'] . '%';
         } else {
           $ym = $ym . $_REQUEST['month'] . '%';
@@ -155,7 +158,7 @@
 
       if ($stmt = mysqli_prepare($mysqli, $sql)) {
         mysqli_stmt_bind_param($stmt, 's', $m);
-        if ((int)($_REQUEST['month'])<10) {
+        if ((int) $_REQUEST['month'] < 10) {
           $m = '%-0' . $_REQUEST['month'] . '-%';
         } else {
           $m = '%-' . $_REQUEST['month'] . '-%';
@@ -170,7 +173,7 @@
   if (isset($sql)) {
     if (isset($res)) {
       if ($ver == 1) {
-        echo '<div id="semi">'.$_POST['year'] . '년 ' . $_POST['month'] . '월</div>';
+        echo '<div id="semi">' . $_POST['year'] . '년 ' . $_POST['month'] . '월</div>';
         echo '<table id=rk_table>';
         while ($newArr = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
           $rk = $newArr['ranking'];
@@ -194,8 +197,8 @@
           echo '<td>' . $mn . '</td><td>' . $sn . '</td><td>' . $st . '</td></tr>';
         }
         echo '</table>';
-      } else if ($ver == 2) {
-        echo '<div id="semi">'.$_POST['year'] . '년</div>';
+      } elseif ($ver == 2) {
+        echo '<div id="semi">' . $_POST['year'] . '년</div>';
         echo '<table id=rk_table>';
         while ($newArr = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
           $rk = $newArr['ranking'];
@@ -219,8 +222,8 @@
           echo '<td>' . $mn . '</td><td>' . $sn . '</td><td>' . $st . '</td></tr>';
         }
         echo '</table>';
-      } else if ($ver == 3) {
-        echo '<div id="semi">'.$_POST['month'] . '월</div>';
+      } elseif ($ver == 3) {
+        echo '<div id="semi">' . $_POST['month'] . '월</div>';
         echo '<table id=rk_table>';
         while ($newArr = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
           $rk = $newArr['ranking'];

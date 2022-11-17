@@ -1,5 +1,6 @@
 USE TEAM11;
 
+DROP TABLE Feedback;
 DROP TABLE Award;
 DROP TABLE Spectator;
 DROP TABLE Sales;

@@ -48,7 +48,7 @@
       
     <nav role="navigation">
         <ul id="main-menu">
-          <li><a href="../menu/Main1.html">Distributor</a></li>
+          <li><a href="../menu/Main1.php">Distributor</a></li>
           <li><a href="../menu/Main2.html">Genre</a></li>
           <li><a href="../menu/Main3.html">Released Date</a></li>
           <li><a href="../menu/Main4.html">Country</a></li>
@@ -65,9 +65,13 @@
   <p>
 
     <div id="contents">
-      <h2 id = "title">YEAR/MONTH TOTAL SALES</h2>
-      &nbsp;&nbsp;&nbsp;
-      
+      <h2 id = "title">Country sales</h2>
+      <p>
+          Please choose the country to view information about sales.
+          <br>
+          If submit nothing, you can view total sales, average sales, and maximun sales of one movie in each country.
+      <br>
+      </p>
       <form action="Main4.php", method="post">
       <div>
             <input type="radio" name="country" id="1" value="한국">한국
@@ -86,8 +90,6 @@
             <div style=" text-align: center;">
                 <input type="submit" value="Submit" class="search">
             </div>
-
-            <p>
   <?php
   $mysqli = mysqli_connect('localhost', 'team11', 'team11', 'team11');
   if (mysqli_connect_errno()) {
@@ -170,12 +172,12 @@
       echo '<td>&nbsp&nbsp&nbsp&nbsp' . $mn . '&nbsp&nbsp&nbsp&nbsp</td><td>' . $st . '</td></tr>';
     }
     echo '</table>';
+    mysqli_free_result($res);
+    mysqli_stmt_close($stmt);
   } else {
     echo '';
   }
 
-  mysqli_free_result($res);
-  mysqli_stmt_close($stmt);
   mysqli_close($mysqli);
   ?>
 </p>

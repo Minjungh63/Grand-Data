@@ -63,16 +63,16 @@ session_start(); ?>
     <nav role="navigation">
 
       <ul id="main-menu">
-        <li><a href="../menu/Main1.html">main1</a></li>
-        <li><a href="../menu/Main2.html">main1</a></li>
-        <li><a href="../menu/Main3.html">main3</a></li>
-        <li><a href="../menu/Main4.html">main4</a></li>
-        <li><a href="../menu/Main5.html">main5</a></li>
-        <li><a href="../menu/Main6.html">main6</a></li>
-        <li><a href="../menu/Main7.php">main7</a></li>
-        <li><a href="../menu/feedback.php">Feedback</a></li>
-      </ul>
-    </nav>
+  <li><a href="../menu/Main1.php">Distributor</a></li>
+  <li><a href="../menu/Main2.html">Genre</a></li>
+  <li><a href="../menu/Main3.html">Release Date</a></li>
+  <li><a href="../menu/Main4.html">Country</a></li>
+  <li><a href="../menu/Main5.html">Director</a></li>
+  <li><a href="../menu/Main6.html">Film Festival</a></li>
+  <li><a href="../menu/Main7.php">Theater</a></li>
+  <li><a href="../menu/feedback.php">Feedback</a></li>
+</ul>
+</nav>
 
 
 <section>
@@ -80,7 +80,7 @@ session_start(); ?>
   <p>
   <form action="feedback_update_check.php", method="post">
     <div id="contents">
-      <h2 id = "title">Write Feedback</h2>
+      <h2 id = "title">Update Feedback</h2>
       contents : <br><input type = "text"  name = "cts" style="width:300px;height:200px;font-size:30px;"><br><br>
       <input type="submit" id='confirm' value="confirm"><br>
 
@@ -93,17 +93,16 @@ session_start(); ?>
         $res_conn = 'Success!';
       }
       $sql = 'UPDATE feedback SET contents = ? WHERE id = ?';
-      if(isset($_REQUEST['cts'])){
+      if (isset($_REQUEST['cts'])) {
         if ($stmt = mysqli_prepare($mysqli, $sql)) {
           mysqli_stmt_bind_param($stmt, 'si', $_REQUEST['cts'], $_SESSION['id']);
           mysqli_stmt_execute($stmt);
           $res = mysqli_stmt_get_result($stmt);
-          header( 'Location: feedback.php' );
+          header('Location: feedback.php');
         } else {
           echo 'fail';
         }
       }
-      
       ?>
 
 

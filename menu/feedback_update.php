@@ -134,7 +134,7 @@ session_start(); ?>
 </section>
 <footer id="downdeco">
       Team 11 | Grand Data <br>
-      JeongHyeon Lee, Minjung Jung, Meenso kwak, Suhyeon Choi
+      Jeonghyun Lee, Minjung Jung, Meenso kwak, Suhyeon Choi
     </footer>
 </body >
 

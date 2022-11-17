@@ -121,7 +121,7 @@ if (isset($_POST['nn']) & isset($_POST['pw']) & isset($_POST['cts'])) {
 </section>
 <footer id="downdeco">
       Team 11 | Grand Data <br>
-      JeongHyeon Lee, Minjung Jung, Meenso kwak, Suhyeon Choi
+      Jeonghyun Lee, Minjung Jung, Meenso kwak, Suhyeon Choi
     </footer>
 </body >
 

@@ -84,7 +84,7 @@
         &nbsp;<input id="insert" type="submit" value="Insert"></p>
       </form>
 
-      <form id = "btn_up" action="Main1_insert.php" method="POST" >
+      <form id = "btn_up" action="Main1_update.php" method="POST" >
         <p><B>Update a Distributor: </B><br><br>
         Distributor Name: <input type="text" class="input_box" name="distributor_name" required/>&nbsp;
 

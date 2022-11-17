@@ -11,7 +11,6 @@
     font-weight:700; 
     height:70px; 
     color:orange;
-    cursor:pointer;
   }
   .sh_tr{
     font-size:20px; 
@@ -19,17 +18,10 @@
     height:35px; 
     color: black;
   }
-  .rk_tr:hover{
-    font-size:20px; 
-    font-weight:700; 
-    height:70px; 
-    color:orange;
-    cursor:pointer;
-  }
+
   .normal_tr{
     height:40px; 
     font-weight:700;
-    cursor:pointer;
   }
 </style>
 <html>

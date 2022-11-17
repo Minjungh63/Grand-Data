@@ -93,35 +93,7 @@
       }
       ?>
 
-      <?php
-      $mysqli = mysqli_connect('localhost', 'team11', 'team11', 'team11');
 
-      if (mysqli_connect_errno()) {
-        printf("Connect failed: %s\n", mysqli_connect_error());
-        exit();
-      } else {
-        mysqli_begin_transaction($mysqli);
-        try {
-          if ($_POST['distributor_name'] != null) {
-            $sql = 'UPDATE distributor SET distributor_name=? WHERE distributor_id=?';
-            if ($stmt = mysqli_prepare($mysqli, $sql)) {
-              mysqli_stmt_bind_param($stmt, 'is', $id, $update);
-              $id = $_REQUEST['distributor_id'];
-              $update = $_REQUEST['distributor_name'];
-              mysqli_stmt_execute($stmt);
-              mysqli_stmt_close($stmt);
-            }
-          }
-         
-          mysqli_commit($mysqli);
-          echo 'Update Successful.';
-        } catch (mysqli_sql_exception $exception) {
-          mysqli_rollback($mysqli);
-          throw $exception;
-        }
-        mysqli_close($mysqli);
-      }
-      ?>
 
     </div>
 </section>

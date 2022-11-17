@@ -172,12 +172,12 @@
       echo '<td>&nbsp&nbsp&nbsp&nbsp' . $mn . '&nbsp&nbsp&nbsp&nbsp</td><td>' . $st . '</td></tr>';
     }
     echo '</table>';
+    mysqli_free_result($res);
+    mysqli_stmt_close($stmt);
   } else {
     echo '';
   }
 
-  mysqli_free_result($res);
-  mysqli_stmt_close($stmt);
   mysqli_close($mysqli);
   ?>
 </p>
